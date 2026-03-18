@@ -1,4 +1,4 @@
-# 🏦 Online Banking System
+# Online Banking System
 
 **BUE - Programming in Java (25CSCI04C)**
 
@@ -12,11 +12,11 @@
 | **Phase**             | Phase 1 (Console-Based)         |
 | **Deadline**          | Week 6 (19/3/2025, 23:59)       |
 | **Assessment Weight** | 25% of total course mark        |
-| **Team Number**       | **39**                          |
+| **Team Number**       | **40**                          |
 
 ---
 
-## 👥 Team Members
+## Team Members
 
 |  #  | Member           | Student ID | Role             | Responsibilities                                                                                     |
 | :-: | ---------------- | ---------- | ---------------- | ---------------------------------------------------------------------------------------------------- |
@@ -41,7 +41,7 @@
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -59,7 +59,7 @@ src/
 
 ---
 
-## 🏗️ Class Diagram
+## Class Diagram
 
 > 📌 _Need to add the class diagram image here!!!_
 
@@ -102,7 +102,7 @@ Transaction (Abstract)
 
 ---
 
-## 📝 Testing Scenario
+## Testing Scenario
 
 The `Main.java` class includes the following test cases:
 
@@ -116,7 +116,7 @@ The `Main.java` class includes the following test cases:
 
 ---
 
-## 📄 Submission Checklist
+## Submission Checklist
 
 ### Code Requirements
 
