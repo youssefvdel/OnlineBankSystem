@@ -16,6 +16,8 @@ public abstract class User {
     private String password;
     private String email;
 
+
+
     /**
      * @param userId   The unique ID for this user
      * @param name     The full name of the user
@@ -29,13 +31,74 @@ public abstract class User {
         this.email = email;
     }
 /**
- * Checks if password is correct
- * @param inputPassword password user typed
- * @return true if match, false if wrong
+ * Cheking Passowrd
+ * @param inputPassword password user entered
+ * @return true if matching password, false if wrong
  */
 public boolean login(String inputPassword)
 {
     return this.password.equals(inputPassword);
 }
+
+
+    /**
+     * Logs out the current user.
+     * Displays a confirmation message to the console.
+     */
+public void logout()
+{
+    System.out.println("User "+this.name+" logged out");
+}
+//   =============== [GETTERS]===============
+    /**
+     * Gets the user's unique identifier.
+     *
+     * @return the userId as a String
+     */
+
+    public String getUserId()
+    {
+    return this.userId;
+    }
+
+    /**
+     * Gets the user's email address.
+     *
+     * @return the email as a String
+     */
+    public String getEmail()
+    {
+        return this.email;
+    }
+
+//   =============== [SETTERS]===============
+/**
+   Sets the user id
+ @param userId the new ID for the user
+ */
+    public void setUserId(String userId)
+    {this.userId = userId;}
+
+    /**
+     * Sets the user full name
+     *
+     * @param name the new name for the user
+     */
+    public void setName(String name)
+    {this.name = name;}
+
+    /**
+     * Sets the user email address
+     * @param email the new email address for the user
+     *
+     */
+    public void setEmail(String email)
+    {this.email= email;}
+
+
+
+    // End of the class ===
+
+
 
 }
