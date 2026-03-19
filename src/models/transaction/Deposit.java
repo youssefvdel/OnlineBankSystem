@@ -4,6 +4,7 @@ import models.account.Account;
 
 /**
  * @author [Tarek Saeed 252382]
+ * @see Transaction
  * @since phase1
  */
 
