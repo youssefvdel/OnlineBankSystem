@@ -7,8 +7,7 @@ import models.user.User;
  * BusinessAccount represents a business bank account with employee management.
  * Extends Account with additional features for business operations.
  *
- * @author Youssef Adel
- * @version 1.0
+ * @author Youssef Adel 258270
  * @since Phase 1
  */
 public class BusinessAccount extends Account {
@@ -19,6 +18,9 @@ public class BusinessAccount extends Account {
     /** List of employee accounts associated with this business */
     private ArrayList<Account> employeesList;
 
+    /** Yearly fee for this business account */
+    private double yearlyFee;
+
     /**
      * Creates a new BusinessAccount with specified details.
      *
@@ -26,16 +28,19 @@ public class BusinessAccount extends Account {
      * @param balance the initial balance
      * @param owner the User who owns this account
      * @param businessName the name of the business
+     * @param yearlyFee the yearly fee for this account
      */
     public BusinessAccount(
         String accountNumber,
         double balance,
         User owner,
-        String businessName
+        String businessName,
+        double yearlyFee
     ) {
         super(accountNumber, balance, owner);
         this.businessName = businessName;
         this.employeesList = new ArrayList<>();
+        this.yearlyFee = yearlyFee;
     }
 
     /**
@@ -50,7 +55,7 @@ public class BusinessAccount extends Account {
         report += "Balance: $" + getBalance() + "\n";
         report += "Owner: " + getOwner().getName() + "\n";
         report += "Employee Count: " + employeesList.size() + "\n";
-        report += "Yearly Fee: $150.00\n";
+        report += "Yearly Fee: $" + yearlyFee + "\n";
         report += "================================";
         return report;
     }
@@ -61,8 +66,10 @@ public class BusinessAccount extends Account {
      * @param employee the employee account to add
      */
     public void addEmployee(Account employee) {
-        employeesList.add(employee);
-        System.out.println("Employee added to Business: " + businessName);
+        if (employee != null) {
+            employeesList.add(employee);
+            System.out.println("Employee added to Business: " + businessName);
+        }
     }
 
     /**
@@ -81,12 +88,11 @@ public class BusinessAccount extends Account {
     /**
      * Applies the yearly fee for this business account.
      *
-     * @return the fee amount that was applied ($150.00)
+     * @return the fee amount that was applied
      */
     public double applyYearlyFee() {
-        double fee = 150.0;
-        withdraw(fee);
-        return fee;
+        withdraw(yearlyFee);
+        return yearlyFee;
     }
 
     /**
@@ -114,5 +120,23 @@ public class BusinessAccount extends Account {
      */
     public int getEmployeeCount() {
         return employeesList.size();
+    }
+
+    /**
+     * Gets the yearly fee.
+     *
+     * @return the yearly fee
+     */
+    public double getYearlyFee() {
+        return yearlyFee;
+    }
+
+    /**
+     * Sets the yearly fee.
+     *
+     * @param yearlyFee the new yearly fee
+     */
+    public void setYearlyFee(double yearlyFee) {
+        this.yearlyFee = yearlyFee;
     }
 }

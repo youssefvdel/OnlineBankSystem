@@ -14,7 +14,6 @@ import models.user.User;
  * @see models/user/User.java
  * @since Phase 1
  */
-
 public abstract class Account {
 
     /** Unique identifier for the account */
@@ -42,61 +41,70 @@ public abstract class Account {
     /**
      * Deposits money into the account.
      *
-     * @param value the amount to deposit (must be non-negative)
+     * @param amount the amount to deposit (must be non-negative)
      */
-    public void deposit(double value) {
-        if (value < 0) {
+    public void deposit(double amount) {
+        if (amount < 0) {
             System.err.println(
-                "Error: Cannot deposit negative amount: " + value
+                "Error: Cannot deposit negative amount: " + amount
             );
             return;
         }
-        this.balance += value;
+        this.balance += amount;
+        System.out.println(
+            "Deposited: $" + amount + " | New Balance: $" + this.balance
+        );
     }
 
     /**
      * Withdraws money from the account.
      *
-     * @param value the amount to withdraw (must be non-negative)
+     * @param amount the amount to withdraw (must be non-negative)
      */
-    public void withdraw(double value) {
-        if (value < 0) {
+    public void withdraw(double amount) {
+        if (amount < 0) {
             System.err.println(
-                "Error: Cannot withdraw negative amount: " + value
+                "Error: Cannot withdraw negative amount: " + amount
             );
             return;
         }
-        if (value > this.balance) {
+        if (amount > this.balance) {
             System.err.println(
-                "Error: Insufficient balance. Available: " + this.balance
+                "Error: Insufficient balance. Available: $" + this.balance
             );
             return;
         }
-        this.balance -= value;
+        this.balance -= amount;
+        System.out.println(
+            "Withdrew: $" + amount + " | New Balance: $" + this.balance
+        );
     }
 
     /**
      * Transfers money to another account.
      *
      * @param destination the destination account to transfer to
-     * @param value the amount to transfer (must be non-negative)
+     * @param amount the amount to transfer (must be non-negative)
      */
-    public void transfer(Account destination, double value) {
-        if (value < 0) {
+    public void transfer(Account destination, double amount) {
+        if (amount < 0) {
             System.err.println(
-                "Error: Cannot transfer negative amount: " + value
+                "Error: Cannot transfer negative amount: " + amount
             );
             return;
         }
-        if (value > this.balance) {
+        if (amount > this.balance) {
             System.err.println(
-                "Error: Insufficient balance for transfer. Available: " +
+                "Error: Insufficient balance for transfer. Available: $" +
                     this.balance
             );
             return;
         }
-        this.balance -= value;
-        destination.balance += value;
+        this.balance -= amount;
+        destination.balance += amount;
+        System.out.println(
+            "Transferred: $" + amount + " to " + destination.accountNumber
+        );
     }
 
     /**
@@ -135,6 +143,24 @@ public abstract class Account {
      */
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    /**
+     * Sets the account balance.
+     *
+     * @param balance the new balance
+     */
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    /**
+     * Sets the account number.
+     *
+     * @param accountNumber the new account number
+     */
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     /**

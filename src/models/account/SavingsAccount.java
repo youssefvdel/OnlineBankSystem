@@ -1,7 +1,14 @@
 package models.account;
 
 import models.user.User;
-
+/**
+ * Represents a savings account that earns interest over time.
+ * Extends Account and adds interest rate and minimum balance logic.
+ *
+ * @author Yosef - 255796
+ * @see Account
+ * @since Phase 1
+ */
 public class SavingsAccount extends Account {
 
     /** The interest rate applied to the balance (e.g. 0.05 = 5%) */
