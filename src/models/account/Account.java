@@ -141,7 +141,13 @@ public abstract class Account implements Transferable {
         this.accountNumber = accountNumber;
     }
 
-    //need to add comments
+    /**
+     *Check if the transferable amount is avalable in the account
+     *
+     * @param destination
+     * @param amount
+     * @return
+     */
 
     public boolean transfer(Account destination, double amount) {
         if (this.getBalance() >= amount) {
