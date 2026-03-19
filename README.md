@@ -22,8 +22,8 @@ This project is a comprehensive console-based banking system that demonstrates a
 | :-: | --------------------- | ---------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |  1  | **Youssef Adel**      | `258270`   | A-13  | Account, BusinessAccount, CurrentAccount <br>BankSystem, Main<br>GitHub Repository Management<br>Project Planning & Management<br>Class Diagram & OOP Logic Design |
 |  2  | **Tarek Saeed**       | `252382`   | A-12  | Transaction, Deposit, Withdrawal, TransactionHistory, Transferable<br>Class Diagram & OOP Logic Design                                                             |
-|  3  | **Yousif Hafez**      | `258612`   | A-13  | FirstClassClient, PremiumClient, StandardClient<br>Insurable and LoanEligible Interfaces                                                                           |
-|  4  | **Yosef Osama**       | `255796`   | A-13  | SavingsAccount, PremiumAccount, Transfer                                                                                                                           |
+|  3  | **Yousif Hafez**      | `258612`   | A-13  | FirstClassClient, PremiumClient, StandardClient<br>Insurable and LoanEligible Interfaces<br>Class Diagram & OOP Logic                                                                           |
+|  4  | **Yosef Osama**       | `255796`   | A-13  | SavingsAccount, PremiumAccount, Transfer <br>Class Diagram & OOP Logic                                                                                                                          |
 |  5  | **Yousef Mohiey**     | `248679`   | A-13  | User, Admin, Client<br>Class Diagram & OOP Logic Design                                                                                                            |
 |  6  | **Abdelrahman Mazen** | `251979`   | A-9   | Join WhatsApp Group                                                                                                                                                |
 
