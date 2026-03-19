@@ -14,19 +14,31 @@ import java.util.ArrayList;
 public class TransactionHistory {
     private ArrayList<Transaction> transactions ;
 
+    // creates a new transactionhistory with empty list
+    // called internally by Account constructor (composition)
+
     public TransactionHistory(){
         this.transactions=new ArrayList<>();
     }
 
+    /**
+     * adds a transaction to the account history
+     * @param transaction
+     */
     public void addTransaction(Transaction transaction){
         if (transaction !=null){
             transaction.add(transaction);
         }
     }
 
+    /**
+     * return a transaction by id
+     * @param transactionId
+     * @return object if found , null otherwise
+     */
     public Transaction viewTransaction(String transactionId){
         for (Transaction t : transactions){
-            if (t.getTransacionId().equals(transactionId)){
+            if (t.getTransactionId().equals(transactionId)){
                 return t;
             }
         }
@@ -34,13 +46,26 @@ public class TransactionHistory {
     }
 
 
+    /**
+     * return a full list of transaction for an account
+     * @return arraylist of all transactions
+     */
     public ArrayList<Transaction> getHistory() {
         return transactions;
     }
 
+    /**
+     * returns number of transactions
+     * @return count "int"
+     */
     public int getTransactionCount(){
         return transactions.size();
     }
+
+    /**
+     * details of transactionhistory
+     * @return history
+     */
 
     @Override
     public String toString() {

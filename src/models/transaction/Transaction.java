@@ -5,6 +5,10 @@ import java.util.Date;
 
 /**
  * @author [Tarek Saeed 252382]
+ * @see Deposit
+ * @see Withdrawal
+ * @see Transfer
+ * @see TransactionHistory
  * @since phase1
  */
 
