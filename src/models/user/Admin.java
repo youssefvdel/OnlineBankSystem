@@ -1,52 +1,89 @@
 package models.user;
 
-
-import models.user.User;
-
 import java.util.ArrayList;
 
 /**
  * Admin.java
  *
- * Represents an administrator user in the banking system.
- * Extends the User class and inherits all its attributes and methods.
- * Provides additional functionality for user management.
+ * Represents an administrator who can manage users in the system.
+ * Extends User to inherit login functionality.
  *
  * @author Yousef Mohiey
- * @since Phase one
+ * @since Phase 1
  * @see User
  */
+public class Admin extends User {
 
-public class Admin extends User
-{
-    /**
-     * @param userId  The unique ID for this user
-     * @param name  The full name of the user
-     * @param password The password for login confirmation
-     * @param email    The email address of the user
-     */
-    public Admin(String userId, String name, String password, String email)
-    {
-        super(userId, name, password, email);
-    }
-
+    /** List of users managed by this admin */
+    private ArrayList<User> users;
 
     /**
-     * Adds a new user to the system.
+     * Constructs a new Admin object.
      *
-     * @param userId new user's id
-     * @param name new user's name
-     * @param password new user's password
-     * @param email new user's email
-     * @param userType "Admin" or "Client"
-     * @param userList the list we're adding to
-     * @return the new user, or null if failed
+     * @param userId the unique user ID from parent class
+     * @param name the admin's full name
+     * @param password the login password
+     * @param email the admin's email address
      */
-    public User createUser(String userId, String name, String password,
-                           String email, String userType, ArrayList<User> userList)
-    {
-
-        System.out.println("Admin "+getName()+" creating"+userType+": "+name);
-
-
+    public Admin(String userId, String name, String password, String email) {
+        super(userId, name, password, email);
+        this.users = new ArrayList<>();
     }
+
+    /**
+     * Adds a new user to the admin's user list.
+     * NOTE: This does not check for duplicate user IDs.
+     *
+     * @param user the User object to add
+     */
+    public void createUser(User user) {
+        users.add(user);
+        System.out.println("User " + user.getName() + " added successfully.");
+    }
+
+    /**
+     * Removes a user from the admin's user list.
+     *
+     * @param user the User object to remove
+     * @return true if user was found and removed
+     *         false if user was not in the list
+     */
+    public boolean deleteUser(User user) {
+        if (users.remove(user)) {
+            System.out.println("User " + user.getName() + " deleted.");
+            return true;
+        } else {
+            System.out.println("User not found.");
+            return false;
+        }
+    }
+
+    /**
+     * Displays all users in the admin's list.
+     * Shows name, email, and user type for each user.
+     */
+    public void viewAllUsers() {
+        if (users.isEmpty()) {
+            System.out.println("No users in system.");
+            return;
+        }
+
+        for (User user : users) {
+            System.out.println("Name: " + user.getName() +
+                    " | Email: " + user.getEmail() +
+                    " | Type: " + user.getUserType());
+        }
+    }
+
+    /**
+     * Returns the user type for this Admin object.
+     * Implements the abstract method from User class.
+     *
+     * @return "Admin" indicating this is an administrator
+     */
+    @Override
+    public String getUserType() {
+        return "Admin";
+    }
+
+} // End of Admin class
