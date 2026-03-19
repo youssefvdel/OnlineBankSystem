@@ -24,7 +24,7 @@
 |  2  | **Tarek Saeed**         | `252382`   | 👤 Member        | • Transaction (Abstract), Deposit, Withdrawal, TransactionHistory
 • Transferable Interface Design & Implementation
 • Class Diagram Design & OOP Logic Architecture                                                                                             |
-|  3  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
+|  3  | **Yousif Hafez**         | `258612`   | 👤 Member        | **\_\_**                                                                                             |
 |  4  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
 |  5  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
 |  6  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
