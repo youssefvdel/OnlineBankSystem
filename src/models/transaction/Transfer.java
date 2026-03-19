@@ -1,8 +1,6 @@
-
 package models.transaction;
 
 import models.account.Account;
-
 /**
  * Represents a transfer of money between two accounts.
  * Extends Transaction and implements execute to withdraw from
@@ -75,6 +73,10 @@ public class Transfer extends Transaction {
             setStatus("failed");
             return false;
         }
+        // Save balances before the transfer
+        double srcBefore = account.getBalance();
+        double dstBefore = destinationAccount.getBalance();
+
         // Withdraw the amount from the source account
         account.withdraw(getAmount());
         // Deposit the same amount into the destination account
@@ -84,17 +86,10 @@ public class Transfer extends Transaction {
         // Print confirmation of the successful transfer
         System.out.println("Transfer successful!" + " From: " + account.getAccountNumber() + " To: " + destinationAccount.getAccountNumber() + " Amount: " + getAmount());
         // Return true to indicate success
+        // Print updated balances
+        System.out.println("Source: " + srcBefore + " ==> " + account.getBalance());
+        System.out.println("Destination: " + dstBefore + " ==> " + destinationAccount.getBalance());
         return true;
-    }
-    /**
-     * Executes the transfer.
-     * Named version of execute for clarity.
-     * @param account the source account to withdraw from
-     */
-    public void executeTransfer(Account account)
-    {
-        //  call the execute method above
-        execute(account);
     }
     /**
      * @return the source account id
