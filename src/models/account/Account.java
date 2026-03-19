@@ -1,5 +1,7 @@
 package models.account;
 
+import models.transaction.Transaction;
+import models.transaction.TransactionHistory;
 import models.user.User;
 
 /**
@@ -24,9 +26,11 @@ public abstract class Account {
 
     /** Account owner (User) */
     private User owner;
+    /** TranscationHistory of account */
+    private TransactionHistory transactionHistory;
 
     /**
-     * Creates a new Account with specified details.
+     * Creates a new Account with spnew Account with specified details.
      *
      * @param accountNumber the unique account identifier
      * @param balance the initial balance
@@ -36,12 +40,21 @@ public abstract class Account {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.owner = owner;
+        transactionHistory = new TransactionHistory();
     }
+
+    /**
+     * Applies yearly fee to the account.
+     * Must be implemented by all account types.
+     *
+     * @return the fee amount that was applied
+     */
+    public abstract double applyYearlyFee();
 
     /**
      * Deposits money into the account.
      *
-     * @param amount the amount to deposit (must be non-negative)
+     * @param amount the amount to deposit
      */
     public void deposit(double amount) {
         if (amount < 0) {
@@ -59,7 +72,7 @@ public abstract class Account {
     /**
      * Withdraws money from the account.
      *
-     * @param amount the amount to withdraw (must be non-negative)
+     * @param amount the amount to withdraw
      */
     public void withdraw(double amount) {
         if (amount < 0) {
@@ -70,7 +83,7 @@ public abstract class Account {
         }
         if (amount > this.balance) {
             System.err.println(
-                "Error: Insufficient balance. Available: $" + this.balance
+                "Error: Insufficient funds. Available: $" + this.balance
             );
             return;
         }
@@ -79,41 +92,6 @@ public abstract class Account {
             "Withdrew: $" + amount + " | New Balance: $" + this.balance
         );
     }
-
-    /**
-     * Transfers money to another account.
-     *
-     * @param destination the destination account to transfer to
-     * @param amount the amount to transfer (must be non-negative)
-     */
-    public void transfer(Account destination, double amount) {
-        if (amount < 0) {
-            System.err.println(
-                "Error: Cannot transfer negative amount: " + amount
-            );
-            return;
-        }
-        if (amount > this.balance) {
-            System.err.println(
-                "Error: Insufficient balance for transfer. Available: $" +
-                    this.balance
-            );
-            return;
-        }
-        this.balance -= amount;
-        destination.balance += amount;
-        System.out.println(
-            "Transferred: $" + amount + " to " + destination.accountNumber
-        );
-    }
-
-    /**
-     * Applies yearly fee to the account.
-     * Must be implemented by all account types.
-     *
-     * @return the fee amount that was applied
-     */
-    public abstract double applyYearlyFee();
 
     /**
      * @return the current account balance
@@ -161,6 +139,14 @@ public abstract class Account {
      */
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public void checkTransactionHistory() {
+        int i = 0;
+
+        for (Transaction transaction : transactionHistory) {
+            System.out.println(++i + "" + transaction);
+        }
     }
 
     /**

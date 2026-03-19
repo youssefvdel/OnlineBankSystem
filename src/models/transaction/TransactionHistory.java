@@ -1,7 +1,5 @@
 package models.transaction;
 
-import models.transaction.Transaction;
-
 import java.util.ArrayList;
 
 /**
@@ -11,43 +9,51 @@ import java.util.ArrayList;
  * @since phase 1
  */
 
-public class TransactionHistory {
-    private ArrayList<Transaction> transactions ;
+public class TransactionHistory implements Iterable<Transaction> {
 
-    public TransactionHistory(){
-        this.transactions=new ArrayList<>();
+    private ArrayList<Transaction> transactions;
+
+    public TransactionHistory() {
+        this.transactions = new ArrayList<>();
     }
 
-    public void addTransaction(Transaction transaction){
-        if (transaction !=null){
-            transaction.add(transaction);
+    public void addTransaction(Transaction transaction) {
+        if (transaction != null) {
+            transactions.add(transaction);
         }
     }
 
-    public Transaction viewTransaction(String transactionId){
-        for (Transaction t : transactions){
-            if (t.getTransacionId().equals(transactionId)){
+    public Transaction viewTransaction(String transactionId) {
+        for (Transaction t : transactions) {
+            if (t.getTransactionId().equals(transactionId)) {
                 return t;
             }
         }
         return null;
     }
 
-
     public ArrayList<Transaction> getHistory() {
         return transactions;
     }
 
-    public int getTransactionCount(){
+    @Override
+    public java.util.Iterator<Transaction> iterator() {
+        return transactions.iterator();
+    }
+
+    public int getTransactionCount() {
         return transactions.size();
     }
 
     @Override
     public String toString() {
-        return "TransactionHistory{" +
-                "count=" + transactions.size() +
-                ", transactions=" + transactions +
-                '}';
+        return (
+            "TransactionHistory{" +
+            "count=" +
+            transactions.size() +
+            ", transactions=" +
+            transactions +
+            '}'
+        );
     }
-
 }

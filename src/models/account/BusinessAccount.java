@@ -90,6 +90,7 @@ public class BusinessAccount extends Account {
      *
      * @return the fee amount that was applied
      */
+    @Override
     public double applyYearlyFee() {
         withdraw(yearlyFee);
         return yearlyFee;
