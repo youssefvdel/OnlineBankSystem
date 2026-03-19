@@ -65,6 +65,21 @@ public class SavingsAccount extends Account {
         System.out.println("Withdrawal successful Remaining balance: " + getBalance());
     }
     /**
+     * Applies a  yearly fee to the savings account.
+     * Deducts 5.0 from the balance using the withdraw method.
+     * Called once per year by the system.
+     *
+     * @return the fee amount that was deducted
+     */
+    public double applyYearlyFee() {
+        //  yearly fee amount
+        double fee = 5.0;
+        // Deduct the fee using the overridden withdraw method
+        withdraw(fee);
+        // Return the fee so the caller knows how much was deducted
+        return fee;
+    }
+    /**
      * @return the current interest rate
      */
     public double getInterestRate()
