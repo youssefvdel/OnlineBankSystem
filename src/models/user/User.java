@@ -70,6 +70,16 @@ public void logout()
     {
         return this.email;
     }
+    /**
+     * Gets the user's name
+     *
+     * @return name as a String
+     */
+
+    public String getName()
+    {
+        return this.name;
+    }
 
 //   =============== [SETTERS]===============
 /**
@@ -97,8 +107,9 @@ public void logout()
 
 
 
-    // End of the class ===
+    // === End of the class ===
 
 
 
 }
+
