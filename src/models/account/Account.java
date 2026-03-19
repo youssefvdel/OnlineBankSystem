@@ -1,6 +1,6 @@
 package models.account;
 
-import java.awt.datatransfer.Transferable;
+import models.interfaces.Transferable;
 import models.transaction.TransactionHistory;
 import models.user.User;
 
