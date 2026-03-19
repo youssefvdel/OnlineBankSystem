@@ -83,8 +83,9 @@ public void logout()
 
 //   =============== [SETTERS]===============
 /**
-   Sets the user id
- @param userId the new ID for the user
+ * Sets the user id
+ *
+  @param userId the new ID for the user
  */
     public void setUserId(String userId)
     {this.userId = userId;}
