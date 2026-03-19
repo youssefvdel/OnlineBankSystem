@@ -148,6 +148,7 @@ public class PremiumAccount extends Account {
         if (getOwner() != null) {
             ownerName = getOwner().getName();
         } else {
+
             ownerName = "Unknown";
         }
         return ("PremiumAccount " + "accountNumber='" + getAccountNumber()  + ", balance=" + getBalance() + ", higherLimit=" + higherLimit + ", premiumRate=" + premiumRate + ", owner=" + ownerName);
