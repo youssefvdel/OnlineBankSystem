@@ -9,7 +9,7 @@ public class BankSystem {
 
     private ArrayList<User> users;
     private ArrayList<Account> accounts;
-    private ArrayList<Transaction> transactions; // You'll create Transaction later
+    private ArrayList<Transaction> transactions;
     private User currentUser;
 
     public BankSystem() {
@@ -19,7 +19,9 @@ public class BankSystem {
     }
 
     // Methods to implement
-    public boolean login(String userId, String password) {}
+    public boolean login(String userId, String password) {
+        return true;
+    }
 
     public void mainMenu() {}
 
