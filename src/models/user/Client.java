@@ -59,7 +59,7 @@ public abstract class Client extends User {
         this.client_ID = client_ID;
         this.phoneNumber = phoneNumber;
         this.accounts = new ArrayList<>(); // Initialize empty list
-        this.status = "Active"; // Default status
+        this.status = status;
     }
 
     // ========== GETTERS ==========
@@ -150,7 +150,7 @@ public abstract class Client extends User {
         }
     }
 
-    public double getTotatlBalance() {
+    public double getTotalBalance() {
         double total = 0;
         for (Account account : this.accounts) {
             total += account.getBalance();

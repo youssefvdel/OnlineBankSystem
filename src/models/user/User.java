@@ -114,11 +114,5 @@ public void logout()
     public abstract String getUserType();
 
 
-
-
-    // === End of the class ===
-
-
-
 }
-
+// === End of the class ===
