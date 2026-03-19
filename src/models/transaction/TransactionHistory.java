@@ -1,7 +1,6 @@
 package models.transaction;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * @author [Tarek Saeed 252382]
@@ -10,21 +9,20 @@ import java.util.Iterator;
  * @since phase 1
  */
 
-public class TransactionHistory implements Iterable<Transaction> {
+public class TransactionHistory {
 
     private ArrayList<Transaction> transactions;
 
-    /**
-     * Creates a new TransactionHistory with empty list.
-     * Called internally by Account constructor (composition).
-     */
+    // creates a new transactionhistory with empty list
+    // called internally by Account constructor (composition)
+
     public TransactionHistory() {
         this.transactions = new ArrayList<>();
     }
 
     /**
-     * Adds a transaction to the account history.
-     * @param transaction the transaction to add
+     * adds a transaction to the account history
+     * @param transaction
      */
     public void addTransaction(Transaction transaction) {
         if (transaction != null) {
@@ -33,9 +31,9 @@ public class TransactionHistory implements Iterable<Transaction> {
     }
 
     /**
-     * Returns a transaction by ID.
-     * @param transactionId the transaction ID to search for
-     * @return Transaction object if found, null otherwise
+     * return a transaction by id
+     * @param transactionId
+     * @return object if found , null otherwise
      */
     public Transaction viewTransaction(String transactionId) {
         for (Transaction t : transactions) {
@@ -47,34 +45,26 @@ public class TransactionHistory implements Iterable<Transaction> {
     }
 
     /**
-     * Returns the full list of transactions for an account.
-     * @return ArrayList of all transactions
+     * return a full list of transaction for an account
+     * @return arraylist of all transactions
      */
     public ArrayList<Transaction> getHistory() {
         return transactions;
     }
 
     /**
-     * Returns the number of transactions.
-     * @return count as int
+     * returns number of transactions
+     * @return count "int"
      */
     public int getTransactionCount() {
         return transactions.size();
     }
 
     /**
-     * Returns an iterator over the transactions.
-     * @return Iterator of Transaction
+     * details of transactionhistory
+     * @return history
      */
-    @Override
-    public Iterator<Transaction> iterator() {
-        return transactions.iterator();
-    }
 
-    /**
-     * Returns details of TransactionHistory.
-     * @return history as string
-     */
     @Override
     public String toString() {
         return (
