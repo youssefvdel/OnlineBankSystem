@@ -1,6 +1,7 @@
 package models.transaction;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @author [Tarek Saeed 252382]
@@ -11,89 +12,69 @@ import java.util.ArrayList;
 
 public class TransactionHistory implements Iterable<Transaction> {
 
-<<<<<<< HEAD
     private ArrayList<Transaction> transactions;
 
+    /**
+     * Creates a new TransactionHistory with empty list.
+     * Called internally by Account constructor (composition).
+     */
     public TransactionHistory() {
         this.transactions = new ArrayList<>();
     }
 
+    /**
+     * Adds a transaction to the account history.
+     * @param transaction the transaction to add
+     */
     public void addTransaction(Transaction transaction) {
         if (transaction != null) {
             transactions.add(transaction);
         }
     }
 
+    /**
+     * Returns a transaction by ID.
+     * @param transactionId the transaction ID to search for
+     * @return Transaction object if found, null otherwise
+     */
     public Transaction viewTransaction(String transactionId) {
         for (Transaction t : transactions) {
             if (t.getTransactionId().equals(transactionId)) {
-=======
-    // creates a new transactionhistory with empty list
-    // called internally by Account constructor (composition)
-
-    public TransactionHistory(){
-        this.transactions=new ArrayList<>();
-    }
-
-    /**
-     * adds a transaction to the account history
-     * @param transaction
-     */
-    public void addTransaction(Transaction transaction){
-        if (transaction !=null){
-            transaction.add(transaction);
-        }
-    }
-
-    /**
-     * return a transaction by id
-     * @param transactionId
-     * @return object if found , null otherwise
-     */
-    public Transaction viewTransaction(String transactionId){
-        for (Transaction t : transactions){
-            if (t.getTransactionId().equals(transactionId)){
->>>>>>> 83a00ca3648705c5176a512cd4b18dbf35b5c1e6
                 return t;
             }
         }
         return null;
     }
 
-<<<<<<< HEAD
-=======
-
     /**
-     * return a full list of transaction for an account
-     * @return arraylist of all transactions
+     * Returns the full list of transactions for an account.
+     * @return ArrayList of all transactions
      */
->>>>>>> 83a00ca3648705c5176a512cd4b18dbf35b5c1e6
     public ArrayList<Transaction> getHistory() {
         return transactions;
     }
 
-<<<<<<< HEAD
-    @Override
-    public java.util.Iterator<Transaction> iterator() {
-        return transactions.iterator();
-    }
-
-    public int getTransactionCount() {
-=======
     /**
-     * returns number of transactions
-     * @return count "int"
+     * Returns the number of transactions.
+     * @return count as int
      */
-    public int getTransactionCount(){
->>>>>>> 83a00ca3648705c5176a512cd4b18dbf35b5c1e6
+    public int getTransactionCount() {
         return transactions.size();
     }
 
     /**
-     * details of transactionhistory
-     * @return history
+     * Returns an iterator over the transactions.
+     * @return Iterator of Transaction
      */
+    @Override
+    public Iterator<Transaction> iterator() {
+        return transactions.iterator();
+    }
 
+    /**
+     * Returns details of TransactionHistory.
+     * @return history as string
+     */
     @Override
     public String toString() {
         return (
