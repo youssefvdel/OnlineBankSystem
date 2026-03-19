@@ -24,7 +24,6 @@
 |  2  | **Tarek Saeed**         | `252382`   | 👤 Member        | • Transaction, Deposit, Withdrawal, TransactionHistory, Transferable<br>• Class Diagram & OOP Logic Design |                                                                                       
 |  3  | **Yousif Hafez**         | `258612`   | 👤 Member        | **First Class Client,premium Client,Standard Client,(Insurable,Loan Eligible)Interfaces**                                                                                          
 |  4  | **Yosef Osama**         | `255796`   | 👤 Member        | **• SavingsAccount,PremiumAccount,Transfer**     
-|
 |  5  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
 |  6  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
 
