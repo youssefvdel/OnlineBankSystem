@@ -46,14 +46,15 @@ public class PremiumAccount extends Account {
      * Overrides parent withdraw to allow higher withdrawal limit.
      * Premium accounts can withdraw up to higherLimit in one transaction.
      * @param value the amount to withdraw
+     * @return true if withdrawal was successful, false otherwise
      */
     @Override
-    public void withdraw(double value) {
+    public boolean withdraw(double value) {
         if (value < 0) {
             System.out.println(
                 "Error Cannot withdraw negative amount: " + value
             );
-            return;
+            return false;
         }
         // Check if withdrawal exceeds the higher limit allowed
         if (value > higherLimit) {
@@ -61,20 +62,24 @@ public class PremiumAccount extends Account {
                 "Error Amount exceeds premium withdrawal limit of: " +
                     higherLimit
             );
-            return;
+            return false;
         }
         // Check if balance is sufficient
         if (value > getBalance()) {
             System.out.println(
                 "Error Insufficient balance Available: " + getBalance()
             );
-            return;
+            return false;
         }
         // If all checks pass call the parent withdraw method
-        super.withdraw(value);
-        System.out.println(
-            "Premium withdrawal successful Remaining balance: " + getBalance()
-        );
+        boolean success = super.withdraw(value);
+        if (success) {
+            System.out.println(
+                "Premium withdrawal successful Remaining balance: " +
+                    getBalance()
+            );
+        }
+        return success;
     }
 
     /**

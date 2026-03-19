@@ -1,6 +1,7 @@
 package models.account;
 
 import models.user.User;
+
 /**
  * Represents a savings account that earns interest over time.
  * Extends Account and adds interest rate and minimum balance logic.
@@ -25,25 +26,32 @@ public class SavingsAccount extends Account {
      * @param interestRate the interest rate applied to the balance
      * @param minBalance the minimum balance required at all times
      */
-    public SavingsAccount(String accountNumber, double balance, User owner, double interestRate, double minBalance)
-    {
+    public SavingsAccount(
+        String accountNumber,
+        double balance,
+        User owner,
+        double interestRate,
+        double minBalance
+    ) {
         // Call the parent Account constructor to set up base attributes
         super(accountNumber, balance, owner);
         this.interestRate = interestRate;
         this.minBalance = minBalance;
     }
+
     /**
      * Calculates and adds interest to the balance.
      * Interest = balance x interestRate.
      * Add the interest
      */
-    public void addInterest()
-    {
+    public void addInterest() {
         // Calculate interest amount based on current balance
         double interest = getBalance() * interestRate;
         // Add the interest using the inherited deposit method
         deposit(interest);
-        System.out.println("Interest added: " + interest + " / New Balance: " + getBalance());
+        System.out.println(
+            "Interest added: " + interest + " / New Balance: " + getBalance()
+        );
     }
 
     /**
@@ -51,26 +59,37 @@ public class SavingsAccount extends Account {
      * Overrides parent withdraw to enforce minimum balance rule.
      * A savings account cannot go below the minimum balance.
      *
-     * @param Value the amount to withdraw
+     * @param value the amount to withdraw
+     * @return true if withdrawal was successful, false otherwise
      */
     @Override
-    public void withdraw(double value)
-    {
-        if (value < 0)
-        {
-            System.out.println("Error Cannot withdraw negative amount: " + value);
-            return;
+    public boolean withdraw(double value) {
+        if (value < 0) {
+            System.out.println(
+                "Error Cannot withdraw negative amount: " + value
+            );
+            return false;
         }
         // Check if withdrawal would drop balance below minimum
-        if (getBalance() - value < minBalance)
-        {
-            System.out.println("Error Withdrawal would breach minimum balance of: " + minBalance + " Available to withdraw: " + (getBalance() - minBalance));
-            return;
+        if (getBalance() - value < minBalance) {
+            System.out.println(
+                "Error Withdrawal would breach minimum balance of: " +
+                    minBalance +
+                    " Available to withdraw: " +
+                    (getBalance() - minBalance)
+            );
+            return false;
         }
         // If balance is safe call the parent withdraw method
-        super.withdraw(value);
-        System.out.println("Withdrawal successful Remaining balance: " + getBalance());
+        boolean success = super.withdraw(value);
+        if (success) {
+            System.out.println(
+                "Withdrawal successful Remaining balance: " + getBalance()
+            );
+        }
+        return success;
     }
+
     /**
      * Applies a  yearly fee to the savings account.
      * Deducts 5.0 from the balance using the withdraw method.
@@ -86,11 +105,11 @@ public class SavingsAccount extends Account {
         // Return the fee so the caller knows how much was deducted
         return fee;
     }
+
     /**
      * @return the current interest rate
      */
-    public double getInterestRate()
-    {
+    public double getInterestRate() {
         return this.interestRate;
     }
 
@@ -98,16 +117,14 @@ public class SavingsAccount extends Account {
      * Sets the interest rate.
      * @param interestRate the new interest rate to apply
      */
-    public void setInterestRate(double interestRate)
-    {
+    public void setInterestRate(double interestRate) {
         this.interestRate = interestRate;
     }
 
     /**
      * @return the minimum balance required
      */
-    public double getMinBalance()
-    {
+    public double getMinBalance() {
         return this.minBalance;
     }
 
@@ -115,8 +132,7 @@ public class SavingsAccount extends Account {
      * Sets the minimum balance.
      * @param minBalance the new minimum balance
      */
-    public void setMinBalance(double minBalance)
-    {
+    public void setMinBalance(double minBalance) {
         this.minBalance = minBalance;
     }
 
@@ -127,6 +143,18 @@ public class SavingsAccount extends Account {
      */
     @Override
     public String toString() {
-        return ("SavingsAccount: " + "accountNumber='" + getAccountNumber()  + ", balance=" + getBalance() + ", interestRate=" + interestRate + ", minBalance=" + minBalance + ", owner=" + (getOwner() != null ? getOwner().getName() : "Unknown"));
+        return (
+            "SavingsAccount: " +
+            "accountNumber='" +
+            getAccountNumber() +
+            ", balance=" +
+            getBalance() +
+            ", interestRate=" +
+            interestRate +
+            ", minBalance=" +
+            minBalance +
+            ", owner=" +
+            (getOwner() != null ? getOwner().getName() : "Unknown")
+        );
     }
 }

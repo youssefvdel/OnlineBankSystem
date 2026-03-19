@@ -1,11 +1,11 @@
 package models.account;
 
 import models.interfaces.Transferable;
-import models.transaction.TransactionHistory;
-import models.user.User;
 import models.transaction.Deposit;
-import models.transaction.Withdrawal;
+import models.transaction.TransactionHistory;
 import models.transaction.Transfer;
+import models.transaction.Withdrawal;
+import models.user.User;
 
 /**
  * Abstract base class for all account types.
@@ -55,55 +55,39 @@ public abstract class Account implements Transferable {
     public abstract double applyYearlyFee();
 
     /**
-     * Deposits money into the account.
+     * Deposits money into the account using the Deposit transaction class.
      *
      * @param amount the amount to deposit
+     * @return true if deposit was successful, false otherwise
+     * @see Deposit#execute(Account)
      */
-    public void deposit(double amount) {
-        if (amount < 0) {
-            System.err.println(
-                "Error: Cannot deposit negative amount: " + amount
-            );
-            return;
-        }
-        this.balance += amount;
-        System.out.println(
-            "Deposited: $" + amount + " | New Balance: $" + this.balance
-        );
-        
-        // Add to transaction history
+    public boolean deposit(double amount) {
         String transId = "DEP" + System.currentTimeMillis();
-        Deposit deposit = new Deposit(transId, amount, this.accountNumber, "internal");
-        transactionHistory.addTransaction(deposit);
+        Deposit deposit = new Deposit(
+            transId,
+            amount,
+            this.accountNumber,
+            "internal"
+        );
+        return deposit.execute(this);
     }
 
     /**
-     * Withdraws money from the account.
+     * Withdraws money from the account using the Withdrawal transaction class.
      *
      * @param amount the amount to withdraw
+     * @return true if withdrawal was successful, false otherwise
+     * @see Withdrawal#execute(Account)
      */
-    public void withdraw(double amount) {
-        if (amount < 0) {
-            System.err.println(
-                "Error: Cannot withdraw negative amount: " + amount
-            );
-            return;
-        }
-        if (amount > this.balance) {
-            System.err.println(
-                "Error: Insufficient funds. Available: $" + this.balance
-            );
-            return;
-        }
-        this.balance -= amount;
-        System.out.println(
-            "Withdrew: $" + amount + " | New Balance: $" + this.balance
-        );
-        
-        // Add to transaction history
+    public boolean withdraw(double amount) {
         String transId = "WDR" + System.currentTimeMillis();
-        Withdrawal withdrawal = new Withdrawal(transId, amount, this.accountNumber, "internal");
-        transactionHistory.addTransaction(withdrawal);
+        Withdrawal withdrawal = new Withdrawal(
+            transId,
+            amount,
+            this.accountNumber,
+            "internal"
+        );
+        return withdrawal.execute(this);
     }
 
     /**
@@ -155,26 +139,22 @@ public abstract class Account implements Transferable {
     }
 
     /**
-     *Check if the transferable amount is avalable in the account
+     * Transfers money from this account to a destination account using the Transfer transaction class.
      *
-     * @param destination
-     * @param amount
-     * @return
+     * @param destination the destination account to transfer funds to
+     * @param amount the amount to transfer
+     * @return true if transfer was successful, false otherwise
+     * @see Transfer#execute(Account)
      */
-
     public boolean transfer(Account destination, double amount) {
-        if (this.getBalance() >= amount) {
-            this.setBalance(this.getBalance() - amount);
-            destination.setBalance(destination.getBalance() + amount);
-            
-            // Add to transaction history for source account
-            String transId = "TRF" + System.currentTimeMillis();
-            Transfer transfer = new Transfer(transId, amount, this.accountNumber, destination);
-            this.transactionHistory.addTransaction(transfer);
-            
-            return true;
-        }
-        return false;
+        String transId = "TRF" + System.currentTimeMillis();
+        Transfer transfer = new Transfer(
+            transId,
+            amount,
+            this.accountNumber,
+            destination
+        );
+        return transfer.execute(this);
     }
 
     /**

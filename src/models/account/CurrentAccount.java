@@ -1,7 +1,7 @@
 package models.account;
 
-import models.user.User;
 import models.transaction.Withdrawal;
+import models.user.User;
 
 /**
  * CurrentAccount represents a checking/current bank account with overdraft facility.
@@ -59,35 +59,42 @@ public class CurrentAccount extends Account {
      * Withdraws money from the account using overdraft if needed.
      *
      * @param amount the amount to withdraw
+     * @return true if withdrawal was successful, false otherwise
      */
     @Override
-    public void withdraw(double amount) {
+    public boolean withdraw(double amount) {
         if (amount < 0) {
             System.err.println(
                 "Error: Cannot withdraw negative amount: " + amount
             );
-            return;
+            return false;
         }
         if (!isActive) {
             System.err.println("Error: Account is inactive. Cannot withdraw.");
-            return;
+            return false;
         }
         if (!canWithdraw(amount)) {
             System.err.println(
                 "Error: Withdrawal exceeds overdraft limit. Available: $" +
                     getAvailableFunds()
             );
-            return;
+            return false;
         }
         setBalance(getBalance() - amount);
         System.out.println(
             "Withdrew: $" + amount + " | New Balance: $" + getBalance()
         );
-        
+
         // Add to transaction history
         String transId = "WDR" + System.currentTimeMillis();
-        Withdrawal withdrawal = new Withdrawal(transId, amount, getAccountNumber(), "internal");
+        Withdrawal withdrawal = new Withdrawal(
+            transId,
+            amount,
+            getAccountNumber(),
+            "internal"
+        );
         getTransactionHistory().addTransaction(withdrawal);
+        return true;
     }
 
     /**
