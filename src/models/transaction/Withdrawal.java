@@ -60,6 +60,10 @@ public class Withdrawal extends Transaction{
             account.setBalance(account.getBalance()-this.getAmount());
 
             this.setStatus("Completed");
+            
+            // Add to transaction history
+            account.getTransactionHistory().addTransaction(this);
+            
             return true;
 
     }

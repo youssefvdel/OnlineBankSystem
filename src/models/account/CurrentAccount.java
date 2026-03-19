@@ -1,6 +1,7 @@
 package models.account;
 
 import models.user.User;
+import models.transaction.Withdrawal;
 
 /**
  * CurrentAccount represents a checking/current bank account with overdraft facility.
@@ -82,6 +83,11 @@ public class CurrentAccount extends Account {
         System.out.println(
             "Withdrew: $" + amount + " | New Balance: $" + getBalance()
         );
+        
+        // Add to transaction history
+        String transId = "WDR" + System.currentTimeMillis();
+        Withdrawal withdrawal = new Withdrawal(transId, amount, getAccountNumber(), "internal");
+        getTransactionHistory().addTransaction(withdrawal);
     }
 
     /**

@@ -2,23 +2,12 @@
 # Compiled Java classes
 *.class
 
+# Build output directory
+out/
+
 # Dependencies
 lib/
 libs/
-vendor/
-
-# Build artifacts
-target/
-build/
-dist/
-out/
-
-# IDE files
-.idea/
-.vscode/
-*.iml
-*.ipr
-*.iws
 
 # Logs
 *.log
@@ -28,11 +17,25 @@ out/
 .env.local
 *.env.*
 
-# OS generated files
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
 Thumbs.db
 
-# Temporary files
-*.tmp
-*.temp
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Python (if any Python files exist in project)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
 ```

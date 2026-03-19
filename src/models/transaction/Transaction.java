@@ -30,7 +30,7 @@ public abstract class Transaction {
 
         this.transactionId=transactionId;
         this.timestamp=new Date();
-        this.status="Completed";
+        this.status="Pending";  // Start with pending status, will be updated after execute
 
         if (accountId==null || accountId.isEmpty()){
             this.status="failed";
@@ -45,7 +45,6 @@ public abstract class Transaction {
             System.out.println("Error: Amount cannot be negative");
         }else {
             this.amount= amount;
-            this.status= "Completed";
         }
 
     }

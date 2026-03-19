@@ -59,7 +59,7 @@ public class SavingsAccount extends Account {
         if (value < 0)
         {
             System.out.println("Error Cannot withdraw negative amount: " + value);
-
+            return;
         }
         // Check if withdrawal would drop balance below minimum
         if (getBalance() - value < minBalance)

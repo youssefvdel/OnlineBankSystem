@@ -57,6 +57,10 @@ public class Deposit extends Transaction {
         account.setBalance(account.getBalance()+this.getAmount());
 
         this.setStatus("completed");
+        
+        // Add to transaction history
+        account.getTransactionHistory().addTransaction(this);
+        
         return true;
     }
 

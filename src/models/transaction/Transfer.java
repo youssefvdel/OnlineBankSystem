@@ -102,6 +102,10 @@ public class Transfer extends Transaction {
         // Print updated balances
         System.out.println("Source: " + srcBefore + " ==> " + account.getBalance());
         System.out.println("Destination: " + dstBefore + " ==> " + destinationAccount.getBalance());
+        
+        // Add to transaction history
+        account.getTransactionHistory().addTransaction(this);
+        
         return true;
     }
     /**

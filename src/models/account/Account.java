@@ -3,6 +3,9 @@ package models.account;
 import models.interfaces.Transferable;
 import models.transaction.TransactionHistory;
 import models.user.User;
+import models.transaction.Deposit;
+import models.transaction.Withdrawal;
+import models.transaction.Transfer;
 
 /**
  * Abstract base class for all account types.
@@ -67,6 +70,11 @@ public abstract class Account implements Transferable {
         System.out.println(
             "Deposited: $" + amount + " | New Balance: $" + this.balance
         );
+        
+        // Add to transaction history
+        String transId = "DEP" + System.currentTimeMillis();
+        Deposit deposit = new Deposit(transId, amount, this.accountNumber, "internal");
+        transactionHistory.addTransaction(deposit);
     }
 
     /**
@@ -91,6 +99,11 @@ public abstract class Account implements Transferable {
         System.out.println(
             "Withdrew: $" + amount + " | New Balance: $" + this.balance
         );
+        
+        // Add to transaction history
+        String transId = "WDR" + System.currentTimeMillis();
+        Withdrawal withdrawal = new Withdrawal(transId, amount, this.accountNumber, "internal");
+        transactionHistory.addTransaction(withdrawal);
     }
 
     /**
@@ -153,6 +166,12 @@ public abstract class Account implements Transferable {
         if (this.getBalance() >= amount) {
             this.setBalance(this.getBalance() - amount);
             destination.setBalance(destination.getBalance() + amount);
+            
+            // Add to transaction history for source account
+            String transId = "TRF" + System.currentTimeMillis();
+            Transfer transfer = new Transfer(transId, amount, this.accountNumber, destination);
+            this.transactionHistory.addTransaction(transfer);
+            
             return true;
         }
         return false;
@@ -177,5 +196,12 @@ public abstract class Account implements Transferable {
             (owner != null ? owner.getName() : "Unknown") +
             '}'
         );
+    }
+
+    /**
+     * @return the transaction history for this account
+     */
+    public TransactionHistory getTransactionHistory() {
+        return this.transactionHistory;
     }
 }
