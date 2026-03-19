@@ -21,15 +21,8 @@
 |  #  | Member           | Student ID | Role             | Responsibilities                                                                                     |
 | :-: | ---------------- | ---------- | ---------------- | ---------------------------------------------------------------------------------------------------- |
 |  1  | **Youssef Adel** | `258270`   | 🎯 **Team Lead** | • Account, BusinessAccount, CurrentAccount, BankSystem, Main<br>• GitHub Repository Management<br>• Project Planning & Management |
-|  2  | **Tarek Saeed**         | `252382`   | 👤 Member        | - Designed and implemented the following components:
-  - `Transaction`
-  - `Deposit`
-  - `Withdrawal`
-  - `TransactionHistory`
-  - `Transferable`
-
-- Developed the Class Diagram and structured the overall OOP logic design                                                                                            |
-|  3  | **Yousif Hafez**         | `258612`   | 👤 Member        | **\_\_**                                                                                             |
+|  2  | **Tarek Saeed**         | `252382`   | 👤 Member        |    **\_\_**                                                                                        
+|  3  | **Yousif Hafez**         | `258612`   | 👤 Member        | **\_\_**                                                                                          
 |  4  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
 |  5  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
 |  6  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
