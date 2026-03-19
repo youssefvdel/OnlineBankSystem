@@ -3,14 +3,19 @@ package models.account;
 import models.user.User;
 
 /**
- * Represents a bank account with basic operations.
- * Implements Transferable interface for money transfers.
+ * Abstract base class for all account types.
+ * Cannot be instantiated directly - must use specific account types.
  *
- * @author Youssef Adel
- * @see User
+ * @author Youssef Adel 258270
+ * @see SavingsAccount
+ * @see CurrentAccount
+ * @see PremiumAccount
+ * @see BusinessAccount
+ * @see models/user/User.java
  * @since Phase 1
  */
-public class Account {
+
+public abstract class Account {
 
     /** Unique identifier for the account */
     private String accountNumber;
@@ -93,6 +98,14 @@ public class Account {
         this.balance -= value;
         destination.balance += value;
     }
+
+    /**
+     * Applies yearly fee to the account.
+     * Must be implemented by all account types.
+     *
+     * @return the fee amount that was applied
+     */
+    public abstract double applyYearlyFee();
 
     /**
      * @return the current account balance
