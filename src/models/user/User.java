@@ -106,6 +106,15 @@ public void logout()
     {this.email= email;}
 
 
+    /**
+     * Returns the type of user (Admin or Client).
+     * Polymorphism.
+     * @return "Admin" or "Client"
+     */
+    public abstract String getUserType();
+
+
+
 
     // === End of the class ===
 
