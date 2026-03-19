@@ -51,6 +51,10 @@ public class Deposit extends Transaction {
             this.setStatus("failed");
             return false;
         }
+
+        //adding balance
+        account.setBalance(account.getBalance()+this.getAmount());
+
         this.setStatus("completed");
         return true;
     }
