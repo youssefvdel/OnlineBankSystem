@@ -107,6 +107,7 @@ public class PremiumAccount extends Account {
      * Called once per year by the system.
      * @return the fee amount that was deducted
      */
+    @Override
     public double applyYearlyFee() {
         // yearly fee amount for premium accounts
         double fee = 75.0;
@@ -145,6 +146,7 @@ public class PremiumAccount extends Account {
     public void setPremiumRate(double premiumRate) {
         this.premiumRate = premiumRate;
     }
+
     /**
      * Returns string representation of the premium account.
      * Useful for debugging and display purposes.
@@ -157,9 +159,20 @@ public class PremiumAccount extends Account {
         if (getOwner() != null) {
             ownerName = getOwner().getName();
         } else {
-
             ownerName = "Unknown";
         }
-        return ("PremiumAccount " + "accountNumber='" + getAccountNumber() + ", balance=" + getBalance() + ", higherLimit=" + higherLimit + ", premiumRate=" + premiumRate + ", owner=" + ownerName);
+        return (
+            "PremiumAccount " +
+            "accountNumber='" +
+            getAccountNumber() +
+            ", balance=" +
+            getBalance() +
+            ", higherLimit=" +
+            higherLimit +
+            ", premiumRate=" +
+            premiumRate +
+            ", owner=" +
+            ownerName
+        );
     }
 }

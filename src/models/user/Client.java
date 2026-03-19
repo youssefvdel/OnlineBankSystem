@@ -1,6 +1,7 @@
-import models.account.Account;
-import models.user.User;
+package models.user;
+
 import java.util.ArrayList;
+import models.account.Account;
 
 /**
  * Client.java
@@ -43,15 +44,20 @@ public abstract class Client extends User {
      * @param phoneNumber the client's phone number
      */
 
-    public Client(String userId, String name, String password, String email,
-                  String client_ID, String phoneNumber) {
+    public Client(
+        String userId,
+        String name,
+        String password,
+        String email,
+        String client_ID,
+        String phoneNumber
+    ) {
         // Call parent (User) constructor
         super(userId, name, password, email);
-
         this.client_ID = client_ID;
         this.phoneNumber = phoneNumber;
-        this.accounts = new ArrayList<>();  // Initialize empty list
-        this.status = "Active";  // Default status
+        this.accounts = new ArrayList<>(); // Initialize empty list
+        this.status = "Active"; // Default status
     }
 
     // ========== GETTERS ==========
@@ -132,7 +138,9 @@ public abstract class Client extends User {
      */
     public boolean removeAccount(Account account) {
         if (accounts.remove(account)) {
-            System.out.println("Account " + account.getAccountNumber() + " removed.");
+            System.out.println(
+                "Account " + account.getAccountNumber() + " removed."
+            );
             return true;
         } else {
             System.out.println("Account not found.");
@@ -140,26 +148,20 @@ public abstract class Client extends User {
         }
     }
 
-    public double getTotatlBalance()
-    {
-    double total = 0;
-    for (Account account : this.accounts)
-    {
-        total += account.getBalance();
-    }
+    public double getTotatlBalance() {
+        double total = 0;
+        for (Account account : this.accounts) {
+            total += account.getBalance();
+        }
         return total;
-
-
     }
 
-   //    ========== ABSTRACT METHOD ==========
+    //    ========== ABSTRACT METHOD ==========
     /**
      * Returns the benefits for this client type.
      * @return String describing the client's benefits
      */
     public abstract String getBenefits();
-
-
 }
 
 // End of Client class
