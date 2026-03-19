@@ -22,7 +22,7 @@
 | :-: | ---------------- | ---------- | ---------------- | ---------------------------------------------------------------------------------------------------- |
 |  1  | **Youssef Adel** | `258270`   | 🎯 **Team Lead** | • Account, BusinessAccount, CurrentAccount, BankSystem, Main<br>• GitHub Repository Management<br>• Project Planning & Management |
 |  2  | **Tarek Saeed**         | `252382`   | 👤 Member        | • Transaction, Deposit, Withdrawal, TransactionHistory, Transferable<br>• Class Diagram & OOP Logic Design |                                                                                       
-|  3  | **Yousif Hafez**         | `258612`   | 👤 Member        | **\_\_**                                                                                          
+|  3  | **Yousif Hafez**         | `258612`   | 👤 Member        | **First Class Client,premium Client,Standard Client,(Insurable,Loan Eligible)Interfaces**                                                                                          
 |  4  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
 |  5  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
 |  6  | **\_\_**         | `______`   | 👤 Member        | **\_\_**                                                                                             |
