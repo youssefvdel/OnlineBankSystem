@@ -1,6 +1,5 @@
 package models.account;
 
-import models.transaction.Transaction;
 import models.transaction.TransactionHistory;
 import models.user.User;
 
@@ -139,14 +138,6 @@ public abstract class Account {
      */
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
-    }
-
-    public void checkTransactionHistory() {
-        int i = 0;
-
-        for (Transaction transaction : transactionHistory) {
-            System.out.println(++i + "" + transaction);
-        }
     }
 
     /**
