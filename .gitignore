@@ -1,1 +1,38 @@
-Nothing should be ignored in this case, as only a source code file (.java) was modified and there are no build artifacts, dependencies, or temporary files in the changes.
+```
+# Compiled Java classes
+*.class
+
+# Dependencies
+lib/
+libs/
+vendor/
+
+# Build artifacts
+target/
+build/
+dist/
+out/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+```
