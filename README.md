@@ -115,21 +115,3 @@ The `Main.java` class includes the following test cases:
 7. Custom exception handling
 
 ---
-
-## Submission Checklist
-
-### Code Requirements
-
-- [ ] All 30 classes implemented
-- [ ] Inheritance used correctly
-- [ ] Interfaces implemented
-- [ ] Abstract classes used
-- [ ] Collections API (ArrayList)
-- [ ] File I/O (saveToFile, loadFromFile)
-- [ ] 7 Custom exceptions
-- [ ] Main.java testing scenario
-- [ ] NO GUI (Console only)
-- [ ] NO global variables
-- [ ] JavaDoc comments on all classes/methods
-
----

@@ -2,6 +2,7 @@ package manager;
 
 import java.util.ArrayList;
 import models.account.Account;
+import models.transaction.Transaction;
 import models.user.User;
 
 public class BankSystem {
