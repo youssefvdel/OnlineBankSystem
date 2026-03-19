@@ -49,7 +49,7 @@ public void logout()
 {
     System.out.println("User "+this.name+" logged out");
 }
-//   =============== [GETTERS]===============
+//   =============== [GETTERS] ===============
     /**
      * Gets the user's unique identifier.
      *
@@ -71,7 +71,16 @@ public void logout()
         return this.email;
     }
 
-//   =============== [SETTERS]===============
+    /**
+     * Gets the user's Full name.
+     *
+     * @return the name as string
+     */
+    public String getName()
+    {return this.name;}
+
+
+//   =============== [SETTERS] ===============
 /**
    Sets the user id
  @param userId the new ID for the user
@@ -97,8 +106,6 @@ public void logout()
 
 
 
-    // End of the class ===
-
-
+    // === End of the class ===
 
 }
