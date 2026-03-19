@@ -1,5 +1,7 @@
 package models.user;
 
+import models.interfaces.Insurable;
+
 /**
  * @author [yousif hafez_ 258612]
  * @see Client
@@ -68,11 +70,24 @@ public class StandardClient extends Client implements Insurable {
     }
 
     /**
-     * allows the standard client to claim insurance
+     * checks if the client has insurance and submits the claim request
+     * if insurance is available
      */
     @Override
-    public void claimInsurance() {
-        System.out.println("Claiming basic insurance...");
+    public void claimInsurable() {
+        String insuranceType = getInsurance();
+
+        // checks if there is no insurance assigned to this client
+        if (insuranceType == null || insuranceType.isEmpty()) {
+            System.out.println("No insurance available for this client.");
+            return;
+        }
+
+        // prints confirmation that the insurance claim was submitted
+        System.out.println("Insurance claim submitted successfully.");
+
+        // prints the type of insurance for this client
+        System.out.println("Insurance Type: " + insuranceType);
     }
 
     /**

@@ -1,5 +1,7 @@
 package models.user;
 
+import models.interfaces.LoanEligible;
+
 /**
  * @author [yousif hafez_ 258612]
  * @see Client
