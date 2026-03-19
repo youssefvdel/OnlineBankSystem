@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class TransactionHistory implements Iterable<Transaction> {
 
+<<<<<<< HEAD
     private ArrayList<Transaction> transactions;
 
     public TransactionHistory() {
@@ -26,24 +27,72 @@ public class TransactionHistory implements Iterable<Transaction> {
     public Transaction viewTransaction(String transactionId) {
         for (Transaction t : transactions) {
             if (t.getTransactionId().equals(transactionId)) {
+=======
+    // creates a new transactionhistory with empty list
+    // called internally by Account constructor (composition)
+
+    public TransactionHistory(){
+        this.transactions=new ArrayList<>();
+    }
+
+    /**
+     * adds a transaction to the account history
+     * @param transaction
+     */
+    public void addTransaction(Transaction transaction){
+        if (transaction !=null){
+            transaction.add(transaction);
+        }
+    }
+
+    /**
+     * return a transaction by id
+     * @param transactionId
+     * @return object if found , null otherwise
+     */
+    public Transaction viewTransaction(String transactionId){
+        for (Transaction t : transactions){
+            if (t.getTransactionId().equals(transactionId)){
+>>>>>>> 83a00ca3648705c5176a512cd4b18dbf35b5c1e6
                 return t;
             }
         }
         return null;
     }
 
+<<<<<<< HEAD
+=======
+
+    /**
+     * return a full list of transaction for an account
+     * @return arraylist of all transactions
+     */
+>>>>>>> 83a00ca3648705c5176a512cd4b18dbf35b5c1e6
     public ArrayList<Transaction> getHistory() {
         return transactions;
     }
 
+<<<<<<< HEAD
     @Override
     public java.util.Iterator<Transaction> iterator() {
         return transactions.iterator();
     }
 
     public int getTransactionCount() {
+=======
+    /**
+     * returns number of transactions
+     * @return count "int"
+     */
+    public int getTransactionCount(){
+>>>>>>> 83a00ca3648705c5176a512cd4b18dbf35b5c1e6
         return transactions.size();
     }
+
+    /**
+     * details of transactionhistory
+     * @return history
+     */
 
     @Override
     public String toString() {
