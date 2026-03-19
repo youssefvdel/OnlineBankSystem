@@ -11,10 +11,9 @@ import java.util.ArrayList;
 
 public class TransactionHistory {
 
-    private ArrayList<Transaction> transactions;
-
     // creates a new transactionhistory with empty list
     // called internally by Account constructor (composition)
+    private ArrayList<Transaction> transactions;
 
     public TransactionHistory() {
         this.transactions = new ArrayList<>();

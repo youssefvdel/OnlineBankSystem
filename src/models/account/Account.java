@@ -1,5 +1,6 @@
 package models.account;
 
+import java.awt.datatransfer.Transferable;
 import models.transaction.TransactionHistory;
 import models.user.User;
 
@@ -15,7 +16,7 @@ import models.user.User;
  * @see models/user/User.java
  * @since Phase 1
  */
-public abstract class Account {
+public abstract class Account implements Transferable {
 
     /** Unique identifier for the account */
     private String accountNumber;
@@ -138,6 +139,17 @@ public abstract class Account {
      */
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    //need to add comments
+
+    public boolean transfer(Account destination, double amount) {
+        if (this.getBalance() >= amount) {
+            this.setBalance(this.getBalance() - amount);
+            destination.setBalance(destination.getBalance() + amount);
+            return true;
+        }
+        return false;
     }
 
     /**

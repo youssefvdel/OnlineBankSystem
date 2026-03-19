@@ -36,12 +36,14 @@ public abstract class Client extends User {
 
     /**
      * Constructs a new Client object.
-     * @param userId the unique user ID from parent class
-     * @param name the client's full name
-     * @param password the login password
-     * @param email the client's email address
-     * @param client_ID the unique client identifier
+     *
+     * @param userId      the unique user ID from parent class
+     * @param name        the client's full name
+     * @param password    the login password
+     * @param email       the client's email address
+     * @param client_ID   the unique client identifier
      * @param phoneNumber the client's phone number
+     * @param status
      */
 
     public Client(
@@ -50,14 +52,14 @@ public abstract class Client extends User {
         String password,
         String email,
         String client_ID,
-        String phoneNumber
-    ) {
+        String phoneNumber,
+        String status) {
         // Call parent (User) constructor
         super(userId, name, password, email);
         this.client_ID = client_ID;
         this.phoneNumber = phoneNumber;
         this.accounts = new ArrayList<>(); // Initialize empty list
-        this.status = "Active"; // Default status
+        this.status = status;
     }
 
     // ========== GETTERS ==========
@@ -148,7 +150,7 @@ public abstract class Client extends User {
         }
     }
 
-    public double getTotatlBalance() {
+    public double getTotalBalance() {
         double total = 0;
         for (Account account : this.accounts) {
             total += account.getBalance();

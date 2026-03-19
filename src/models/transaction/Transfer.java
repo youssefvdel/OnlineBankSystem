@@ -73,6 +73,19 @@ public class Transfer extends Transaction {
             setStatus("failed");
             return false;
         }
+
+        /**
+         * Tarek added this comment
+         * to use transferable interface
+         *         // Check if accounts support transfer (Polymorphism via Interface)
+         *         if (sourceAccount instanceof Transferable) {
+         *             // Use the interface method
+         *             return ((Transferable) sourceAccount).transfer(destAccount, this.getAmount());
+         *         }
+         *         return false;
+         */
+
+
         // Save balances before the transfer
         double srcBefore = account.getBalance();
         double dstBefore = destinationAccount.getBalance();
