@@ -1,3 +1,6 @@
+package models.user;
+
+
 import models.user.User;
 
 import java.util.ArrayList;
