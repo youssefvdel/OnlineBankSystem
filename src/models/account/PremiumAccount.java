@@ -145,7 +145,6 @@ public class PremiumAccount extends Account {
     public void setPremiumRate(double premiumRate) {
         this.premiumRate = premiumRate;
     }
-
     /**
      * Returns string representation of the premium account.
      * Useful for debugging and display purposes.
@@ -161,18 +160,6 @@ public class PremiumAccount extends Account {
 
             ownerName = "Unknown";
         }
-        return (
-            "PremiumAccount " +
-            "accountNumber='" +
-            getAccountNumber() +
-            ", balance=" +
-            getBalance() +
-            ", higherLimit=" +
-            higherLimit +
-            ", premiumRate=" +
-            premiumRate +
-            ", owner=" +
-            ownerName
-        );
+        return ("PremiumAccount " + "accountNumber='" + getAccountNumber() + ", balance=" + getBalance() + ", higherLimit=" + higherLimit + ", premiumRate=" + premiumRate + ", owner=" + ownerName);
     }
 }
