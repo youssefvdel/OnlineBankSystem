@@ -1,6 +1,5 @@
 package models.transaction;
 
-import models.transaction.Transaction;
 
 import java.util.ArrayList;
 
