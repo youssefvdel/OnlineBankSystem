@@ -127,7 +127,7 @@ graph TD
 ### 🟠 TarekSaeed (252382) — Menu Router + Transactions
 ```
 ┌─────────────────────────────┐
-│ 🎛️ Main Menu Loop          │
+│ 🎛️ Main Menu Loop           │
 │ • switch+while interactive  │
 │ • Refactor Deposit/Withdraw │
 │   → methods in Account      │
@@ -165,13 +165,13 @@ graph TD
 
 ### 🔴 AbdelrahmanMazen (251979) — Admin Dashboard
 ```
-┌─────────────────────────────┐
-│ 📊 Admin Tools              │
+┌─────────────────────────────────┐
+│ 📊 Admin Tools                  │
 │ • Staff CRUD (add/update/remove)│
-│ • Delete Account (not user) │
-│ • Reports + file export     │
-│ • ReportException           │
-└─────────────────────────────┘
+│ • Delete Account (not user)     │
+│ • Reports + file export         │
+│ • ReportException               │
+└─────────────────────────────────┘
 ```
 📄 Details: `plan/tasks/AbdelrahmanMazen_251979.md`
 
