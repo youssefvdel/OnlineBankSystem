@@ -297,16 +297,34 @@ _Note: Full file persistence implementation is planned for Phase 2._
 
 ---
 
-## Future Enhancements (Phase 2)
+## Future Enhancements (Phase 2) ✅ IN PROGRESS
 
-- Graphical User Interface (GUI) using JavaFX or Swing
-- Database integration for persistent storage
-- Email notifications for transactions
-- Enhanced security features (password encryption, two-factor authentication)
-- Loan processing and approval system
-- Interest calculation automation
-- Monthly statement generation
-- Admin panel for user management
+**Phase 2 Plan**: [View Work Distribution →](PHASE2_DISTRIBUTION.md)
+
+### Core Requirements
+- [x] **GUI Implementation** (Swing) - Interactive menus for Admin/Client
+- [x] **File Persistence** - Save/load users, accounts, transactions
+- [x] **Exception Handling** - Custom exceptions + try/catch everywhere
+- [x] **Authentication** - Login with 3-attempt limit + role-based routing
+
+### New Features (From Feedback)
+- [x] Interactive main menu (switch + loop + user input)
+- [x] Remove hard-coded data → load from files
+- [x] Simplify architecture: deposit/withdraw as methods, not classes
+- [x] **Admin**: Update Staff, Delete Account (archive), Generate Reports
+- [x] **Client**: Manage Card Details, Pay Bills, Update Account Info
+
+### Work Distribution
+| Member | Focus | Task File |
+|--------|-------|-----------|
+| Youssef Adel | System Core + File I/O | [`tasks/YoussefAdel_258270.md`](YoussefAdel_258270.md) |
+| Tarek Saeed | Transactions + GUI Refactor | [`tasks/TarekSaeed_252382.md`](TarekSaeed_252382.md) |
+| Yousif Hafez | Client Features + Cards | [`tasks/YousifHafez_258612.md`](YousifHafez_258612.md) |
+| Yosef Osama | Account GUI + Exceptions | [`tasks/YosefOsama_255796.md`](YosefOsama_255796.md) |
+| Yousef Mohiey | Auth System + Login GUI | [`tasks/YousefMohiey_248679.md`](YousefMohiey_248679.md) |
+| Abdelrahman Mazen ⭐ | Admin Dashboard + Reports | [`tasks/AbdelrahmanMazen_251979.md`](AbdelrahmanMazen_251979.md) |
+
+> 📋 Each file has: priority tasks, code snippets, testing checklist, resources 🎥
 
 ---
 

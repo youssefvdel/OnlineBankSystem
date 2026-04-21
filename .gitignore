@@ -1,2 +1,10 @@
 .idea
 out
+plan
+.obsidian
+target
+pom.xml
+.classpath
+.project
+.settings
+.zed
