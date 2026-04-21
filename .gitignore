@@ -1,11 +1,10 @@
-.idea
 out
-.obsidian
 target
 pom.xml
+.idea
+.obsidian
 .classpath
 .project
 .settings
 .zed
-plan/.obsidian
-plan/.trash
+.trash

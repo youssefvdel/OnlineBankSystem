@@ -111,16 +111,13 @@ public class BankSystem {
 
     /**
      * Load all data from CSV files. Call this on startup.
+     * @throws DataLoadException if file read fails
      */
-    public void loadAllData() {
-        try {
-            loadUsers();
-            loadAccounts();
-            loadTransactions();
-            System.out.println("Data loaded successfully");
-        } catch (DataLoadException e) {
-            System.err.println(e.getUserMessage());
-        }
+    public void loadAllData() throws DataLoadException {
+        loadUsers();
+        loadAccounts();
+        loadTransactions();
+        System.out.println("Data loaded successfully");
     }
 
     private void saveUsers() throws DataLoadException {
