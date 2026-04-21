@@ -1,6 +1,5 @@
 .idea
 out
-plan
 .obsidian
 target
 pom.xml
@@ -8,3 +7,5 @@ pom.xml
 .project
 .settings
 .zed
+plan/.obsidian
+plan/.trash
