@@ -1,10 +1,6 @@
 out
 target
-pom.xml
 .idea
 .obsidian
-.classpath
-.project
-.settings
 .zed
 .trash
