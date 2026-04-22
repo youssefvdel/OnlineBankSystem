@@ -236,6 +236,40 @@ public class BankSystem {
                 a.getOwner() != null ? a.getOwner().getUserId() : "",
                 a.getClass().getSimpleName()
             );
+            
+            String extra = "";
+            if (a instanceof SavingsAccount) {
+                SavingsAccount sa = (SavingsAccount) a;
+                extra = CSVHelper.join(
+                    String.valueOf(sa.getInterestRate()),
+                    String.valueOf(sa.getMinBalance())
+                );
+            } else if (a instanceof CurrentAccount) {
+                CurrentAccount ca = (CurrentAccount) a;
+                extra = CSVHelper.join(
+                    String.valueOf(ca.getOverdraftLimit()),
+                    String.valueOf(ca.getYearlyFee()),
+                    String.valueOf(ca.getTransactionLimit()),
+                    String.valueOf(ca.getMinimumBalance()),
+                    String.valueOf(ca.isActive())
+                );
+            } else if (a instanceof PremiumAccount) {
+                PremiumAccount pa = (PremiumAccount) a;
+                extra = CSVHelper.join(
+                    String.valueOf(pa.getHigherLimit()),
+                    String.valueOf(pa.getPremiumRate())
+                );
+            } else if (a instanceof BusinessAccount) {
+                BusinessAccount ba = (BusinessAccount) a;
+                extra = CSVHelper.join(
+                    CSVHelper.escape(ba.getBusinessName()),
+                    String.valueOf(ba.getYearlyFee())
+                );
+            }
+            
+            if (!extra.isEmpty()) {
+                base += "," + extra;
+            }
             lines.add(base);
         }
         CSVHelper.writeLines(ACCOUNTS_FILE, lines);
