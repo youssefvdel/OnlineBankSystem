@@ -6,9 +6,6 @@ import models.transaction.TransactionHistory;
 import models.transaction.Transfer;
 import models.transaction.Withdrawal;
 import models.user.User;
-import src.exceptions.InsufficientFundsException;
-import src.exceptions.InvalidAmountException;
-import src.exceptions.TransactionFailedException;
 
 /**
  * Abstract base class for all account types.
@@ -64,9 +61,7 @@ public abstract class Account implements Transferable {
      * @return true if deposit was successful, false otherwise
      * @see Deposit#execute(Account)
      */
-    public boolean deposit(double amount)  
-        throws InvalidAmountException,
-               TransactionFailedException{
+    public boolean deposit(double amount) {
         String transId = "DEP" + System.currentTimeMillis();
         Deposit deposit = new Deposit(
             transId,
@@ -84,10 +79,7 @@ public abstract class Account implements Transferable {
      * @return true if withdrawal was successful, false otherwise
      * @see Withdrawal#execute(Account)
      */
-    public boolean withdraw(double amount) 
-        throws InsufficientFundsException,
-               InvalidAmountException,
-               TransactionFailedException {
+    public boolean withdraw(double amount) {
         String transId = "WDR" + System.currentTimeMillis();
         Withdrawal withdrawal = new Withdrawal(
             transId,
