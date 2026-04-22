@@ -1,5 +1,8 @@
 package models.transaction;
 import models.account.Account;
+import src.exceptions.InsufficientFundsException;
+import src.exceptions.InvalidAmountException;
+import src.exceptions.TransactionFailedException;
 
 /**
  * @author Tarek Saeed 252382
@@ -20,7 +23,8 @@ public class Withdrawal extends Transaction{
      * @param method withdrawal method "ATM , online,bill payemnt"
      * */
 
-    public Withdrawal(String transactionId , double amount , String accountId ,String method ) {
+    public Withdrawal(String transactionId , double amount , String accountId ,String method ) 
+            throws InvalidAmountException, TransactionFailedException{
 
         super(transactionId, amount, accountId);
 
@@ -40,26 +44,24 @@ public class Withdrawal extends Transaction{
      */
 
     @Override
-    public boolean execute(Account account){
+    public boolean execute(Account account)throws InsufficientFundsException , InvalidAmountException ,TransactionFailedException {
 
         if (this.method == null || this.method.isEmpty()){
             this.setStatus("Failed");
-            return false;
-        }
+            throw new TransactionFailedException ("withdrawl method is invalid");}
 
         if (this.getAmount() <=0) {
-            this.setStatus("Failed");
-            return false;
+            this.setStatus(STATUS_FAILED);
+            throw new InvalidAmountException(this.getAmount());
         }
             if(account.getBalance() <this.getAmount()){
-                this.setStatus("Failed");
-                System.out.println("Error: insufficient funds. Balance: " +account.getBalance());
-                return false;
+                this.setStatus(STATUS_FAILED);
+                throw new InsufficientFundsException(account.getBalance(), this.getAmount());
             }
             //deduct balance
             account.setBalance(account.getBalance()-this.getAmount());
 
-            this.setStatus("Completed");
+            this.setStatus(STATUS_COMPLETED);
             
             // Add to transaction history
             account.getTransactionHistory().addTransaction(this);
