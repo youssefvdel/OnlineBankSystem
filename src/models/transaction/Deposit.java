@@ -1,8 +1,6 @@
 package models.transaction;
 
 import models.account.Account;
-import src.exceptions.InvalidAmountException;
-import src.exceptions.TransactionFailedException;
 
 /**
  * @author [Tarek Saeed 252382]
@@ -23,8 +21,7 @@ public class Deposit extends Transaction {
      * @param source
      * */
 
-    public Deposit(String transactionId,double amount,String accountId,String source)
-            throws InvalidAmountException, TransactionFailedException {
+    public Deposit(String transactionId,double amount,String accountId,String source){
         super(transactionId,amount,accountId);
 
         this.source=source;
@@ -44,22 +41,22 @@ public class Deposit extends Transaction {
      * @return true if valid , false otherwise
      */
     @Override
-    public boolean execute(Account account) throws InvalidAmountException,TransactionFailedException {
+    public boolean execute(Account account) {
 
         if(this.source==null||this.source.isEmpty()){
-            this.setStatus(STATUS_FAILED);
-            throw new TransactionFailedException("withdrawl method is invalid");
+            this.setStatus("failed");
+            return false ;
         }
 
         if(this.getAmount()<=0){
-            this.setStatus(STATUS_FAILED);
-            throw new InvalidAmountException(this.getAmount());
+            this.setStatus("failed");
+            return false;
         }
 
         //adding balance
         account.setBalance(account.getBalance()+this.getAmount());
 
-        this.setStatus(STATUS_COMPLETED);
+        this.setStatus("completed");
         
         // Add to transaction history
         account.getTransactionHistory().addTransaction(this);

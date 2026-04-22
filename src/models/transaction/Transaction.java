@@ -2,10 +2,6 @@ package models.transaction;
 import models.account.Account;
 
 import java.util.Date;
-import src.exceptions.InsufficientFundsException;
-import src.exceptions.InvalidAmountException;
-import src.exceptions.TransactionFailedException;
-
 
 /**
  * @author [Tarek Saeed 252382]
@@ -17,10 +13,6 @@ import src.exceptions.TransactionFailedException;
  */
 
 public abstract class Transaction {
-    
-    protected static final String STATUS_PENDING = "Pending";
-    protected static final String STATUS_COMPLETED = "Completed";
-    protected static final String STATUS_FAILED = "Failed";
 
     private String transactionId;
     private double amount;
@@ -34,22 +26,28 @@ public abstract class Transaction {
      * @param accountId
      * */
 
-  public Transaction(String transactionId, double amount, String accountId)
-            throws InvalidAmountException, TransactionFailedException {
+    public Transaction(String transactionId,double amount ,String accountId){
 
-        if (accountId == null || accountId.isEmpty()) {
-            throw new TransactionFailedException("Account ID is invalid");
+        this.transactionId=transactionId;
+        this.timestamp=new Date();
+        this.status="Pending";  // Start with pending status, will be updated after execute
+
+        if (accountId==null || accountId.isEmpty()){
+            this.status="failed";
+            System.out.println("Error: account id cannot be empty");
+        }else {
+            this.accountId=accountId;
         }
 
-        if (amount <= 0) {
-            throw new InvalidAmountException(amount);
+        if (amount < 0){
+            this.status="failed";
+            this.amount=0;
+            System.out.println("Error: Amount cannot be negative");
+        }else {
+            this.amount= amount;
         }
 
-        this.transactionId = transactionId;
-        this.amount = amount;
-        this.accountId = accountId;
-        this.timestamp = new Date();
-        this.status = STATUS_PENDING;
+    }
 
     /**
      * returns the unique transaction ID
@@ -109,7 +107,7 @@ public abstract class Transaction {
       * @return true if transaction succed , false otherwise
       * */
 
-     public abstract boolean execute(Account account)throws InsufficientFundsException, InvalidAmountException, TransactionFailedException;
+     public abstract boolean execute(Account account);
 
      /**
       * @return transaction detailes for output

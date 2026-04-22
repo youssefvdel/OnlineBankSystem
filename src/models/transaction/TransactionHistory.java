@@ -48,7 +48,7 @@ public class TransactionHistory {
      * @return arraylist of all transactions
      */
     public ArrayList<Transaction> getHistory() {
-          return new ArrayList<>(transactions);   
+        return transactions;
     }
 
     /**
