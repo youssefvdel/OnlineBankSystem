@@ -24,7 +24,7 @@ public class InsufficientFundsException extends Exception
      */
     public InsufficientFundsException(double balance, double amount, Throwable cause) 
     {
-        super("Insufficient funds Balance: $" + balance + ", Attempted: $" + amount);
+        super("Insufficient funds Balance: $" + balance + ", Attempted: $" + amount,cause);
         this.balance = balance;
         this.amount = amount;
     }
@@ -40,7 +40,7 @@ public class InsufficientFundsException extends Exception
     }
     
     /**
-     * Return user-friendly error message for GUI.
+     * Return error message for GUI.
      */
     public String getUserMessage() 
     {
