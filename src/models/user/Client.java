@@ -16,7 +16,8 @@ import models.account.Account;
  * @since Phase 1
  * @see User
  */
-public abstract class Client extends User {
+public abstract class Client extends User implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     // ========== ATTRIBUTES ==========
 

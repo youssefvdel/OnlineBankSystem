@@ -8,7 +8,8 @@ import models.account.Account;
  * @since phase1
  */
 
-public class Deposit extends Transaction {
+public class Deposit extends Transaction implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     //source for deposit "cash,check,transfer"
     private String source;

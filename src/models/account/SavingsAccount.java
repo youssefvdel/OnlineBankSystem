@@ -10,7 +10,8 @@ import models.user.User;
  * @see Account
  * @since Phase 1
  */
-public class SavingsAccount extends Account {
+public class SavingsAccount extends Account implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     /** The interest rate applied to the balance (e.g. 0.05 = 5%) */
     private double interestRate;

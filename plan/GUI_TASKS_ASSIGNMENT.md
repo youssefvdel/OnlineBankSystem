@@ -1,8 +1,9 @@
 # GUI Tasks Assignment - Phase 2
 
-**Last Updated:** April 2026  
+**Last Updated:** April 22, 2026  
 **Project:** OnlineBankSystem  
-**Goal:** Each member implements GUI for their user type + File I/O + Exceptions
+**Goal:** Each member implements GUI for their user type + File I/O (.ser) + Exceptions  
+**Master Plan:** See `PHASE2_PERFECT_PLAN.md` for full distribution + timeline
 
 ---
 
@@ -13,135 +14,154 @@
 
 ---
 
-## Team GUI Tasks
+## Team GUI Tasks (Final Distribution - .ser Format)
 
 | Priority | Component | Owner | Time | Notes |
 |----------|-----------|-------|------|-------|
-| 🔴 P0 | LoginFrame.java | YousefMohiey | 45 min | Read users.csv, authenticate |
-| 🔴 P0 | RegisterFrame.java | YoussefAdel | 45 min | Write to users.csv |
-| 🔴 P0 | Toast.java (utility) | YoussefAdel | 20 min | Shared notification popup |
-| 🟡 P1 | AdminDashboard.java | **AbdelrahmanMazen** | 25 min | **SIMPLE**: 4 buttons, no complex logic |
-| 🟡 P1 | GenerateReportDialog.java | **AbdelrahmanMazen** | 20 min | **SIMPLE**: Display data from CSV in JTable |
-| 🟡 P1 | AddStaffDialog.java | YousefMohiey | 25 min | Auth-related, writes to staff.csv |
-| 🟡 P1 | RemoveStaffDialog.java | YosefOsama | 20 min | Simple delete from collection |
-| 🟡 P1 | UpdateStaffDialog.java | TarekSaeed | 25 min | Edit staff fields, save to CSV |
-| 🟡 P1 | DeleteAccountDialog.java | YousifHafez | 20 min | Remove account from accounts.csv |
+| 🔴 P0 | LoginFrame.java | YousefMohiey | 45 min | Read users.ser, authenticate |
+| 🔴 P0 | RegisterFrame.java | **YoussefAdel** | 45 min | Write to users.ser ✅ DONE |
+| 🔴 P0 | Toast.java (utility) | **YoussefAdel** | 20 min | Shared notification popup ✅ DONE |
+| 🟡 P1 | AdminDashboard.java | **YoussefAdel** | 30 min | 4 buttons (took from Abdelrahman) ✅ DONE |
+| 🟡 P1 | ViewReportsDialog.java | **YoussefAdel** | 25 min | View reports in JTable ✅ DONE |
+| 🟡 P1 | AddStaffDialog.java | YousefMohiey | 25 min | Writes to staff.ser |
+| 🟡 P1 | ViewStaffListDialog.java | YousefMohiey | 25 min | Display all staff in table |
+| 🟡 P1 | AdminActionLogger.java | YousefMohiey | 20 min | Log admin actions to reports.ser |
+| 🟡 P1 | RemoveStaffDialog.java | YosefOsama | 20 min | Delete from staff.ser |
+| 🟡 P1 | UpdateStaffDialog.java | TarekSaeed | 25 min | Edit staff, save to staff.ser |
+| 🟡 P1 | DeleteAccountDialog.java | YousifHafez | 20 min | Remove from accounts.ser |
 | 🟡 P1 | CustomerDashboard.java | YosefOsama | 45 min | Main customer menu |
-| 🟡 P1 | TransactionDialog.java | YousifHafez | 30 min | Deposit/Withdraw/Transfer |
+| 🟡 P1 | TransactionDialog.java | YousifHafez | 30 min | Deposit/Withdraw |
+| 🟡 P1 | TransferMoneyDialog.java | YosefOsama | 30 min | Transfer between accounts |
 | 🟡 P1 | CardManagementFrame.java | YousifHafez | 40 min | Issue/update card status |
-| 🟡 P1 | PayBillsFrame.java | YousifHafez | 30 min | Pay outstanding fees |
+| 🟢 P2 | ViewTransactionHistoryDialog.java | **AbdelrahmanMazen** | 25 min | Filterable table (OPTIONAL) |
+| 🟡 P1 | ViewAccountsDialog.java | TarekSaeed | 25 min | View all customer accounts |
 | 🟡 P1 | StaffDashboard.java | TarekSaeed | 45 min | Teller operations |
 | 🟢 P2 | ForgotPasswordFrame.java | YousefMohiey | 30 min | Extra credit |
 | 🟢 P2 | ProfileEditFrame.java | Any | 25 min | Extra credit |
 
 ---
 
-## AbdelrahmanMazen - Reduced Scope (2 Windows Only)
+## GUI Tasks by Team Member
 
-### Why reduced:
-- Focus on learning basics first
-- Still covers all grading criteria (GUI + Files + Exceptions)
-- Team picks up complex dialogs
-
-### Your 2 Tasks:
-
-#### 1. AdminDashboard.java (~25 min)
-```java
-// Starter code - just fill in the button actions
-public class AdminDashboard extends JFrame {
-    public AdminDashboard(Admin admin) {
-        setTitle("Admin Dashboard");
-        setSize(400, 300);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
-        // 4 simple buttons
-        JButton addStaff = new JButton("Add Staff");
-        JButton removeStaff = new JButton("Remove Staff");
-        JButton updateStaff = new JButton("Update Staff");
-        JButton generateReport = new JButton("Generate Report");
-        
-        // TODO: Add action listeners that open the respective dialogs
-        // For now: System.out.println("Button clicked");
-        
-        // Layout code here...
-    }
-}
-```
-
-#### 2. GenerateReportDialog.java (~20 min)
-```java
-// Starter code - just display data from CSV
-public class GenerateReportDialog extends JDialog {
-    public GenerateReportDialog(Frame parent) {
-        super(parent, "Transaction Report", true);
-        setSize(500, 400);
-        
-        // Read from reports.csv using CSVHelper
-        // Display in JTable (no editing needed)
-        
-        JButton close = new JButton("Close");
-        close.addActionListener(e -> dispose());
-        add(close, BorderLayout.SOUTH);
-    }
-}
-```
-
-#### File I/O (your 30%):
-- Create `saveAdminActions.csv` with format: `timestamp,adminId,actionType,details`
-- Use your existing `CSVHelper.appendRow()` method
-- No complex parsing needed
-
-#### Exception (your 30%):
-```java
-// AdminActionException.java - 5 lines max
-public class AdminActionException extends Exception {
-    public AdminActionException(String message) {
-        super(message);
-    }
-}
-```
-
-#### Grade Checklist for Abdelrahman:
-- [ ] AdminDashboard has 4 working buttons (can just print for now)
-- [ ] GenerateReportDialog shows data from CSV in a table
-- [ ] Admin actions append to saveAdminActions.csv
-- [ ] AdminActionException thrown on invalid action
-- [ ] Code compiles and runs
-
-**Total time: ~45 min** - achievable!
+### YoussefAdel (258270) — System Core + Registration + Admin Dashboard ✅
+**Already Done:** File I/O engine, DataLoadException, Main.java menu
+**GUI Tasks:**
+1. 🔴 P0: `RegisterFrame.java` (45 min) — Registration form ✅ DONE
+2. 🔴 P0: `Toast.java` (20 min) — Reusable notification popup ✅ DONE
+3. 🟡 P1: `ViewReportsDialog.java` (25 min) — View reports in JTable ✅ DONE
+4. 🟡 P1: `AdminDashboard.java` (30 min) — Main admin menu ✅ DONE
+**Exception:** `DataLoadException.java` ✅ Already done
+**File I/O:** users.ser, accounts.ser, transactions.ser (read+write via serialization)
 
 ---
 
-## File Contracts (Agreed CSV Formats)
+### YousefMohiey (248679) — Authentication + Staff Management + Admin Actions
+**GUI Tasks:**
+1. 🔴 P0: `LoginFrame.java` (45 min) — Login with 3-attempt limit
+2. 🟡 P1: `AddStaffDialog.java` (25 min) — Admin adds staff
+3. 🟡 P1: `ViewStaffListDialog.java` (25 min) — Display all staff in table
+4. 🟡 P1: `AdminActionLogger.java` (20 min) — Log admin actions to reports.ser
+**Exception:** `StaffCreationException.java` — Throw on duplicate email
+**File I/O:** users.ser (read), staff.ser (write)
 
-### users.csv
-```
-id,name,email,password,phone,role,createdAt
-258270,Youssef Adel,youssef@test.com,pass123,010...,StandardClient,2026-04-01
+---
+
+### AbdelrahmanMazen (251979) — Minimal Scope (1 Optional GUI)
+**Note:** If not completed by 2:00 PM on sprint day → Team will complete
+**GUI Tasks:**
+1. 🟢 P2: `ViewTransactionHistoryDialog.java` (25 min) — Filterable transaction table (OPTIONAL)
+**Exception:** — (moved to YousefMohiey)
+**File I/O:** transactions.ser (read only)
+
+---
+
+### YosefOsama (255796) — Customer Dashboard + Staff Remove + Transfer
+**GUI Tasks:**
+1. 🟡 P1: `CustomerDashboard.java` (45 min) — Account ops menu
+2. 🟡 P1: `RemoveStaffDialog.java` (20 min) — Search & remove staff
+3. 🟡 P1: `TransferMoneyDialog.java` (30 min) — Transfer between accounts
+**Exception:** `StaffNotFoundException.java` — Throw if staff not found
+**File I/O:** accounts.ser, staff.ser, transactions.ser
+
+---
+
+### TarekSaeed (252382) — Staff Dashboard + Staff Update + Accounts View
+**GUI Tasks:**
+1. 🟡 P1: `StaffDashboard.java` (45 min) — Teller operations interface
+2. 🟡 P1: `UpdateStaffDialog.java` (25 min) — Edit staff fields
+3. 🟡 P1: `ViewAccountsDialog.java` (25 min) — View all customer accounts
+**Exception:** `StaffUpdateException.java` — Throw on invalid phone/job
+**File I/O:** staff.ser, accounts.ser
+
+---
+
+### YousifHafez (258612) — Customer Features + Account Delete
+**GUI Tasks:**
+1. 🟡 P1: `TransactionDialog.java` (30 min) — Deposit/Withdraw
+2. 🟡 P1: `CardManagementFrame.java` (40 min) — Issue/update card status
+3. 🟡 P1: `DeleteAccountDialog.java` (20 min) — Admin deletes account
+**Exception:** `AccountDeletionException.java` — Throw if balance > 0
+**File I/O:** accounts.ser, transactions.ser, cards.ser
+
+---
+
+## Summary: Work Distribution
+
+| Member | GUI Count | Total Time | Exceptions | Files |
+|--------|-----------|------------|------------|-------|
+| YoussefAdel | 4 ✅ | ~120 min | DataLoadException ✅ | users.ser, accounts.ser, transactions.ser |
+| YousefMohiey | 4 | ~115 min | StaffCreationException | users.ser, staff.ser |
+| AbdelrahmanMazen | 1 | ~25 min | — | transactions.ser |
+| YosefOsama | 3 | ~95 min | StaffNotFoundException | accounts.ser, staff.ser, transactions.ser |
+| TarekSaeed | 3 | ~95 min | StaffUpdateException | staff.ser, accounts.ser |
+| YousifHafez | 3 | ~90 min | AccountDeletionException | accounts.ser, transactions.ser, cards.ser |
+
+**Total: 18 GUIs, ~545 min (~9 hours) — Abdelrahman has minimal scope**
+
+---
+
+## File Contracts (.ser Format - Java Serialization)
+
+### users.ser
+```java
+// ArrayList<User> serialized
+ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/users.ser"));
+oos.writeObject(users);
 ```
 
-### staff.csv
-```
-id,name,email,password,phone,role,jobTitle,createdAt
-S001,John Staff,john@test.com,pass456,011...,Staff,Teller,2026-04-02
-```
-
-### accounts.csv
-```
-accountId,ownerId,accountType,balance,createdAt,status
-ACC001,258270,Savings,1000.00,2026-04-01,ACTIVE
+### staff.ser
+```java
+// ArrayList<Staff> serialized
+ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/staff.ser"));
+oos.writeObject(staff);
 ```
 
-### transactions.csv
-```
-txId,accountId,type,amount,timestamp,description
-TX001,ACC001,DEPOSIT,500.00,2026-04-02T10:30,Initial deposit
+### accounts.ser
+```java
+// ArrayList<Account> serialized
+ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/accounts.ser"));
+oos.writeObject(accounts);
 ```
 
-### reports.csv (for Abdelrahman)
+### transactions.ser
+```java
+// ArrayList<Transaction> serialized
+ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/transactions.ser"));
+oos.writeObject(transactions);
 ```
-timestamp,adminId,actionType,details
-2026-04-02T11:00,ADMIN001,REPORT_GENERATED,Transaction summary Q1
+
+### reports.ser (optional - for admin action logging)
+```java
+// ArrayList<String> or custom Report class
+ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/reports.ser"));
+oos.writeObject(reports);
+```
+
+### cards.ser (for YousifHafez)
+```java
+// ArrayList<Card> serialized
+ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/cards.ser"));
+oos.writeObject(cards);
 ```
 
 ---
@@ -152,7 +172,7 @@ timestamp,adminId,actionType,details
 # Everyone: create your feature branch
 git checkout -b feature/yourname-gui-task
 
-# Code your 1-2 components
+# Code your components
 # Test locally
 # Commit with clear message
 git add src/gui/YourComponent.java
@@ -171,23 +191,26 @@ git push origin feature/yourname-gui-task
 
 1. **File I/O Test** (YoussefAdel):
    ```bash
-   java -cp out Main
-   # Register user → exit → restart → verify data loads
+   java -cp out manager.SerializationTest
+   # Verify .ser files created and data persists
    ```
 
 2. **Auth Test** (YousefMohiey):
    ```bash
+   java -cp out Main
    # Login with registered user → verify role-based menu loads
    ```
 
-3. **Admin Flow Test** (AbdelrahmanMazen):
+3. **Admin Flow Test** (YoussefAdel + YousefMohiey):
    ```bash
-   # Login as Admin → click Generate Report → verify table shows data
+   # Login as Admin → AdminDashboard opens → Click buttons
+   # Verify reports.ser gets appended
    ```
 
 4. **Full Integration**:
    ```bash
    # All teammates run together, test cross-component flows
+   # Verify all .ser files persist correctly
    ```
 
 ---
@@ -209,31 +232,36 @@ git push origin feature/yourname-gui-task
 | JFrame + JButton Tutorial | https://youtu.be/a7rX_VbJL8k | 8 min |
 | JTable from CSV | https://youtu.be/5K8vVvZqJ8E | 10 min |
 | Custom Exceptions in Java | https://youtu.be/6u4vqVvqJ8k | 6 min |
-| File I/O in Java | https://youtu.be/9XJicRt_FaI?t=180 | 5 min |
+| Java Serialization | https://youtu.be/ue06TSYXJpY | 5 min |
 
 ---
 
-## Quick Start for Abdelrahman
+## Quick Start Guide
 
 ```bash
 # 1. Pull latest
 git pull origin main
 
-# 2. Create your branch
-git checkout -b feature/abdelrahman-admin-gui
+# 2. Create your feature branch
+git checkout -b feature/yourname-gui-task
 
-# 3. Create the 2 files (copy starter code above)
-mkdir -p src/gui/admin
-touch src/gui/admin/AdminDashboard.java
-touch src/gui/admin/GenerateReportDialog.java
+# 3. Create your assigned GUI files (NetBeans GUI Builder)
+mkdir -p src/gui/{auth,admin,customer,staff,util}
 
 # 4. Compile and test
-javac -d out -sourcepath src src/gui/admin/*.java
+javac -d out $(find src -name "*.java" -type f)
 
-# 5. Commit when working
-git add src/gui/admin/
-git commit -m "feat: Add AdminDashboard + GenerateReportDialog"
-git push origin feature/abdelrahman-admin-gui
+# 5. Run serialization test
+java -cp out manager.SerializationTest
+
+# 6. Commit when working
+git add src/gui/
+git commit -m "feat: Add your GUI components"
+git push origin feature/yourname-gui-task
 ```
 
-**You got this!** Start with AdminDashboard first. If stuck, message the team on Discord. 🚀
+**Starter Code Templates:** See individual task files in `plan/tasks/` for each member.
+
+**Important:** All GUIs must be NetBeans GUI Builder format (`.form` files required).
+
+**You got this!** Start with your P0 task first. If stuck, message the team on Discord. 🚀

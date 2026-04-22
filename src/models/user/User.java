@@ -9,7 +9,8 @@
 
 package models.user;
 
-public abstract class User {
+public abstract class User implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
     // "private" means only User can access those variables
     private String userId;
     private String name;

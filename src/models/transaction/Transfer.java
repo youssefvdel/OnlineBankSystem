@@ -10,7 +10,8 @@ import models.account.Account;
  * @see Transaction
  * @since Phase 1
  */
-public class Transfer extends Transaction {
+public class Transfer extends Transaction implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     /** The account number the money is taken FROM */
     private String sourceAccountId;

@@ -9,7 +9,8 @@ import models.user.User;
  * @see Account
  * @since Phase 1
  */
-public class PremiumAccount extends Account {
+public class PremiumAccount extends Account implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * The higher withdrawal limit allowed for premium accounts

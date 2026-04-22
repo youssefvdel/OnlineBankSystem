@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * @since Phase 1
  * @see User
  */
-public class Admin extends User {
+public class Admin extends User implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Admin object.

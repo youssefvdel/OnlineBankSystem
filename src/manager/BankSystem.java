@@ -1,18 +1,19 @@
 package manager;
 
 import exceptions.DataLoadException;
-import java.util.ArrayList;
-import java.util.List;
 import models.account.Account;
 import models.transaction.Transaction;
-import models.user.Client;
 import models.user.User;
-import utils.CSVHelper;
+
+import java.io.*;
+import java.util.ArrayList;
 
 /**
- * Main manager for the banking system.
- * Handles users, accounts, transactions and file persistence.
- * @author Youssef Adel - 258270
+ * Central manager for the banking system.
+ * Handles user authentication, data persistence with .ser files.
+ * 
+ * @author Youssef Adel 258270
+ * @version Phase 2
  */
 public class BankSystem {
 
@@ -21,6 +22,14 @@ public class BankSystem {
     private ArrayList<Transaction> transactions;
     private User currentUser;
 
+    private static final String DATA_DIR = "data/";
+    private static final String USERS_FILE = DATA_DIR + "users.ser";
+    private static final String ACCOUNTS_FILE = DATA_DIR + "accounts.ser";
+    private static final String TRANSACTIONS_FILE = DATA_DIR + "transactions.ser";
+
+    /**
+     * Creates a new BankSystem with empty collections.
+     */
     public BankSystem() {
         this.users = new ArrayList<>();
         this.accounts = new ArrayList<>();
@@ -28,15 +37,13 @@ public class BankSystem {
     }
 
     /**
-     * Validate user login credentials.
+     * Authenticates a user by ID and password.
      */
     public boolean login(String userId, String password) {
         for (User user : users) {
             if (user.getUserId().equals(userId) && user.login(password)) {
                 currentUser = user;
-                System.out.println(
-                    "Login successful! Welcome, " + user.getName()
-                );
+                System.out.println("Login successful! Welcome, " + user.getName());
                 return true;
             }
         }
@@ -44,6 +51,9 @@ public class BankSystem {
         return false;
     }
 
+    /**
+     * Displays the main menu options for the logged-in user.
+     */
     public void mainMenu() {
         if (currentUser == null) {
             System.out.println("Please login first");
@@ -56,25 +66,26 @@ public class BankSystem {
         System.out.println("4. Logout");
     }
 
-    public void saveToFile() {
-        System.out.println("Saving data to file...");
-    }
-
-    public void loadFromFile() {
-        System.out.println("Loading data from file...");
-    }
-
+    /**
+     * Adds a user to the system.
+     */
     public void addUser(User user) {
         users.add(user);
     }
 
+    /**
+     * Adds an account to the system and links it to its owner.
+     */
     public void addAccount(Account account) {
         accounts.add(account);
-        if (account.getOwner() instanceof Client) {
-            ((Client) account.getOwner()).addAccount(account);
+        if (account.getOwner() instanceof models.user.Client) {
+            ((models.user.Client) account.getOwner()).addAccount(account);
         }
     }
 
+    /**
+     * Finds an account by its account number.
+     */
     public Account getAccountByNumber(String accountNumber) {
         for (Account acc : accounts) {
             if (acc.getAccountNumber().equals(accountNumber)) {
@@ -84,122 +95,85 @@ public class BankSystem {
         return null;
     }
 
+    /**
+     * Returns the currently authenticated user.
+     */
     public User getCurrentUser() {
         return currentUser;
     }
 
-    // File paths for persistence
-    private static final String DATA_DIR = "data/";
-    private static final String USERS_FILE = DATA_DIR + "users.csv";
-    private static final String ACCOUNTS_FILE = DATA_DIR + "accounts.csv";
-    private static final String TRANSACTIONS_FILE =
-        DATA_DIR + "transactions.csv";
-
     /**
-     * Save all data to CSV files. Call this when app exits.
+     * Saves all system data (users, accounts, transactions) to .ser files.
      */
     public void saveAllData() {
         try {
-            saveUsers();
-            saveAccounts();
-            saveTransactions();
-            System.out.println("Data saved successfully");
-        } catch (DataLoadException e) {
-            System.err.println(e.getUserMessage());
+            saveToFile(USERS_FILE, users);
+            saveToFile(ACCOUNTS_FILE, accounts);
+            saveToFile(TRANSACTIONS_FILE, transactions);
+            System.out.println("✓ Data saved successfully");
+        } catch (Exception e) {
+            System.err.println("✗ Error saving data: " + e.getMessage());
         }
     }
 
     /**
-     * Load all data from CSV files. Call this on startup.
-     * @throws DataLoadException if file read fails
+     * Loads all system data from .ser files.
      */
     public void loadAllData() throws DataLoadException {
-        loadUsers();
-        loadAccounts();
-        loadTransactions();
-        System.out.println("Data loaded successfully");
+        try {
+            users = loadFromFile(USERS_FILE);
+            accounts = loadFromFile(ACCOUNTS_FILE);
+            transactions = loadFromFile(TRANSACTIONS_FILE);
+            
+            if (users == null) users = new ArrayList<>();
+            if (accounts == null) accounts = new ArrayList<>();
+            if (transactions == null) transactions = new ArrayList<>();
+            
+            System.out.println("✓ Data loaded successfully");
+        } catch (DataLoadException e) {
+            throw e;
+        } catch (Exception e) {
+            System.out.println("⚠ Starting with empty data (files not found)");
+            users = new ArrayList<>();
+            accounts = new ArrayList<>();
+            transactions = new ArrayList<>();
+        }
     }
 
-    private void saveUsers() throws DataLoadException {
-        ArrayList<String> lines = new ArrayList<>();
-        for (User u : users) {
-            String base = CSVHelper.join(
-                u.getUserId(),
-                u.getName(),
-                u.getEmail(),
-                u.getClass().getSimpleName()
-            );
-            if (u instanceof Client) {
-                base += ",CLIENT";
+    /**
+     * Generic save to .ser file using serialization.
+     */
+    @SuppressWarnings("unchecked")
+    private <T> void saveToFile(String filePath, T data) throws DataLoadException {
+        try {
+            File file = new File(filePath);
+            file.getParentFile().mkdirs();
+            
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeObject(data);
+            oos.close();
+        } catch (IOException e) {
+            throw new DataLoadException(filePath, "write", e);
+        }
+    }
+
+    /**
+     * Generic load from .ser file using deserialization.
+     */
+    @SuppressWarnings("unchecked")
+    private <T> T loadFromFile(String filePath) throws DataLoadException {
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                return null;
             }
-            lines.add(base);
-        }
-        CSVHelper.writeLines(USERS_FILE, lines);
-    }
-
-    private void loadUsers() throws DataLoadException {
-        List<String> lines = CSVHelper.readLines(USERS_FILE);
-        for (String line : lines) {
-            List<String> f = CSVHelper.parseLine(line);
-            if (f.size() < 4) continue;
-            String id = f.get(0),
-                name = f.get(1),
-                email = f.get(2),
-                role = f.get(3);
-            System.out.println("Loaded: " + name + " (" + role + ")");
-        }
-    }
-
-    private void saveAccounts() throws DataLoadException {
-        ArrayList<String> lines = new ArrayList<>();
-        for (Account a : accounts) {
-            String base = CSVHelper.join(
-                a.getAccountNumber(),
-                String.valueOf(a.getBalance()),
-                a.getOwner() != null ? a.getOwner().getUserId() : "",
-                a.getClass().getSimpleName()
-            );
-            lines.add(base);
-        }
-        CSVHelper.writeLines(ACCOUNTS_FILE, lines);
-    }
-
-    private void loadAccounts() throws DataLoadException {
-        List<String> lines = CSVHelper.readLines(ACCOUNTS_FILE);
-        for (String line : lines) {
-            List<String> f = CSVHelper.parseLine(line);
-            if (f.size() < 4) continue;
-            String accNum = f.get(0),
-                type = f.get(3);
-            System.out.println("Loaded: " + accNum + " (" + type + ")");
-        }
-    }
-
-    private void saveTransactions() throws DataLoadException {
-        ArrayList<String> lines = new ArrayList<>();
-        for (Transaction t : transactions) {
-            lines.add(
-                CSVHelper.join(
-                    t.getTransactionId(),
-                    String.valueOf(t.getAmount()),
-                    t.getAccountId(),
-                    t.getStatus(),
-                    t.getClass().getSimpleName(),
-                    t.getTimestamp() != null
-                        ? String.valueOf(t.getTimestamp().getTime())
-                        : ""
-                )
-            );
-        }
-        CSVHelper.writeLines(TRANSACTIONS_FILE, lines);
-    }
-
-    private void loadTransactions() throws DataLoadException {
-        List<String> lines = CSVHelper.readLines(TRANSACTIONS_FILE);
-        for (String line : lines) {
-            List<String> f = CSVHelper.parseLine(line);
-            if (f.size() < 5) continue;
-            System.out.println("Loaded: " + f.get(0) + " - $" + f.get(1));
+            
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            T data = (T) ois.readObject();
+            ois.close();
+            return data;
+        } catch (IOException | ClassNotFoundException e) {
+            throw new DataLoadException(filePath, "read", e);
         }
     }
 }

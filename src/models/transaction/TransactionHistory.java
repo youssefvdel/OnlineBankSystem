@@ -9,7 +9,8 @@ import java.util.ArrayList;
  * @since phase 1
  */
 
-public class TransactionHistory {
+public class TransactionHistory implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     // creates a new transactionhistory with empty list
     // called internally by Account constructor (composition)

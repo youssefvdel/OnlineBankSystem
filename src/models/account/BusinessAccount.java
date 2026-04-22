@@ -10,7 +10,8 @@ import models.user.User;
  * @author Youssef Adel 258270
  * @since Phase 1
  */
-public class BusinessAccount extends Account {
+public class BusinessAccount extends Account implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     /** Name of the business */
     private String businessName;

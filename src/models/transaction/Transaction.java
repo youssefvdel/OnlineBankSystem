@@ -12,7 +12,8 @@ import java.util.Date;
  * @since phase1
  */
 
-public abstract class Transaction {
+public abstract class Transaction implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String transactionId;
     private double amount;
