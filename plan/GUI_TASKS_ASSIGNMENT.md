@@ -1,8 +1,9 @@
 # GUI Tasks Assignment - Phase 2
 
-**Last Updated:** April 2026  
+**Last Updated:** April 22, 2026  
 **Project:** OnlineBankSystem  
-**Goal:** Each member implements GUI for their user type + File I/O + Exceptions
+**Goal:** Each member implements GUI for their user type + File I/O + Exceptions  
+**Master Plan:** See `PHASE2_PERFECT_PLAN.md` for full distribution + timeline
 
 ---
 
@@ -13,102 +14,109 @@
 
 ---
 
-## Team GUI Tasks
+## Team GUI Tasks (Redistributed — Abdelrahman Minimal Scope)
 
 | Priority | Component | Owner | Time | Notes |
 |----------|-----------|-------|------|-------|
 | 🔴 P0 | LoginFrame.java | YousefMohiey | 45 min | Read users.csv, authenticate |
-| 🔴 P0 | RegisterFrame.java | YoussefAdel | 45 min | Write to users.csv |
-| 🔴 P0 | Toast.java (utility) | YoussefAdel | 20 min | Shared notification popup |
-| 🟡 P1 | AdminDashboard.java | **AbdelrahmanMazen** | 25 min | **SIMPLE**: 4 buttons, no complex logic |
-| 🟡 P1 | GenerateReportDialog.java | **AbdelrahmanMazen** | 20 min | **SIMPLE**: Display data from CSV in JTable |
+| 🔴 P0 | RegisterFrame.java | YoussefAdel | 45 min | Write to users.csv ✅ DONE |
+| 🔴 P0 | Toast.java (utility) | YoussefAdel | 20 min | Shared notification popup ✅ DONE |
+| 🟡 P1 | AdminDashboard.java | **YoussefAdel** | 30 min | 4 buttons: Add/Remove/Update/Report ✅ DONE |
+| 🟡 P1 | ViewReportsDialog.java | YoussefAdel | 25 min | View system reports in JTable ✅ DONE |
 | 🟡 P1 | AddStaffDialog.java | YousefMohiey | 25 min | Auth-related, writes to staff.csv |
+| 🟡 P1 | ViewStaffListDialog.java | YousefMohiey | 25 min | Display all staff in table |
+| 🟡 P1 | AdminActionLogger.java | YousefMohiey | 20 min | Utility to log admin actions |
 | 🟡 P1 | RemoveStaffDialog.java | YosefOsama | 20 min | Simple delete from collection |
 | 🟡 P1 | UpdateStaffDialog.java | TarekSaeed | 25 min | Edit staff fields, save to CSV |
 | 🟡 P1 | DeleteAccountDialog.java | YousifHafez | 20 min | Remove account from accounts.csv |
 | 🟡 P1 | CustomerDashboard.java | YosefOsama | 45 min | Main customer menu |
-| 🟡 P1 | TransactionDialog.java | YousifHafez | 30 min | Deposit/Withdraw/Transfer |
+| 🟡 P1 | TransactionDialog.java | YousifHafez | 30 min | Deposit/Withdraw only |
+| 🟡 P1 | TransferMoneyDialog.java | YosefOsama | 30 min | Transfer between accounts |
 | 🟡 P1 | CardManagementFrame.java | YousifHafez | 40 min | Issue/update card status |
-| 🟡 P1 | PayBillsFrame.java | YousifHafez | 30 min | Pay outstanding fees |
+| 🟢 P2 | ViewTransactionHistoryDialog.java | **AbdelrahmanMazen** | 25 min | Filterable transaction table (OPTIONAL) |
+| 🟡 P1 | ViewAccountsDialog.java | TarekSaeed | 25 min | View all customer accounts |
 | 🟡 P1 | StaffDashboard.java | TarekSaeed | 45 min | Teller operations |
 | 🟢 P2 | ForgotPasswordFrame.java | YousefMohiey | 30 min | Extra credit |
 | 🟢 P2 | ProfileEditFrame.java | Any | 25 min | Extra credit |
 
 ---
 
-## AbdelrahmanMazen - Reduced Scope (2 Windows Only)
+## GUI Tasks by Team Member
 
-### Why reduced:
-- Focus on learning basics first
-- Still covers all grading criteria (GUI + Files + Exceptions)
-- Team picks up complex dialogs
+### YoussefAdel (258270) — System Core + Registration + Admin Dashboard ✅
+**Already Done:** File I/O engine, CSVHelper, DataLoadException, Main.java menu
+**GUI Tasks:**
+1. 🔴 P0: `RegisterFrame.java` (45 min) — Registration form ✅ DONE
+2. 🔴 P0: `Toast.java` (20 min) — Reusable notification popup ✅ DONE
+3. 🟡 P1: `ViewReportsDialog.java` (25 min) — View system reports in JTable ✅ DONE
+4. 🟡 P1: `AdminDashboard.java` (30 min) — Main admin menu (took from Abdelrahman) ✅ DONE
+**Exception:** `DataLoadException.java` ✅ Already done
+**File I/O:** users.csv (write), reports.csv (read+write)
 
-### Your 2 Tasks:
+---
 
-#### 1. AdminDashboard.java (~25 min)
-```java
-// Starter code - just fill in the button actions
-public class AdminDashboard extends JFrame {
-    public AdminDashboard(Admin admin) {
-        setTitle("Admin Dashboard");
-        setSize(400, 300);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
-        // 4 simple buttons
-        JButton addStaff = new JButton("Add Staff");
-        JButton removeStaff = new JButton("Remove Staff");
-        JButton updateStaff = new JButton("Update Staff");
-        JButton generateReport = new JButton("Generate Report");
-        
-        // TODO: Add action listeners that open the respective dialogs
-        // For now: System.out.println("Button clicked");
-        
-        // Layout code here...
-    }
-}
-```
+### YousefMohiey (248679) — Authentication + Staff Management + Admin Actions
+**GUI Tasks:**
+1. 🔴 P0: `LoginFrame.java` (45 min) — Login with 3-attempt limit, role routing
+2. 🟡 P1: `AddStaffDialog.java` (25 min) — Admin adds staff, writes to staff.csv
+3. 🟡 P1: `ViewStaffListDialog.java` (25 min) — Display all staff in table (for Admin)
+4. 🟡 P1: `AdminActionLogger.java` (20 min) — Utility to log admin actions to CSV
+**Exception:** `StaffCreationException.java` — Throw on duplicate email
+**File I/O:** users.csv (read for auth), staff.csv (read + write)
 
-#### 2. GenerateReportDialog.java (~20 min)
-```java
-// Starter code - just display data from CSV
-public class GenerateReportDialog extends JDialog {
-    public GenerateReportDialog(Frame parent) {
-        super(parent, "Transaction Report", true);
-        setSize(500, 400);
-        
-        // Read from reports.csv using CSVHelper
-        // Display in JTable (no editing needed)
-        
-        JButton close = new JButton("Close");
-        close.addActionListener(e -> dispose());
-        add(close, BorderLayout.SOUTH);
-    }
-}
-```
+---
 
-#### File I/O (your 30%):
-- Create `saveAdminActions.csv` with format: `timestamp,adminId,actionType,details`
-- Use your existing `CSVHelper.appendRow()` method
-- No complex parsing needed
+### AbdelrahmanMazen (251979) — Minimal Scope (1 Optional GUI)
+**Note:** If not completed by 2:00 PM on sprint day → YoussefAdel or YousefMohiey will complete
+**GUI Tasks:**
+1. 🟢 P2: `ViewTransactionHistoryDialog.java` (25 min) — Filterable transaction table (OPTIONAL - Nice to have)
+**Exception:** — (moved to YousefMohiey)
+**File I/O:** transactions.csv (read only)
 
-#### Exception (your 30%):
-```java
-// AdminActionException.java - 5 lines max
-public class AdminActionException extends Exception {
-    public AdminActionException(String message) {
-        super(message);
-    }
-}
-```
+---
 
-#### Grade Checklist for Abdelrahman:
-- [ ] AdminDashboard has 4 working buttons (can just print for now)
-- [ ] GenerateReportDialog shows data from CSV in a table
-- [ ] Admin actions append to saveAdminActions.csv
-- [ ] AdminActionException thrown on invalid action
-- [ ] Code compiles and runs
+### YosefOsama (255796) — Customer Dashboard + Staff Remove + Transfer
+**GUI Tasks:**
+1. 🟡 P1: `CustomerDashboard.java` (45 min) — Account ops menu
+2. 🟡 P1: `RemoveStaffDialog.java` (20 min) — Search & remove staff from staff.csv
+3. 🟡 P1: `TransferMoneyDialog.java` (30 min) — Transfer between accounts with validation
+**Exception:** `StaffNotFoundException.java` — Throw if staff not found
+**File I/O:** accounts.csv (read + update), staff.csv (read + delete), transactions.csv (write)
 
-**Total time: ~45 min** - achievable!
+---
+
+### TarekSaeed (252382) — Staff Dashboard + Staff Update + Accounts View
+**GUI Tasks:**
+1. 🟡 P1: `StaffDashboard.java` (45 min) — Teller operations interface
+2. 🟡 P1: `UpdateStaffDialog.java` (25 min) — Edit staff fields, save to staff.csv
+3. 🟡 P1: `ViewAccountsDialog.java` (25 min) — View all customer accounts (for Staff/Admin)
+**Exception:** `StaffUpdateException.java` — Throw on invalid phone/job
+**File I/O:** staff.csv (read + update), accounts.csv (read)
+
+---
+
+### YousifHafez (258612) — Customer Features + Account Delete
+**GUI Tasks:**
+1. 🟡 P1: `TransactionDialog.java` (30 min) — Deposit/Withdraw
+2. 🟡 P1: `CardManagementFrame.java` (40 min) — Issue/update card status
+3. 🟡 P1: `DeleteAccountDialog.java` (20 min) — Admin deletes account (balance=0 check)
+**Exception:** `AccountDeletionException.java` — Throw if balance > 0
+**File I/O:** accounts.csv (read + delete), transactions.csv (read + delete related), cards.csv (read + write)
+
+---
+
+## Summary: Work Distribution
+
+| Member | GUI Count | Total Time | Exceptions | Files |
+|--------|-----------|------------|------------|-------|
+| YoussefAdel | 4 | ~120 min | DataLoadException ✅ | users.csv, reports.csv |
+| YousefMohiey | 4 | ~115 min | StaffCreationException | users.csv, staff.csv |
+| AbdelrahmanMazen | 1 | ~25 min | — | transactions.csv |
+| YosefOsama | 3 | ~95 min | StaffNotFoundException | accounts.csv, staff.csv, transactions.csv |
+| TarekSaeed | 3 | ~95 min | StaffUpdateException | staff.csv, accounts.csv |
+| YousifHafez | 3 | ~90 min | AccountDeletionException | accounts.csv, transactions.csv, cards.csv |
+
+**Total: 18 GUIs, ~545 min (~9 hours) — Abdelrahman has minimal scope**
 
 ---
 
@@ -213,27 +221,27 @@ git push origin feature/yourname-gui-task
 
 ---
 
-## Quick Start for Abdelrahman
+## Quick Start Guide
 
 ```bash
 # 1. Pull latest
 git pull origin main
 
-# 2. Create your branch
-git checkout -b feature/abdelrahman-admin-gui
+# 2. Create your feature branch
+git checkout -b feature/yourname-gui-task
 
-# 3. Create the 2 files (copy starter code above)
-mkdir -p src/gui/admin
-touch src/gui/admin/AdminDashboard.java
-touch src/gui/admin/GenerateReportDialog.java
+# 3. Create your 3 assigned GUI files
+mkdir -p src/gui/{auth,admin,customer,staff,util}
 
 # 4. Compile and test
-javac -d out -sourcepath src src/gui/admin/*.java
+javac -d out -sourcepath src src/gui/yourfile/*.java
 
 # 5. Commit when working
-git add src/gui/admin/
-git commit -m "feat: Add AdminDashboard + GenerateReportDialog"
-git push origin feature/abdelrahman-admin-gui
+git add src/gui/
+git commit -m "feat: Add your 3 GUI components"
+git push origin feature/yourname-gui-task
 ```
 
-**You got this!** Start with AdminDashboard first. If stuck, message the team on Discord. 🚀
+**Starter Code Templates:** See individual task files in `plan/tasks/` for each member.
+
+**You got this!** Start with your P0 task first. If stuck, message the team on Discord. 🚀
