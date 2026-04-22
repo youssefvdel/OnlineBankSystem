@@ -1,10 +1,25 @@
 import exceptions.DataLoadException;
 import java.util.Scanner;
 import manager.BankSystem;
+import models.user.StandardClient;
 
 /**
- * Entry point for the banking system console app.
- * @author Youssef Adel - 258270
+ * Main entry point for the Online Banking System.
+ * 
+ * This class handles:
+ * - Application startup and shutdown
+ * - Loading/saving data on launch/exit
+ * - User authentication flow (login/register)
+ * - Routing to role-specific menus (Admin/Client)
+ * 
+ * Phase 2 Requirements Implemented:
+ * - Interactive console menu with switch/loop
+ * - Data persistence via CSV files
+ * - Exception handling with DataLoadException
+ * - User registration and login with attempt limits
+ * 
+ * @author Youssef Adel 258270
+ * @version Phase 2
  */
 public class Main {
 
@@ -12,7 +27,10 @@ public class Main {
     private static Scanner scanner;
 
     /**
-     * App starts here.
+     * Application entry point.
+     * Initializes the bank system, loads data, and runs the main loop.
+     * 
+     * @param args command line arguments (not used)
      */
     public static void main(String[] args) {
         System.out.println("Online Bank System - Phase 2");
@@ -21,7 +39,6 @@ public class Main {
         bank = new BankSystem();
         scanner = new Scanner(System.in);
 
-        // load data from files
         try {
             bank.loadAllData();
         } catch (DataLoadException e) {
@@ -29,7 +46,6 @@ public class Main {
             System.err.println("Starting with empty data. New data will be saved on exit.");
         }
 
-        // main loop
         boolean running = true;
         while (running) {
             if (bank.getCurrentUser() == null) {
@@ -39,14 +55,15 @@ public class Main {
             }
         }
 
-        // save before exit
         bank.saveAllData();
         scanner.close();
         System.out.println("Goodbye!");
     }
 
     /**
-     * Login/register menu.
+     * Displays the login menu and handles user choice.
+     * 
+     * @return true to continue running, false to exit
      */
     private static boolean showLoginMenu() {
         System.out.println("\n=== LOGIN ===");
@@ -71,7 +88,9 @@ public class Main {
     }
 
     /**
-     * Handle login with 3 tries max.
+     * Handles user login with password attempt limiting.
+     * 
+     * @return true if login succeeds, false otherwise
      */
     private static boolean handleLogin() {
         System.out.print("User ID: ");
@@ -97,7 +116,10 @@ public class Main {
     }
 
     /**
-     * Handle new client signup.
+     * Handles new client registration.
+     * Creates a StandardClient with auto-generated IDs.
+     * 
+     * @return true to continue, false to exit
      */
     private static boolean handleRegister() {
         System.out.println("\n=== REGISTER ===");
@@ -110,13 +132,22 @@ public class Main {
         System.out.print("Phone: ");
         String phone = scanner.nextLine().trim();
 
-        // TODO: actually create the client
-        System.out.println("Registration received. Admin approval required.");
+        String userId = "U" + System.currentTimeMillis();
+        String clientId = "C" + System.currentTimeMillis();
+        
+        StandardClient newClient = new StandardClient(
+            userId, name, pass, email, clientId, phone, 1000.0
+        );
+        
+        bank.addUser(newClient);
+        System.out.println("Registration successful! Your User ID: " + userId);
         return true;
     }
 
     /**
-     * Show menu based on user role.
+     * Routes to the appropriate menu based on user role.
+     * 
+     * @return true to continue running, false to exit
      */
     private static boolean showMainMenu() {
         var user = bank.getCurrentUser();
@@ -134,7 +165,9 @@ public class Main {
     }
 
     /**
-     * Admin options menu.
+     * Displays admin-specific menu options.
+     * 
+     * @return true to continue, false to exit
      */
     private static boolean showAdminMenu() {
         System.out.println("\n[Admin Menu]");
@@ -186,7 +219,9 @@ public class Main {
     }
 
     /**
-     * Client options menu.
+     * Displays client-specific menu options.
+     * 
+     * @return true to continue, false to exit
      */
     private static boolean showClientMenu() {
         System.out.println("\n[Client Menu]");
@@ -225,7 +260,6 @@ public class Main {
                 break;
             case "7":
                 System.out.println("Pay Bills - Coming soon");
-                break;
             case "8":
                 System.out.println("Update Profile - Coming soon");
                 break;
