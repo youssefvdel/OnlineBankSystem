@@ -1,4 +1,4 @@
-# 🎯 Abdelrahman Mazen (251979) - Phase 2 Tasks ⭐
+# 🎯 Abdelrahman Mazen (251979) - Phase 2 Tasks 
 
 **Focus**: Admin Dashboard + Staff Management + Reporting
 
