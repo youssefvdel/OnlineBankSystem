@@ -6,7 +6,7 @@ package gui.auth;
 
 import javax.swing.JOptionPane;
 import exceptions.InvalidLoginException;
-import gui.AdminDashboard;
+import gui.admin.AdminDashboard;
 import gui.ClientDashboard;
 import java.io.File;
 import java.io.BufferedReader;
@@ -179,7 +179,7 @@ String username = jtuser.getText().trim();
             JOptionPane.showMessageDialog(this, "Login successful. Welcome, " + loggedInUser.getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
             
             if (loggedInUser instanceof Admin) {
-                new AdminDashboard(loggedInUser).setVisible(true);
+                new AdminDashboard((Admin) loggedInUser).setVisible(true);
             } else {
                 new ClientDashboard(loggedInUser).setVisible(true);
             }

@@ -1,68 +1,35 @@
 import exceptions.DataLoadException;
-import gui.LoginFrame;
+import java.util.Scanner;
 import manager.BankSystem;
-import models.user.StandardClient;
-
-import javax.swing.*;
 
 /**
-<<<<<<< Updated upstream
- * Main entry point for the Online Banking System.
- * 
- * This class handles:
- * - Application startup and shutdown
- * - Loading/saving data on launch/exit
- * - User authentication flow (login/register)
- * - Routing to role-specific menus (Admin/Client)
- * 
- * Phase 2 Requirements Implemented:
- * - Interactive console menu with switch/loop
- * - Data persistence via CSV files
- * - Exception handling with DataLoadException
- * - User registration and login with attempt limits
- * 
- * @author Youssef Adel 258270
-=======
- * Main entry point for the Online Banking System - Phase 2 GUI.
- * Opens LoginFrame for user authentication.
- * 
+ * Entry point for the banking system console app.
  * @author Youssef Adel - 258270
->>>>>>> Stashed changes
- * @version Phase 2
  */
 public class Main {
 
     private static BankSystem bank;
+    private static Scanner scanner;
 
     /**
-     * Application entry point.
-<<<<<<< Updated upstream
-     * Initializes the bank system, loads data, and runs the main loop.
-=======
-     * Initializes the bank system and opens the login GUI.
->>>>>>> Stashed changes
-     * 
-     * @param args command line arguments (not used)
+     * App starts here.
      */
     public static void main(String[] args) {
         System.out.println("Online Bank System - Phase 2");
         System.out.println("================================\n");
 
         bank = new BankSystem();
+        scanner = new Scanner(System.in);
 
-<<<<<<< Updated upstream
-=======
-        // Load data from .ser files
->>>>>>> Stashed changes
+        // load data from files
         try {
             bank.loadAllData();
-            System.out.println("Data loaded successfully");
         } catch (DataLoadException e) {
             System.err.println("Warning: " + e.getUserMessage());
-            System.err.println("Starting with empty data.");
+            System.err.println("Starting with empty data. New data will be saved on exit.");
         }
 
-<<<<<<< Updated upstream
+        // main loop
         boolean running = true;
         while (running) {
             if (bank.getCurrentUser() == null) {
@@ -72,15 +39,14 @@ public class Main {
             }
         }
 
+        // save before exit
         bank.saveAllData();
         scanner.close();
         System.out.println("Goodbye!");
     }
 
     /**
-     * Displays the login menu and handles user choice.
-     * 
-     * @return true to continue running, false to exit
+     * Login/register menu.
      */
     private static boolean showLoginMenu() {
         System.out.println("\n=== LOGIN ===");
@@ -105,9 +71,7 @@ public class Main {
     }
 
     /**
-     * Handles user login with password attempt limiting.
-     * 
-     * @return true if login succeeds, false otherwise
+     * Handle login with 3 tries max.
      */
     private static boolean handleLogin() {
         System.out.print("User ID: ");
@@ -133,10 +97,7 @@ public class Main {
     }
 
     /**
-     * Handles new client registration.
-     * Creates a StandardClient with auto-generated IDs.
-     * 
-     * @return true to continue, false to exit
+     * Handle new client signup.
      */
     private static boolean handleRegister() {
         System.out.println("\n=== REGISTER ===");
@@ -149,22 +110,13 @@ public class Main {
         System.out.print("Phone: ");
         String phone = scanner.nextLine().trim();
 
-        String userId = "U" + System.currentTimeMillis();
-        String clientId = "C" + System.currentTimeMillis();
-        
-        StandardClient newClient = new StandardClient(
-            userId, name, pass, email, clientId, phone, 1000.0
-        );
-        
-        bank.addUser(newClient);
-        System.out.println("Registration successful! Your User ID: " + userId);
+        // TODO: actually create the client
+        System.out.println("Registration received. Admin approval required.");
         return true;
     }
 
     /**
-     * Routes to the appropriate menu based on user role.
-     * 
-     * @return true to continue running, false to exit
+     * Show menu based on user role.
      */
     private static boolean showMainMenu() {
         var user = bank.getCurrentUser();
@@ -182,9 +134,7 @@ public class Main {
     }
 
     /**
-     * Displays admin-specific menu options.
-     * 
-     * @return true to continue, false to exit
+     * Admin options menu.
      */
     private static boolean showAdminMenu() {
         System.out.println("\n[Admin Menu]");
@@ -236,9 +186,7 @@ public class Main {
     }
 
     /**
-     * Displays client-specific menu options.
-     * 
-     * @return true to continue, false to exit
+     * Client options menu.
      */
     private static boolean showClientMenu() {
         System.out.println("\n[Client Menu]");
@@ -277,6 +225,7 @@ public class Main {
                 break;
             case "7":
                 System.out.println("Pay Bills - Coming soon");
+                break;
             case "8":
                 System.out.println("Update Profile - Coming soon");
                 break;
@@ -290,28 +239,5 @@ public class Main {
                 System.out.println("Invalid choice");
         }
         return true;
-=======
-        // Open login GUI
-        SwingUtilities.invokeLater(() -> {
-            LoginFrame loginFrame = new LoginFrame();
-            loginFrame.setVisible(true);
-        });
-
-        // Save data when app closes
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            bank.saveAllData();
-            System.out.println("Data saved successfully");
-        }));
-    }
-
-    /**
-     * Returns the bank system instance.
-     * Used by GUI classes to access data.
-     * 
-     * @return The BankSystem instance
-     */
-    public static BankSystem getBank() {
-        return bank;
->>>>>>> Stashed changes
     }
 }
