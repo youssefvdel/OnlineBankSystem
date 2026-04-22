@@ -129,7 +129,6 @@ public abstract class Client extends User {
      */
     public void addAccount(Account account) {
         this.accounts.add(account);
-        System.out.println("Account added to client " + getName());
     }
 
     /**
@@ -139,13 +138,14 @@ public abstract class Client extends User {
      *         false if account was not in the list
      */
     public boolean removeAccount(Account account) {
-        if (accounts.remove(account)) {
-            System.out.println(
-                "Account " + account.getAccountNumber() + " removed."
-            );
+        if (accounts.remove(account)) 
+        {
+        
             return true;
-        } else {
-            System.out.println("Account not found.");
+        } 
+        else 
+        {
+     
             return false;
         }
     }
