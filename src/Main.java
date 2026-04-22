@@ -1,9 +1,12 @@
 import exceptions.DataLoadException;
-import java.util.Scanner;
+import gui.LoginFrame;
 import manager.BankSystem;
 import models.user.StandardClient;
 
+import javax.swing.*;
+
 /**
+<<<<<<< Updated upstream
  * Main entry point for the Online Banking System.
  * 
  * This class handles:
@@ -19,16 +22,25 @@ import models.user.StandardClient;
  * - User registration and login with attempt limits
  * 
  * @author Youssef Adel 258270
+=======
+ * Main entry point for the Online Banking System - Phase 2 GUI.
+ * Opens LoginFrame for user authentication.
+ * 
+ * @author Youssef Adel - 258270
+>>>>>>> Stashed changes
  * @version Phase 2
  */
 public class Main {
 
     private static BankSystem bank;
-    private static Scanner scanner;
 
     /**
      * Application entry point.
+<<<<<<< Updated upstream
      * Initializes the bank system, loads data, and runs the main loop.
+=======
+     * Initializes the bank system and opens the login GUI.
+>>>>>>> Stashed changes
      * 
      * @param args command line arguments (not used)
      */
@@ -37,15 +49,20 @@ public class Main {
         System.out.println("================================\n");
 
         bank = new BankSystem();
-        scanner = new Scanner(System.in);
 
+<<<<<<< Updated upstream
+=======
+        // Load data from .ser files
+>>>>>>> Stashed changes
         try {
             bank.loadAllData();
+            System.out.println("Data loaded successfully");
         } catch (DataLoadException e) {
             System.err.println("Warning: " + e.getUserMessage());
-            System.err.println("Starting with empty data. New data will be saved on exit.");
+            System.err.println("Starting with empty data.");
         }
 
+<<<<<<< Updated upstream
         boolean running = true;
         while (running) {
             if (bank.getCurrentUser() == null) {
@@ -273,5 +290,28 @@ public class Main {
                 System.out.println("Invalid choice");
         }
         return true;
+=======
+        // Open login GUI
+        SwingUtilities.invokeLater(() -> {
+            LoginFrame loginFrame = new LoginFrame();
+            loginFrame.setVisible(true);
+        });
+
+        // Save data when app closes
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            bank.saveAllData();
+            System.out.println("Data saved successfully");
+        }));
+    }
+
+    /**
+     * Returns the bank system instance.
+     * Used by GUI classes to access data.
+     * 
+     * @return The BankSystem instance
+     */
+    public static BankSystem getBank() {
+        return bank;
+>>>>>>> Stashed changes
     }
 }

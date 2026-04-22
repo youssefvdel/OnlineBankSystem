@@ -6,14 +6,14 @@
 
 ---
 
-## ⚠️ IMPORTANT: Scope Reduced
+## Note:  IMPORTANT: Scope Reduced
 
 **Reason:** Team redistribution to ensure Phase 2 completion  
 **Your tasks moved to:** YoussefAdel (AdminDashboard), YousefMohiey (AdminActionLogger)
 
 ---
 
-## ✅ Your 1 Task (OPTIONAL - P2 Nice to Have)
+##  Your 1 Task (OPTIONAL - P2 Nice to Have)
 
 ### Task 1: ViewTransactionHistoryDialog.java (~25 min)
 
@@ -32,37 +32,37 @@ import java.awt.*;
  * @author Abdelrahman Mazen 251979
  */
 public class ViewTransactionHistoryDialog extends JDialog {
-    
-    public ViewTransactionHistoryDialog(Frame parent) {
-        super(parent, "Transaction History", true);
-        setupUI();
-        loadData();
-    }
-    
-    private void setupUI() {
-        setSize(600, 400);
-        setLocationRelativeTo(getOwner());
-        setLayout(new BorderLayout(10, 10));
-        
-        // Table for displaying data
-        String[] columns = {"TX ID", "Account", "Type", "Amount", "Timestamp"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-        JTable table = new JTable(model);
-        
-        add(new JScrollPane(table), BorderLayout.CENTER);
-        
-        // Close button
-        JButton close = new JButton("Close");
-        close.addActionListener(e -> dispose());
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(close);
-        add(buttonPanel, BorderLayout.SOUTH);
-    }
-    
-    private void loadData() {
-        // TODO: Read from transactions.ser using ObjectInputStream
-        // Display in JTable
-    }
+  
+  public ViewTransactionHistoryDialog(Frame parent) {
+      super(parent, "Transaction History", true);
+      setupUI();
+      loadData();
+  }
+  
+  private void setupUI() {
+      setSize(600, 400);
+      setLocationRelativeTo(getOwner());
+      setLayout(new BorderLayout(10, 10));
+      
+      // Table for displaying data
+      String[] columns = {"TX ID", "Account", "Type", "Amount", "Timestamp"};
+      DefaultTableModel model = new DefaultTableModel(columns, 0);
+      JTable table = new JTable(model);
+      
+      add(new JScrollPane(table), BorderLayout.CENTER);
+      
+      // Close button
+      JButton close = new JButton("Close");
+      close.addActionListener(e -> dispose());
+      JPanel buttonPanel = new JPanel();
+      buttonPanel.add(close);
+      add(buttonPanel, BorderLayout.SOUTH);
+  }
+  
+  private void loadData() {
+      // TODO: Read from transactions.ser using ObjectInputStream
+      // Display in JTable
+  }
 }
 ```
 
@@ -73,7 +73,7 @@ public class ViewTransactionHistoryDialog extends JDialog {
 
 ---
 
-## 📁 File I/O (Your 30%)
+##  File I/O (Your 30%)
 
 **File:** `data/transactions.ser` (read only)
 
@@ -86,7 +86,7 @@ ArrayList<Transaction> transactions = (ArrayList<Transaction>) ois.readObject();
 
 ---
 
-## ⚠️ Exception Handling
+## Note:  Exception Handling
 
 **MOVED to YousefMohiey:** `AdminActionException.java`
 
@@ -94,7 +94,7 @@ ArrayList<Transaction> transactions = (ArrayList<Transaction>) ois.readObject();
 
 ---
 
-## 🤝 Team Handoff
+##  Team Handoff
 
 **You provide:**
 - ViewTransactionHistoryDialog.java (optional, nice-to-have)
@@ -106,7 +106,7 @@ ArrayList<Transaction> transactions = (ArrayList<Transaction>) ois.readObject();
 
 ---
 
-## ✅ Final Submission Checklist
+##  Final Submission Checklist
 
 - [ ] ViewTransactionHistoryDialog.java - compiles, opens, shows data (OPTIONAL)
 - [ ] Code has @author tag with your name + ID
@@ -114,7 +114,7 @@ ArrayList<Transaction> transactions = (ArrayList<Transaction>) ois.readObject();
 - [ ] Pushed to your feature branch (if completing)
 
 **Message when done:**
-> "✅ ViewTransactionHistoryDialog done (optional). Ready for integration."
+> " ViewTransactionHistoryDialog done (optional). Ready for integration."
 
 ---
 

@@ -29,7 +29,11 @@
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblWelcome" alignment="0" max="32767" attributes="0"/>
+<<<<<<< Updated upstream
                   <Component id="jLabel1" alignment="0" pref="295" max="32767" attributes="0"/>
+=======
+                  <Component id="jLabel1" alignment="0" pref="373" max="32767" attributes="0"/>
+>>>>>>> Stashed changes
                   <Component id="btnAddStaff" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnRemoveStaff" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnUpdateStaff" alignment="0" max="32767" attributes="0"/>

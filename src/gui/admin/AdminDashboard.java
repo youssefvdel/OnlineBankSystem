@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -5,13 +6,24 @@
 package gui.admin;
 
 import gui.auth.RegisterFrame;
+=======
+package gui.admin;
+
+>>>>>>> Stashed changes
 import gui.util.Toast;
 import manager.BankSystem;
 import models.user.Admin;
 
 /**
  * Main admin dashboard window.
+<<<<<<< Updated upstream
  * @author Youssef Adel 258270
+=======
+ * Provides access to all admin operations.
+ * 
+ * @author Youssef Adel 258270
+ * @version Phase 2
+>>>>>>> Stashed changes
  */
 public class AdminDashboard extends javax.swing.JFrame {
 
@@ -20,6 +32,12 @@ public class AdminDashboard extends javax.swing.JFrame {
     
     /**
      * Creates new form AdminDashboard
+<<<<<<< Updated upstream
+=======
+     * 
+     * @param admin The logged-in admin user
+     * @param bank The BankSystem instance
+>>>>>>> Stashed changes
      */
     public AdminDashboard(Admin admin, BankSystem bank) {
         this.admin = admin;
@@ -90,7 +108,11 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< Updated upstream
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+=======
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+>>>>>>> Stashed changes
                     .addComponent(btnAddStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRemoveStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnUpdateStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -123,17 +145,26 @@ public class AdminDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStaffActionPerformed
+<<<<<<< Updated upstream
         // TODO: Open AddStaffDialog (YousefMohiey)
+=======
+>>>>>>> Stashed changes
         Toast.showInfo(this, "Add Staff - Coming soon");
     }//GEN-LAST:event_btnAddStaffActionPerformed
 
     private void btnRemoveStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveStaffActionPerformed
+<<<<<<< Updated upstream
         // TODO: Open RemoveStaffDialog (YosefOsama)
+=======
+>>>>>>> Stashed changes
         Toast.showInfo(this, "Remove Staff - Coming soon");
     }//GEN-LAST:event_btnRemoveStaffActionPerformed
 
     private void btnUpdateStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStaffActionPerformed
+<<<<<<< Updated upstream
         // TODO: Open UpdateStaffDialog (TarekSaeed)
+=======
+>>>>>>> Stashed changes
         Toast.showInfo(this, "Update Staff - Coming soon");
     }//GEN-LAST:event_btnUpdateStaffActionPerformed
 
@@ -151,11 +182,14 @@ public class AdminDashboard extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+<<<<<<< Updated upstream
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+=======
+>>>>>>> Stashed changes
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -172,6 +206,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+<<<<<<< Updated upstream
         //</editor-fold>
 
         /* Create and display the form */
@@ -180,6 +215,11 @@ public class AdminDashboard extends javax.swing.JFrame {
                 new AdminDashboard(null, null).setVisible(true);
             }
         });
+=======
+
+        // Do not open with null - this is just for NetBeans GUI Builder preview
+        // AdminDashboard should be opened from LoginFrame with real Admin object
+>>>>>>> Stashed changes
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

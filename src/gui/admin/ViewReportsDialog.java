@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
@@ -12,6 +13,22 @@ import javax.swing.table.DefaultTableModel;
 /**
  * Dialog to view system reports from reports.csv.
  * @author Youssef Adel 258270
+=======
+package gui.admin;
+
+import gui.util.Toast;
+
+import javax.swing.table.DefaultTableModel;
+import java.io.*;
+import java.util.ArrayList;
+
+/**
+ * Dialog to view system reports from reports.ser.
+ * Displays admin action history in a table.
+ * 
+ * @author Youssef Adel 258270
+ * @version Phase 2
+>>>>>>> Stashed changes
  */
 public class ViewReportsDialog extends javax.swing.JDialog {
 
@@ -19,6 +36,12 @@ public class ViewReportsDialog extends javax.swing.JDialog {
     
     /**
      * Creates new form ViewReportsDialog
+<<<<<<< Updated upstream
+=======
+     * 
+     * @param parent Parent frame
+     * @param modal Modal setting
+>>>>>>> Stashed changes
      */
     public ViewReportsDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -26,6 +49,14 @@ public class ViewReportsDialog extends javax.swing.JDialog {
         loadReports();
     }
     
+<<<<<<< Updated upstream
+=======
+    /**
+     * Creates new form ViewReportsDialog
+     * 
+     * @param parent Parent frame
+     */
+>>>>>>> Stashed changes
     public ViewReportsDialog(java.awt.Frame parent) {
         super(parent, true);
         initComponents();
@@ -41,26 +72,83 @@ public class ViewReportsDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< Updated upstream
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         btnRefresh = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
 
+=======
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblReports = new javax.swing.JTable();
+        btnRefresh = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+>>>>>>> Stashed changes
         setTitle("System Reports");
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Admin Action Reports");
 
+<<<<<<< Updated upstream
         btnRefresh.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         btnRefresh.setText("Refresh");
         btnRefresh.setPreferredSize(new java.awt.Dimension(100, 35));
         btnRefresh.addActionListener(this::btnRefreshActionPerformed);
+=======
+        tblReports.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
+        tblReports.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Timestamp", "Admin ID", "Action Type", "Details"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblReports.setRowHeight(25);
+        tblReports.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblReports);
+
+        btnRefresh.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
+        btnRefresh.setText("Refresh");
+        btnRefresh.setPreferredSize(new java.awt.Dimension(100, 35));
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+>>>>>>> Stashed changes
 
         btnClose.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         btnClose.setText("Close");
         btnClose.setPreferredSize(new java.awt.Dimension(100, 35));
+<<<<<<< Updated upstream
         btnClose.addActionListener(this::btnCloseActionPerformed);
+=======
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+>>>>>>> Stashed changes
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,12 +157,22 @@ public class ViewReportsDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+=======
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+>>>>>>> Stashed changes
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -82,12 +180,21 @@ public class ViewReportsDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
+<<<<<<< Updated upstream
                 .addGap(11, 11, 11)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+>>>>>>> Stashed changes
                 .addGap(15, 15, 15))
         );
 
@@ -107,11 +214,14 @@ public class ViewReportsDialog extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+<<<<<<< Updated upstream
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+=======
+>>>>>>> Stashed changes
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -128,9 +238,13 @@ public class ViewReportsDialog extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewReportsDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+<<<<<<< Updated upstream
         //</editor-fold>
 
         /* Create and display the dialog */
+=======
+
+>>>>>>> Stashed changes
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ViewReportsDialog dialog = new ViewReportsDialog(new javax.swing.JFrame(), true);
@@ -150,13 +264,26 @@ public class ViewReportsDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+<<<<<<< Updated upstream
     // End of variables declaration//GEN-END:variables
 
+=======
+    private javax.swing.JTable tblReports;
+    // End of variables declaration//GEN-END:variables
+
+    /**
+     * Loads reports from reports.ser file.
+     */
+>>>>>>> Stashed changes
     private void loadReports() {
         tableModel = (DefaultTableModel) tblReports.getModel();
         tableModel.setRowCount(0);
         
+<<<<<<< Updated upstream
         java.io.File reportsFile = new java.io.File("data/reports.csv");
+=======
+        File reportsFile = new File("data/reports.ser");
+>>>>>>> Stashed changes
         
         if (!reportsFile.exists()) {
             Toast.showInfo(this, "No reports available yet.");
@@ -164,6 +291,7 @@ public class ViewReportsDialog extends javax.swing.JDialog {
         }
         
         try {
+<<<<<<< Updated upstream
             java.util.List<String> lines = CSVHelper.readLines("data/reports.csv");
             
             if (lines.isEmpty()) {
@@ -180,6 +308,19 @@ public class ViewReportsDialog extends javax.swing.JDialog {
                         fields.get(1),
                         fields.get(2),
                         fields.get(3)
+=======
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(reportsFile));
+            ArrayList<String[]> reports = (ArrayList<String[]>) ois.readObject();
+            ois.close();
+            
+            for (String[] report : reports) {
+                if (report.length >= 4) {
+                    tableModel.addRow(new Object[]{
+                        report[0],
+                        report[1],
+                        report[2],
+                        report[3]
+>>>>>>> Stashed changes
                     });
                 }
             }

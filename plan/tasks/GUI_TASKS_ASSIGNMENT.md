@@ -68,9 +68,9 @@
 **Logic:**
 ```
 Login Success → Check Role → Open Menu
-    Admin → AdminDashboardFrame
-    Staff → StaffDashboardFrame  
-    Customer → CustomerDashboardFrame
+  Admin → AdminDashboardFrame
+  Staff → StaffDashboardFrame  
+  Customer → CustomerDashboardFrame
 ```
 
 **Done Criteria:**
@@ -175,7 +175,7 @@ Login Success → Check Role → Open Menu
 **Done Criteria:**
 - [ ] Searches users.csv + accounts.csv
 - [ ] Shows balance before delete
-- [ ] Warning: "This action cannot be undone"
+- [ ] Note: "This action cannot be undone"
 
 ---
 
@@ -336,17 +336,17 @@ Toast.showWarning(JFrame parent, String message)
 Week 1                    Week 2                    Week 3-4
 ─────────────────────────────────────────────────────────────────
 LoginFrame ──────→ MainRouter ──────→ AdminDashboardFrame
-    ↓                                      ↓
+  ↓                                      ↓
 RegisterFrame                            AddStaffDialog
-    ↓                                      ↓
+  ↓                                      ↓
 Toast (utility)                    RemoveStaffDialog
-    ↓                                      ↓
+  ↓                                      ↓
 CustomerDashboardFrame ──────→ GenerateReportFrame
-    ↓                                      ↓
+  ↓                                      ↓
 TransactionDialog                  DeleteAccountDialog
-    ↓
+  ↓
 CardManagementFrame
-    ↓
+  ↓
 PayBillsDialog
 ```
 
