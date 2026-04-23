@@ -1,27 +1,29 @@
 package manager;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-
+/**
+ * Logs admin actions to a text file.
+ * @author Yousef Mohiey - 248679
+ */
 public class AdminActionLogger {
-    private static final String FILE = "data/reports.ser";
-    private static ArrayList<String> logs = new ArrayList<>();
     
-    public static void log(String adminName, String action) {
-        logs.add("[" + new Date() + "] " + adminName + ": " + action);
-        save();
-    }
-    
-    private static void save() {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE))) {
-            out.writeObject(logs);
-        } catch (IOException e) {}
-    }
-    
-    public static ArrayList<String> getLogs() {
-        return logs;
+    private static final String LOG_FILE = "data/admin_logs.t";
+
+    /**
+     * Appends an action with timestamp to the log file.
+     */
+    public static void log(String action) {
+        String entry = LocalDateTime.now() + " | " + action;
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_FILE, true))) {
+            writer.write(entry);
+            writer.newLine();
+        } catch (IOException e) {
+            // Silently ignore in GUI to avoid crashing
+        }
     }
 }

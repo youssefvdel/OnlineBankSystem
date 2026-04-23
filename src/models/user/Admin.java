@@ -14,7 +14,11 @@ import java.util.ArrayList;
  */
 public class Admin extends User implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
-
+    
+    // Add these two fields
+    private String phoneNumber;
+    private String jobTitle;
+    
     /**
      * Constructs a new Admin object.
      *
@@ -22,58 +26,45 @@ public class Admin extends User implements java.io.Serializable {
      * @param name the admin's full name
      * @param password the login password
      * @param email the admin's email address
+     * @param phone the admin's phone number
+     * @param job the admin's job title
      */
-    public Admin(String userId, String name, String password, String email) {
+    public Admin(String userId, String name, String password, String email, String phone, String job) {
         super(userId, name, password, email);
+        this.phoneNumber = phone;  
+        this.jobTitle = job;        
+    }
+    
+    // Getters
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    
+    public String getJobTitle() {
+        return jobTitle;
     }
 
     /**
      * Adds a new user to the admin's user list.
-     * NOTE: This does not check for duplicate user IDs.
-     *
-     * @param user the User to add
-     * @param userList shared list from BankSystem
      */
     public void createUser(User user, ArrayList<User> userList) {
-      userList.add(user);
+        userList.add(user);
     }
-
-    
- /**
- * Removes a user from the shared user list.
- *
- * @param user The user to remove
- * @param userList The shared list from BankSystem
- * @return true if user was found and removed, false if not found
- */
-    
-    public boolean deleteUser(User user, ArrayList<User> userList) {
-        if (userList.remove(user)) {
-            return true;
-        } 
-        else {
-            return false;
-             }
-    }
-
-/**
- * Returns the list of all users for display.
- *
- * @param userList The shared list to return
- * @return ArrayList of User objects for GUI to display
- */
-    
-  public ArrayList<User> viewAllUsers (ArrayList<User> userList)
-  {
-      return userList;
-  }
 
     /**
-     * Returns the user type for this Admin object.
-     * Implements the abstract method from User class.
-     *
-     * @return "Admin" indicating this is an administrator
+     * Removes a user from the shared user list.
      */
+    public boolean deleteUser(User user, ArrayList<User> userList) {
+        return userList.remove(user);
+    }
+
+    /**
+     * Returns the list of all users for display.
+     */
+    public ArrayList<User> viewAllUsers(ArrayList<User> userList) {
+        return userList;
+    }
+
     @Override
     public String getUserType() {
         return "Admin";
