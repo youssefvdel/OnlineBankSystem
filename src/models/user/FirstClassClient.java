@@ -5,7 +5,8 @@ package models.user;
  * @see Client
  * @since phase1
  */
-public class FirstClassClient extends Client {
+public class FirstClassClient extends Client implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     private double priorityLevel;
 

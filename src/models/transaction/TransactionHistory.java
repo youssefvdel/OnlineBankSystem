@@ -1,5 +1,10 @@
 package models.transaction;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -9,31 +14,22 @@ import java.util.ArrayList;
  * @since phase 1
  */
 
-public class TransactionHistory {
+public class TransactionHistory implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
-    // creates a new transactionhistory with empty list
-    // called internally by Account constructor (composition)
-    private ArrayList<Transaction> transactions;
+    private final ArrayList<Transaction> transactions;
 
     public TransactionHistory() {
         this.transactions = new ArrayList<>();
+        loadFromFile("data/transactions.txt");
     }
 
-    /**
-     * adds a transaction to the account history
-     * @param transaction
-     */
     public void addTransaction(Transaction transaction) {
         if (transaction != null) {
             transactions.add(transaction);
         }
     }
 
-    /**
-     * return a transaction by id
-     * @param transactionId
-     * @return object if found , null otherwise
-     */
     public Transaction viewTransaction(String transactionId) {
         for (Transaction t : transactions) {
             if (t.getTransactionId().equals(transactionId)) {
@@ -43,36 +39,75 @@ public class TransactionHistory {
         return null;
     }
 
-    /**
-     * return a full list of transaction for an account
-     * @return arraylist of all transactions
-     */
     public ArrayList<Transaction> getHistory() {
-        return transactions;
+        return new ArrayList<>(transactions);
     }
 
-    /**
-     * returns number of transactions
-     * @return count "int"
-     */
     public int getTransactionCount() {
         return transactions.size();
     }
+    
+    public void saveToFile(String filename) {
+    try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+        for (Transaction t : transactions) {
+            writer.println(
+                t.getTransactionId() + "," +
+                t.getClass().getSimpleName() + "," +
+                t.getAmount() + "," +
+                t.getAccountId() + "," +
+                t.getStatus()
+            );
+        }
+    } catch (IOException e) {
+        System.out.println("Error saving transactions");
+    }
+    }
+    
+public void loadFromFile(String filename) {
 
-    /**
-     * details of transactionhistory
-     * @return history
-     */
+    try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
 
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts.length < 5) {
+                continue;
+                          }
+
+            String id = parts[0];
+            String type = parts[1];
+            double amount = Double.parseDouble(parts[2]);
+            String accId = parts[3];
+            String status = parts[4];
+
+            Transaction t;
+
+            try {
+                if (type.equals("Deposit")) {
+                    t = new Deposit(id, amount, accId, "loaded");
+                } else {
+                    t = new Withdrawal(id, amount, accId, "loaded");
+                }
+
+                t.setStatus(status);
+                transactions.add(t);
+
+            } catch (Exception e) {
+                System.out.println("Skipping invalid transaction: " + e.getMessage());
+            }
+        }
+
+    } catch (IOException e) {
+        System.out.println("Error loading transactions");
+    }
+}
+    
     @Override
     public String toString() {
-        return (
-            "TransactionHistory{" +
-            "count=" +
-            transactions.size() +
-            ", transactions=" +
-            transactions +
-            '}'
-        );
+        return "TransactionHistory{" +
+                "count=" + transactions.size() +
+                ", transactions=" + transactions +
+                '}';
     }
 }

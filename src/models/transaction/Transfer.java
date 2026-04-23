@@ -1,5 +1,8 @@
 package models.transaction;
 
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
 import models.account.Account;
 /**
  * Represents a transfer of money between two accounts.
@@ -10,7 +13,8 @@ import models.account.Account;
  * @see Transaction
  * @since Phase 1
  */
-public class Transfer extends Transaction {
+public class Transfer extends Transaction implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     /** The account number the money is taken FROM */
     private String sourceAccountId;
@@ -26,6 +30,7 @@ public class Transfer extends Transaction {
      * @param destinationAccount the account to deposit into
      */
     public Transfer(String transactionId, double amount, String sourceAccountId, Account destinationAccount)
+    throws InvalidAmountException, TransactionFailedException
     {
         // Call the parent Transaction constructor with transactionId, amount, sourceAccountId
         super(transactionId, amount, sourceAccountId);
@@ -42,7 +47,10 @@ public class Transfer extends Transaction {
      * @return true if transfer succeeded, false otherwise
      */
     @Override
-    public boolean execute(Account account) {
+    public boolean execute(Account account)
+               throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException {
         // Check source account is not null
         if (account == null) {
             System.out.println("Error Source account is null");

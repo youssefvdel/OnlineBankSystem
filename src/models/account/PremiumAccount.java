@@ -1,5 +1,8 @@
 package models.account;
 
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
 import models.user.User;
 
 /**
@@ -9,7 +12,8 @@ import models.user.User;
  * @see Account
  * @since Phase 1
  */
-public class PremiumAccount extends Account {
+public class PremiumAccount extends Account implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * The higher withdrawal limit allowed for premium accounts
@@ -49,7 +53,10 @@ public class PremiumAccount extends Account {
      * @return true if withdrawal was successful, false otherwise
      */
     @Override
-    public boolean withdraw(double value) {
+    public boolean withdraw(double value) 
+               throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException {
         if (value < 0) {
             System.out.println(
                 "Error Cannot withdraw negative amount: " + value
@@ -113,7 +120,10 @@ public class PremiumAccount extends Account {
      * @return the fee amount that was deducted
      */
     @Override
-    public double applyYearlyFee() {
+    public double applyYearlyFee()   
+               throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException {
         // yearly fee amount for premium accounts
         double fee = 75.0;
         // Deduct the fee using the overridden withdraw method

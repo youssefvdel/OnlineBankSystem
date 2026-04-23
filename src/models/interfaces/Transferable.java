@@ -1,5 +1,8 @@
 package models.interfaces;
 
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
 import models.account.Account;
 
 /**
@@ -12,7 +15,10 @@ import models.account.Account;
 
 public interface Transferable {
     // transfer money from account to another if it's elibible
-    boolean transfer(Account destination, double amount);
+    public boolean transfer(Account destination, double amount)
+        throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException;
 
     /**
      * @return the current balance

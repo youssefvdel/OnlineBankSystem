@@ -1,5 +1,8 @@
 package models.account;
 
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
 import models.user.User;
 
 /**
@@ -10,7 +13,8 @@ import models.user.User;
  * @see Account
  * @since Phase 1
  */
-public class SavingsAccount extends Account {
+public class SavingsAccount extends Account implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     /** The interest rate applied to the balance (e.g. 0.05 = 5%) */
     private double interestRate;
@@ -44,7 +48,10 @@ public class SavingsAccount extends Account {
      * Interest = balance x interestRate.
      * Add the interest
      */
-    public void addInterest() {
+    public void addInterest()   
+               throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException {
         // Calculate interest amount based on current balance
         double interest = getBalance() * interestRate;
         // Add the interest using the inherited deposit method
@@ -63,7 +70,10 @@ public class SavingsAccount extends Account {
      * @return true if withdrawal was successful, false otherwise
      */
     @Override
-    public boolean withdraw(double value) {
+    public boolean withdraw(double value) 
+              throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException {
         if (value < 0) {
             System.out.println(
                 "Error Cannot withdraw negative amount: " + value
@@ -97,7 +107,10 @@ public class SavingsAccount extends Account {
      *
      * @return the fee amount that was deducted
      */
-    public double applyYearlyFee() {
+    public double applyYearlyFee()   
+               throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException {
         //  yearly fee amount
         double fee = 5.0;
         // Deduct the fee using the overridden withdraw method

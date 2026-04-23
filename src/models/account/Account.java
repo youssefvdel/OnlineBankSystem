@@ -1,5 +1,8 @@
 package models.account;
 
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
 import models.interfaces.Transferable;
 import models.transaction.Deposit;
 import models.transaction.TransactionHistory;
@@ -52,7 +55,7 @@ public abstract class Account implements Transferable {
      *
      * @return the fee amount that was applied
      */
-    public abstract double applyYearlyFee();
+    public abstract double applyYearlyFee()throws InsufficientFundsException, InvalidAmountException, TransactionFailedException;
 
     /**
      * Deposits money into the account using the Deposit transaction class.
@@ -61,17 +64,22 @@ public abstract class Account implements Transferable {
      * @return true if deposit was successful, false otherwise
      * @see Deposit#execute(Account)
      */
-    public boolean deposit(double amount) {
-        String transId = "DEP" + System.currentTimeMillis();
-        Deposit deposit = new Deposit(
+public boolean deposit(double amount)
+        throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException {
+
+    String transId = "DEP" + System.currentTimeMillis();
+
+    Deposit deposit = new Deposit(
             transId,
             amount,
             this.accountNumber,
             "internal"
-        );
-        return deposit.execute(this);
-    }
+    );
 
+    return deposit.execute(this);
+}
     /**
      * Withdraws money from the account using the Withdrawal transaction class.
      *
@@ -79,16 +87,22 @@ public abstract class Account implements Transferable {
      * @return true if withdrawal was successful, false otherwise
      * @see Withdrawal#execute(Account)
      */
-    public boolean withdraw(double amount) {
-        String transId = "WDR" + System.currentTimeMillis();
-        Withdrawal withdrawal = new Withdrawal(
+ public boolean withdraw(double amount)
+        throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException {
+
+    String transId = "WDR" + System.currentTimeMillis();
+
+    Withdrawal withdrawal = new Withdrawal(
             transId,
             amount,
             this.accountNumber,
             "internal"
-        );
-        return withdrawal.execute(this);
-    }
+    );
+
+    return withdrawal.execute(this);
+}
 
     /**
      * @return the current account balance
@@ -146,7 +160,11 @@ public abstract class Account implements Transferable {
      * @return true if transfer was successful, false otherwise
      * @see Transfer#execute(Account)
      */
-    public boolean transfer(Account destination, double amount) {
+    public boolean transfer(Account destination, double amount) 
+     throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException
+    {
         String transId = "TRF" + System.currentTimeMillis();
         Transfer transfer = new Transfer(
             transId,

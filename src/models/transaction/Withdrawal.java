@@ -1,82 +1,68 @@
 package models.transaction;
+
 import models.account.Account;
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
 
 /**
  * @author Tarek Saeed 252382
- * @see Transaction
- * @since phase 1
+ * @since Phase 2
  */
+public class Withdrawal extends Transaction {
 
-public class Withdrawal extends Transaction{
+    private String method;
 
-    // withdrawal method "ATM,online,bill payment"
-    private String method ;
-
-    /**
-     * creates a withdrawal transaction
-     * @param transactionId
-     * @param accountId
-     * @param amount
-     * @param method withdrawal method "ATM , online,bill payemnt"
-     * */
-
-    public Withdrawal(String transactionId , double amount , String accountId ,String method ) {
+    public Withdrawal(String transactionId, double amount, String accountId, String method)
+            throws InvalidAmountException, TransactionFailedException {
 
         super(transactionId, amount, accountId);
-
-        this.method=method;
+        this.method = method;
     }
 
-    /**
-     * returns the withdawal method
-     * @return method "string"
-     */
-
-    public String getMethod(){return method;}
-
-
-    /**
-     * @returns withdrawl detailes
-     */
-
-    @Override
-    public boolean execute(Account account){
-
-        if (this.method == null || this.method.isEmpty()){
-            this.setStatus("Failed");
-            return false;
-        }
-
-        if (this.getAmount() <=0) {
-            this.setStatus("Failed");
-            return false;
-        }
-            if(account.getBalance() <this.getAmount()){
-                this.setStatus("Failed");
-                System.out.println("Error: insufficient funds. Balance: " +account.getBalance());
-                return false;
-            }
-            //deduct balance
-            account.setBalance(account.getBalance()-this.getAmount());
-
-            this.setStatus("Completed");
-            
-            // Add to transaction history
-            account.getTransactionHistory().addTransaction(this);
-            
-            return true;
-
+    public String getMethod() {
+        return method;
     }
 
     @Override
-    public String toString(){
-        return "withdrawal{"+
-                "transactionId='"+getTransactionId()+'\''+
-                ", amount="+getAmount()+
-                ",method='"+method+'\''+
-                ", status='"+getStatus()+'\''+
+    public boolean execute(Account account)
+            throws InsufficientFundsException,
+                   InvalidAmountException,
+                   TransactionFailedException {
+
+        if (method == null || method.isEmpty()) {
+            setStatus(STATUS_FAILED);
+            throw new TransactionFailedException("Withdrawal method is invalid");
+        }
+
+        if (getAmount() <= 0) {
+            setStatus(STATUS_FAILED);
+            throw new InvalidAmountException(getAmount());
+        }
+
+        if (account.getBalance() < this.getAmount()) {
+            this.setStatus(STATUS_FAILED);
+            throw new InsufficientFundsException(account.getBalance(), this.getAmount());
+        }
+
+        // deduct balance
+        account.setBalance(account.getBalance() - getAmount());
+
+        setStatus(STATUS_COMPLETED);
+        
+        account.getTransactionHistory().addTransaction(this);
+        account.getTransactionHistory().saveToFile("data/transactions.txt");
+
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Withdrawal{" +
+                "transactionId='" + getTransactionId() + '\'' +
+                ", amount=" + getAmount() +
+                ", method='" + method + '\'' +
+                ", status='" + getStatus() + '\'' +
                 '}';
     }
-
-
 }
