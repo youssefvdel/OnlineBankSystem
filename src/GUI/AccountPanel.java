@@ -2,6 +2,7 @@
 package GUI;
 import exceptions.InvalidAccountException;
 import exceptions.OverdraftLimitExceededException;
+import java.awt.event.ActionListener;
 /**
  *
  * @author Yosef - 255796
@@ -9,6 +10,10 @@ import exceptions.OverdraftLimitExceededException;
 public class AccountPanel extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AccountPanel.class.getName());
+
+    static void addActionListener(ActionListener actionListener) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     /**
      * Creates new form AccountPanel
