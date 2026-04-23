@@ -132,7 +132,18 @@
 
 ---
 
-### 2.4 TarekSaeed (252382) — 0% Complete
+### 2.4 TarekSaeed (252382) — 40% Complete (Off-Track)
+
+**What he actually did (not his assigned tasks):**
+
+| File | Priority | Status | Purpose |
+|------|----------|--------|---------|
+| `TransactionFailedException.java` | P1 | ✅ Done | Generic transaction failure exception |
+| `TransactionPanel.java` + `.form` | P1 | ✅ Done | Deposit/Withdraw GUI (duplicates Hafez) |
+| Transaction exceptions in Account classes | P1 | ✅ Done | Added to all Account subclasses |
+| `TransactionHistory` file handling | P1 | ✅ Done | Loads from transactions.txt |
+
+**His ASSIGNED work (not done):**
 
 | File | Priority | Status | Purpose |
 |------|----------|--------|---------|
@@ -140,8 +151,12 @@
 | `UpdateStaffDialog.java` + `.form` | P1 | ❌ Missing | Edit staff details |
 | `ViewAccountsDialog.java` + `.form` | P1 | ❌ Missing | View all customer accounts |
 | `StaffUpdateException.java` | P1 | ❌ Missing | Throw on invalid update |
+| `TransferMoneyDialog.java` + `.form` | P1 | 🚧 Under Work | Transfer between accounts |
+| `TransactionHistoryDialog.java` + `.form` | P2 | ❌ Missing | Transaction history viewer |
 
-**Completed:** 0/4
+**Note:** Tarek worked on transaction features instead of his assigned staff features. TransactionPanel duplicates Hafez's TransactionDialog. Transfer GUI claimed but not delivered.
+
+**Completed:** 4/10 (0/4 assigned tasks done)
 
 ---
 
@@ -194,9 +209,9 @@
 |--------|----|----------|------|---------|------------|
 | **YoussefAdel** | 258270 | 12 | 12 | 0 | **100%** ✅ |
 | YousifHafez | 258612 | 5 | 5 | 0 | **100%** ✅ |
+| TarekSaeed | 252382 | 10 | 4 | 6 | **40%** ⚠️ |
 | YousefMohiey | 248679 | 6 | 1 | 5 | 17% |
 | YosefOsama | 255796 | 4 | 0 | 4 | 0% |
-| TarekSaeed | 252382 | 4 | 0 | 4 | 0% |
 | AbdelrahmanMazen | 251979 | 1 | 0 | 1 | 0% |
 
 ---
@@ -406,8 +421,8 @@ OnlineBankSystem/
 | YoussefAdel | 258270 | youssef.adel@bue.edu.eg | ✅ Active |
 | YousefMohiey | 248679 | yousef.mohiey@bue.edu.eg | ⚠️ Partial |
 | YosefOsama | 255796 | yosef.osama@bue.edu.eg | ❌ Inactive |
-| TarekSaeed | 252382 | tarek.saeed@bue.edu.eg | ❌ Inactive |
-| YousifHafez | 258612 | yousif.hafez@bue.edu.eg | ❌ Inactive |
+| TarekSaeed | 252382 | tarek.saeed@bue.edu.eg | ⚠️ Off-Track |
+| YousifHafez | 258612 | yousif.hafez@bue.edu.eg | ✅ Active |
 | AbdelrahmanMazen | 251979 | abdelrahman.mazen@bue.edu.eg | ❌ Inactive |
 
 ---
@@ -428,22 +443,28 @@ OnlineBankSystem/
 - AccountDeletionException.java
 - PayBillForm.java + .form (Extra - not assigned)
 
+**TarekSaeed partial completion (40% - off track):**
+- TransactionFailedException.java ✅
+- TransactionPanel.java + .form ✅ (but duplicates Hafez's work)
+- Transaction exceptions in Account classes ✅
+- TransactionHistory file handling ✅
+- ❌ Missing all assigned staff features
+
 **Project Status:**
-- 12/18 GUIs complete (67%)
-- 5/7 exceptions complete (71%)
+- 13/18 GUIs complete (72%)
+- 6/7 exceptions complete (86%)
 - All models complete (100%)
-- File I/O complete (CSV format)
 
 **Still missing from teammates:**
 - YousefMohiey: AddStaffDialog, ViewStaffListDialog, AdminActionLogger, StaffCreationException
-- YosefOsama: CustomerDashboard, RemoveStaffDialog, TransferMoneyDialog, StaffNotFoundException
-- TarekSaeed: StaffDashboard, UpdateStaffDialog, ViewAccountsDialog, StaffUpdateException
+- YosefOsama: CustomerDashboard, RemoveStaffDialog, TransferMoneyDialog, StaffNotFoundException  
+- TarekSaeed: StaffDashboard, UpdateStaffDialog, ViewAccountsDialog, StaffUpdateException (assigned but not done)
 - AbdelrahmanMazen: ViewTransactionHistoryDialog (optional)
 
-**Recommendation:** YoussefAdel and YousifHafez portions are submission-ready. Remaining teammates need to deliver 10 files.
+**Recommendation:** YoussefAdel and YousifHafez portions are submission-ready. Tarek needs to pivot to his assigned staff features.
 
 ---
 
 **Report Generated:** April 23, 2026  
-**Version:** 2.0  
-**Status:** Ready for Submission (YoussefAdel + YousifHafez Complete)
+**Version:** 2.1  
+**Status:** Updated with Tarek's partial work
