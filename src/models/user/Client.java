@@ -3,6 +3,7 @@ package models.user;
 
 import exceptions.InsufficientFundsException;
 import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
 import java.util.ArrayList;
 import models.account.Account;
 
@@ -246,8 +247,8 @@ public void blockCard() {
  * @return true if payment is successful
  * @author Yousif Hafez - 258612
  */
-public boolean payBill(String billType, double amount) throws InsufficientFundsException {
-
+public boolean payBill(String billType, double amount)
+        throws InsufficientFundsException, InvalidAmountException, TransactionFailedException{
     // Validate amount
     if (amount <= 0) {
         throw new InvalidAmountException(amount);
@@ -264,7 +265,7 @@ public boolean payBill(String billType, double amount) throws InsufficientFundsE
         acc.withdraw(amount);
     }
 
-    return true;
+    return true; 
 }
 
     //    ========== ABSTRACT METHOD ==========

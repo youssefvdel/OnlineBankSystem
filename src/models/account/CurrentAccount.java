@@ -1,5 +1,8 @@
 package models.account;
 
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
 import models.transaction.Withdrawal;
 import models.user.User;
 
@@ -63,7 +66,10 @@ public class CurrentAccount extends Account implements java.io.Serializable {
      * @return true if withdrawal was successful, false otherwise
      */
     @Override
-    public boolean withdraw(double amount) {
+    public boolean withdraw(double amount)
+               throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException {
         if (amount < 0) {
             System.err.println(
                 "Error: Cannot withdraw negative amount: " + amount
@@ -94,7 +100,7 @@ public class CurrentAccount extends Account implements java.io.Serializable {
             getAccountNumber(),
             "internal"
         );
-        getTransactionHistory().addTransaction(withdrawal);
+        withdrawal.execute(this);
         return true;
     }
 
@@ -104,7 +110,10 @@ public class CurrentAccount extends Account implements java.io.Serializable {
      * @return the fee amount that was applied
      */
     @Override
-    public double applyYearlyFee() {
+    public double applyYearlyFee()    
+               throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException {
         withdraw(yearlyFee);
         return yearlyFee;
     }

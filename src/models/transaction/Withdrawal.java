@@ -40,9 +40,9 @@ public class Withdrawal extends Transaction {
             throw new InvalidAmountException(getAmount());
         }
 
-        if (account.getBalance() < getAmount()) {
-            setStatus(STATUS_FAILED);
-            throw new InsufficientFundsException(account.getBalance(), getAmount());
+        if (account.getBalance() < this.getAmount()) {
+            this.setStatus(STATUS_FAILED);
+            throw new InsufficientFundsException(account.getBalance(), this.getAmount());
         }
 
         // deduct balance

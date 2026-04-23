@@ -55,7 +55,7 @@ public abstract class Account implements Transferable {
      *
      * @return the fee amount that was applied
      */
-    public abstract double applyYearlyFee();
+    public abstract double applyYearlyFee()throws InsufficientFundsException, InvalidAmountException, TransactionFailedException;
 
     /**
      * Deposits money into the account using the Deposit transaction class.
@@ -160,7 +160,11 @@ public boolean deposit(double amount)
      * @return true if transfer was successful, false otherwise
      * @see Transfer#execute(Account)
      */
-    public boolean transfer(Account destination, double amount) {
+    public boolean transfer(Account destination, double amount) 
+     throws InsufficientFundsException,
+               InvalidAmountException,
+               TransactionFailedException
+    {
         String transId = "TRF" + System.currentTimeMillis();
         Transfer transfer = new Transfer(
             transId,
