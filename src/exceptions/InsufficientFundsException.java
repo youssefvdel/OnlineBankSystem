@@ -5,6 +5,7 @@
 package src.exceptions;
 
 /**
+<<<<<<< Updated upstream
  *Thrown when withdrawal/transfer exceeds account balance.
  * @author tareq
  */
@@ -20,6 +21,28 @@ public class InsufficientFundsException extends Exception{
     }
 
     public double getBalance() {
+=======
+ * Custom exception thrown when withdrawal amount exceeds available balance.
+ * @author Tareq
+ */
+public class InsufficientFundsException extends Exception 
+{
+    private double balance;
+    private double amount;
+    
+    /**
+     * Create exception with balance and attempted amount.
+     */
+    public InsufficientFundsException(double balance, double amount) 
+    {
+        super("Insufficient funds Balance: " + balance + ", Attempted: " + amount);
+        this.balance = balance;
+        this.amount = amount;
+    }
+        
+    public double getBalance() 
+    {
+>>>>>>> Stashed changes
         return balance;
     }
 

@@ -2,9 +2,15 @@ package models.transaction;
 import models.account.Account;
 
 import java.util.Date;
+<<<<<<< Updated upstream
 import src.exceptions.InsufficientFundsException;
 import src.exceptions.InvalidAmountException;
 import src.exceptions.TransactionFailedException;
+=======
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
+>>>>>>> Stashed changes
 
 
 /**
@@ -16,7 +22,12 @@ import src.exceptions.TransactionFailedException;
  * @since phase1
  */
 
+<<<<<<< Updated upstream
 public abstract class Transaction {
+=======
+public abstract class Transaction implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
+>>>>>>> Stashed changes
     
     protected static final String STATUS_PENDING = "Pending";
     protected static final String STATUS_COMPLETED = "Completed";
@@ -50,7 +61,11 @@ public abstract class Transaction {
         this.accountId = accountId;
         this.timestamp = new Date();
         this.status = STATUS_PENDING;
+<<<<<<< Updated upstream
 
+=======
+  }
+>>>>>>> Stashed changes
     /**
      * returns the unique transaction ID
      * @return transactionId "string"
@@ -127,4 +142,3 @@ public abstract class Transaction {
 
 
 }
-

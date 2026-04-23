@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+<<<<<<< Updated upstream
 package src.exceptions;
+=======
+package exceptions;
+>>>>>>> Stashed changes
 
 /**
  * Generic exception for transaction execution failures.
@@ -21,4 +25,8 @@ public class TransactionFailedException extends Exception{
     }
     
     
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

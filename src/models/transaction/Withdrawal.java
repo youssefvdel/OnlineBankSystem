@@ -1,8 +1,14 @@
 package models.transaction;
 import models.account.Account;
+<<<<<<< Updated upstream
 import src.exceptions.InsufficientFundsException;
 import src.exceptions.InvalidAmountException;
 import src.exceptions.TransactionFailedException;
+=======
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
+>>>>>>> Stashed changes
 
 /**
  * @author Tarek Saeed 252382
@@ -10,7 +16,8 @@ import src.exceptions.TransactionFailedException;
  * @since phase 1
  */
 
-public class Withdrawal extends Transaction{
+public class Withdrawal extends Transaction implements java.io.Serializable{
+        private static final long serialVersionUID = 1L;
 
     // withdrawal method "ATM,online,bill payment"
     private String method ;

@@ -1,8 +1,13 @@
 package models.transaction;
 
 import models.account.Account;
+<<<<<<< Updated upstream
 import src.exceptions.InvalidAmountException;
 import src.exceptions.TransactionFailedException;
+=======
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
+>>>>>>> Stashed changes
 
 /**
  * @author [Tarek Saeed 252382]
