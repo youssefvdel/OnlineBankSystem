@@ -4,6 +4,7 @@
  */
 package gui.customer;
 
+import manager.BankSystem;
 import models.user.Client;
 
 /**
@@ -14,6 +15,7 @@ import models.user.Client;
  */
 public class PayBillForm extends javax.swing.JFrame {
     Client client;
+    BankSystem bank;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PayBillForm.class.getName());
 
     /**
@@ -23,17 +25,17 @@ public class PayBillForm extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
-/**
- * Constructs a PayBillForm and links it with a Client object.
- *
- * @param c the client whose data will be used to process payments
- */
-public PayBillForm(Client c) {
-    initComponents();
-    this.client = c;
-    
-}
+
+    public PayBillForm(Client c) {
+        this(c, null);
+    }
+
+    public PayBillForm(Client c, BankSystem bank) {
+        initComponents();
+        this.client = c;
+        this.bank = bank;
+        setLocationRelativeTo(null);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,7 +52,7 @@ public PayBillForm(Client c) {
         billTypeCombo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Enter_amount.setText("Enter Amount:");
 
@@ -107,30 +109,31 @@ public PayBillForm(Client c) {
     * Handles bill payment when Pay button is clicked
     */
     private void PayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayActionPerformed
-    try {
-        // Read amount
-        double amount = Double.parseDouble(amountField.getText());
+        if (client == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No client selected");
+            return;
+        }
 
-        // Get selected bill type
-        String billType = billTypeCombo.getSelectedItem().toString();
+        try {
+            double amount = Double.parseDouble(amountField.getText().trim());
+            String billType = billTypeCombo.getSelectedItem().toString();
 
-        // Call method
-        client.payBill(billType, amount);
+            client.payBill(billType, amount);
 
-        // Success
-        javax.swing.JOptionPane.showMessageDialog(this, "Payment successful");
+            if (bank != null) {
+                bank.saveAllData();
+            }
 
-        // Clear field
-        amountField.setText("");
+            javax.swing.JOptionPane.showMessageDialog(this, "Payment successful");
+            amountField.setText("");
 
-    } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Enter a valid number");
-
-    } catch (RuntimeException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, e.getMessage());
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, e.getMessage());
-    }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Enter a valid number");
+        } catch (RuntimeException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_PayActionPerformed
 
     private void amountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountFieldActionPerformed

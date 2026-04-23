@@ -1,82 +1,95 @@
 package gui.customer;
-import gui.customer.TransactionPanel;
-import javax.swing.JOptionPane;
-import models.user.Client;
 
-import models.user.User;
+import javax.swing.JOptionPane;
+import manager.BankSystem;
+import models.account.Account;
 import models.user.Client;
+import models.user.User;
+
 /**
  *
  * @author Yosef - 255796
  */
 public class ClientDashboard extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientDashboard.class.getName());
 
-    private User currentUser; // Store as generic User
-    private Client currentClient; // Store casted Client for specific features
-    /**
-     * Creates new form clientDashboard
-     */
-   
-    public ClientDashboard(User user ) 
-    {
+    private User currentUser;
+    private Client currentClient;
+    private BankSystem bank;
+
+    public ClientDashboard(User user) {
+        this(user, null);
+    }
+
+    public ClientDashboard(User user, BankSystem bank) {
         initComponents();
-        
-         this.currentUser = user;
-         // you can use currentUser for transactions later
-         System.out.println("Logged in as: " + (user != null ? user.getName() : "Guest"));
-         
-    // WITHDRAW/DEPOSIT BUTTON FUNCTIONALITY
-     WithdrawDeposit.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            ClientDashboard.this.setVisible(false);
-            
-            // Pass the first account to TransactionPanel
-            models.account.Account account = currentClient.getAccounts().isEmpty() 
-                ? new models.account.CurrentAccount("TEMP", 0.0, currentClient, 0, 0, 0, 0)
-                : currentClient.getAccounts().get(0);
-            gui.customer.TransactionPanel transPanel = new gui.customer.TransactionPanel(account);
-            
-            transPanel.setVisible(true);
-            
-        } catch (Exception ex) {
-            javax.swing.JOptionPane.showMessageDialog(
-                ClientDashboard.this,
-                "Error: " + ex.getMessage(),
-                "System Error",
-                javax.swing.JOptionPane.ERROR_MESSAGE
-            );
-        }
+        this.currentUser = user;
+        this.bank = bank;
+        this.currentClient = (user instanceof Client) ? (Client) user : null;
+
+        System.out.println("Logged in as: " + (user != null ? user.getName() : "Guest"));
+
+        setupButtonListeners();
     }
-});
-     
-     // MANAGE CARD BUTTON FUNCTIONALITY
-    manageCard.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            // 1. Hide current Dashboard
-            ClientDashboard.this.setVisible(false);
-            
-            // 2. Open Card Management Frame
-            // Assuming CardManagementFrame is in gui.customer package
-            gui.customer.CardManagementFrame cardFrame = new gui.customer.CardManagementFrame(currentClient);
-            
-            // 3. Show the new window
-            cardFrame.setVisible(true);
-            
-        } catch (Exception ex) {
-            javax.swing.JOptionPane.showMessageDialog(
-                ClientDashboard.this,
-                "Error opening Card Management: " + ex.getMessage(),
-                "System Error",
-                javax.swing.JOptionPane.ERROR_MESSAGE
-            );
-        }
-    }
-});
-        
+
+    private void setupButtonListeners() {
+        // WITHDRAW/DEPOSIT
+        WithdrawDeposit.addActionListener(evt -> {
+            if (currentClient == null || currentClient.getAccounts().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No accounts available");
+                return;
+            }
+            Account account = currentClient.getAccounts().get(0);
+            new TransactionPanel(account, bank).setVisible(true);
+        });
+
+        // TRANSFER
+        transfer.addActionListener(evt -> {
+            if (currentClient == null || currentClient.getAccounts().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No accounts available");
+                return;
+            }
+            Account account = currentClient.getAccounts().get(0);
+            new TransferFrame(account, bank).setVisible(true);
+        });
+
+        // PAY BILL
+        PayBill.addActionListener(evt -> {
+            if (currentClient == null) {
+                JOptionPane.showMessageDialog(this, "No client selected");
+                return;
+            }
+            new PayBillForm(currentClient, bank).setVisible(true);
+        });
+
+        // VIEW HISTORY
+        viewHistory.addActionListener(evt -> {
+            if (currentClient == null || currentClient.getAccounts().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No accounts available");
+                return;
+            }
+            Account account = currentClient.getAccounts().get(0);
+            new TransactionHistoryFrame(account).setVisible(true);
+        });
+
+        // MANAGE CARD
+        manageCard.addActionListener(evt -> {
+            if (currentClient == null) {
+                JOptionPane.showMessageDialog(this, "No client selected");
+                return;
+            }
+            new CardManagementFrame(currentClient, bank).setVisible(true);
+        });
+
+        // LOGOUT
+        logout.addActionListener(evt -> {
+            if (bank != null) {
+                bank.saveAllData();
+            }
+            dispose();
+            new gui.auth.LoginFrame(bank).setVisible(true);
+        });
     }
 
     /**

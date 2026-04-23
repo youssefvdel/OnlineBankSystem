@@ -47,7 +47,7 @@ public class TransferFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         statusLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Destination Account");
 
@@ -59,7 +59,7 @@ public class TransferFrame extends javax.swing.JFrame {
         amountField.setText("\"\"");
         amountField.addActionListener(this::amountFieldActionPerformed);
 
-        transferBtn.setText("Trnsfer");
+        transferBtn.setText("Transfer");
         transferBtn.addActionListener(this::transferBtnActionPerformed);
 
         jLabel3.setText("Status:");
@@ -122,37 +122,40 @@ public class TransferFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_amountFieldActionPerformed
 
     private void transferBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferBtnActionPerformed
-        // TODO add your handling code here:
         try {
-    String destAccNumber = destField.getText();
-    double amount = Double.parseDouble(amountField.getText());
+            String destAccNumber = destField.getText().trim();
+            double amount = Double.parseDouble(amountField.getText().trim());
 
-    Account destination = bankSystem.getAccountByNumber(destAccNumber);
+            if (destAccNumber.isEmpty()) {
+                statusLabel.setText("Enter destination account");
+                return;
+            }
 
-    if (destination == null) {
-        statusLabel.setText("Destination not found");
-        return;
-    }
+            Account destination = bankSystem.getAccountByNumber(destAccNumber);
 
-    sourceAccount.transfer(destination, amount);
+            if (destination == null) {
+                statusLabel.setText("Destination not found");
+                return;
+            }
 
-    statusLabel.setText("Transfer successful");
+            sourceAccount.transfer(destination, amount);
+            bankSystem.saveAllData();
 
-} catch (NumberFormatException e) {
-    statusLabel.setText("Invalid amount");
+            statusLabel.setText("Transfer successful");
+            destField.setText("");
+            amountField.setText("");
 
-} catch (InvalidAmountException e) {
-    statusLabel.setText("Invalid amount");
-
-} catch (InsufficientFundsException e) {
-    statusLabel.setText("Not enough balance");
-
-} catch (TransactionFailedException e) {
-    statusLabel.setText("Transfer failed");
-
-} catch (Exception e) {
-    statusLabel.setText("Unexpected error");
-}
+        } catch (NumberFormatException e) {
+            statusLabel.setText("Invalid amount");
+        } catch (InvalidAmountException e) {
+            statusLabel.setText("Invalid amount");
+        } catch (InsufficientFundsException e) {
+            statusLabel.setText("Not enough balance");
+        } catch (TransactionFailedException e) {
+            statusLabel.setText("Transfer failed");
+        } catch (Exception e) {
+            statusLabel.setText("Unexpected error");
+        }
     }//GEN-LAST:event_transferBtnActionPerformed
 
     /**

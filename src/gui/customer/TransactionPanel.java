@@ -7,24 +7,30 @@ package gui.customer;
 import exceptions.InsufficientFundsException;
 import exceptions.InvalidAmountException;
 import exceptions.TransactionFailedException;
+import manager.BankSystem;
 import models.account.Account;
-
 
 /**
  *
  * @author tareq
  */
 public class TransactionPanel extends javax.swing.JFrame {
-    
+
     private Account account;
+    private BankSystem bank;
     private boolean isDepositMode = true;
 
     public TransactionPanel(Account account) {
-        initComponents();  
+        this(account, null);
+    }
+
+    public TransactionPanel(Account account, BankSystem bank) {
+        initComponents();
         setResizable(true);
-        setMinimumSize(new java.awt.Dimension(400, 300)); 
-        
+        setMinimumSize(new java.awt.Dimension(400, 300));
+
         this.account = account;
+        this.bank = bank;
 
         fixResize();
 
@@ -60,7 +66,7 @@ public class TransactionPanel extends javax.swing.JFrame {
         statusLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Amount");
 
@@ -175,38 +181,44 @@ public class TransactionPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_depositBtnActionPerformed
 
     private void executeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeBtnActionPerformed
-        // TODO try {
- try {
-        double amount = Double.parseDouble(amountField.getText());
-
-        if (amount <= 0) {
-            statusLabel.setText("Enter valid amount");
+        if (account == null) {
+            statusLabel.setText("No account selected");
             return;
         }
 
-        if (isDepositMode) {
-            account.deposit(amount);
-            statusLabel.setText("Deposit successful");
-        } else {
-            account.withdraw(amount);
-            statusLabel.setText("Withdrawal successful");
+        try {
+            double amount = Double.parseDouble(amountField.getText().trim());
+
+            if (amount <= 0) {
+                statusLabel.setText("Enter valid amount");
+                return;
+            }
+
+            if (isDepositMode) {
+                account.deposit(amount);
+                statusLabel.setText("Deposit successful");
+            } else {
+                account.withdraw(amount);
+                statusLabel.setText("Withdrawal successful");
+            }
+
+            if (bank != null) {
+                bank.saveAllData();
+            }
+
+            amountField.setText("");
+
+        } catch (InvalidAmountException e) {
+            statusLabel.setText("Invalid amount");
+        } catch (InsufficientFundsException e) {
+            statusLabel.setText("Not enough balance");
+        } catch (TransactionFailedException e) {
+            statusLabel.setText("Transaction failed");
+        } catch (NumberFormatException e) {
+            statusLabel.setText("Invalid number");
+        } catch (Exception e) {
+            statusLabel.setText("Unexpected error");
         }
-
-    } catch (InvalidAmountException e) {
-        statusLabel.setText("Invalid amount");
-
-    } catch (InsufficientFundsException e) {
-        statusLabel.setText("Not enough balance");
-
-    } catch (TransactionFailedException e) {
-        statusLabel.setText("Transaction failed");
-
-    } catch (NumberFormatException e) {
-        statusLabel.setText("Invalid number");
-
-    } catch (Exception e) {
-        statusLabel.setText("Unexpected error");
-    }
     }//GEN-LAST:event_executeBtnActionPerformed
 
     /**
