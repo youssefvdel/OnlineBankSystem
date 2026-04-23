@@ -130,16 +130,6 @@ public class BankSystem {
     }
 
     /**
-     * Returns all transactions in the system.
-     * Useful for admin views and transaction history.
-     *
-     * @return ArrayList of all Transaction objects
-     */
-    public ArrayList<Transaction> getAllTransactions() {
-        return new ArrayList<>(transactions);
-    }
-
-    /**
      * Returns the currently authenticated user.
      */
     public User getCurrentUser() {
