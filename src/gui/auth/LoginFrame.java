@@ -64,7 +64,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel2.setText("Username");
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        jLabel3.setText("Passowrd");
+        jLabel3.setText("Password");
 
         jtuser.addActionListener(this::jtuserActionPerformed);
 
@@ -81,7 +81,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel4.setText("Attempts left: 3");
 
         ShowPassword.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        ShowPassword.setText("Show Passowrd");
+        ShowPassword.setText("Show Password");
         ShowPassword.addActionListener(this::ShowPasswordActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
