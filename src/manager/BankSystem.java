@@ -251,7 +251,16 @@ public class BankSystem {
         String phone = "";
         String status = "";
         String cardStatus = "";
-        if (user instanceof Client) {
+        String jobTitle= "";
+       
+        if(user instanceof Admin)
+        {
+        Admin a = (Admin) user;
+        phone = a.getPhoneNumber();
+        jobTitle = a.getJobTitle();
+        }
+       
+        else if (user instanceof Client) {
             Client c = (Client) user;
             clientId = c.getClientId();
             phone = c.getPhoneNumber();
@@ -262,7 +271,7 @@ public class BankSystem {
             else if (c instanceof FirstClassClient) type = "FirstClassClient";
         }
         return CSVHelper.join(type, user.getUserId(), user.getName(), user.getPassword(), user.getEmail(),
-                clientId, phone, status, cardStatus);
+                clientId, phone, status, cardStatus,jobTitle);
     }
 
     private User csvToUser(String line) {
@@ -277,10 +286,11 @@ public class BankSystem {
         String phone = f.size() > 6 ? f.get(6) : "";
         String status = f.size() > 7 ? f.get(7) : "";
         String cardStatusStr = f.size() > 8 ? f.get(8) : "";
+        String job = f.size() > 9 ? f.get(9) : "";
 
         User user;
         if ("Admin".equals(type)) {
-            user = new Admin(userId, name, password, email);
+            user = new Admin(userId, name, password, email, phone, job);
         } else if ("StandardClient".equals(type)) {
             user = new StandardClient(userId, name, password, email, userId, phone, 1000.0);
         } else if ("PremiumClient".equals(type)) {
@@ -331,7 +341,7 @@ public class BankSystem {
         double balance = CSVHelper.parseDouble(f.get(2), 0.0);
         String ownerId = f.get(3);
         User owner = findUserById(ownerId);
-        if (owner == null) owner = new Admin("unknown", "Unknown", "", "");
+        if (owner == null) owner = new Admin("unknown", "Unknown", "", "","","");
 
         Account acc;
         if ("SavingsAccount".equals(type)) {

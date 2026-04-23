@@ -164,7 +164,9 @@ public class AddStaffMember extends javax.swing.JFrame {
         String name = txtName.getText().trim();
         String email = txtEmail.getText().trim();
         String phone = txtPhone.getText().trim();
+        String job = txtJob.getText().trim();
         String pass = new String(txtPassword.getPassword());
+  
 
      
         if (name.isEmpty() || email.isEmpty() || pass.isEmpty()) {
@@ -182,10 +184,13 @@ public class AddStaffMember extends javax.swing.JFrame {
         }
 
         
+        
         String id = "A" + System.currentTimeMillis();
-        Admin newAdmin = new Admin(id, name, pass, email);
+        Admin newAdmin = new Admin(id, name, pass, email, phone, job);
         bank.addUser(newAdmin);
-
+        bank.saveAllData();
+        manager.AdminActionLogger.log("Added staff: " + name + " (" + email + ")");
+        
         JOptionPane.showMessageDialog(this, "Staff added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
         dispose();
 
