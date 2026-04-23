@@ -378,16 +378,20 @@ public class BankSystem {
         String destAcc = f.size() > 6 ? f.get(6) : "";
 
         Transaction trans;
-        if ("Deposit".equals(type)) {
-            trans = new Deposit(transId, amount, accountId, "internal");
-        } else if ("Withdrawal".equals(type)) {
-            trans = new Withdrawal(transId, amount, accountId, "internal");
-        } else if ("Transfer".equals(type)) {
-            Account dest = getAccountByNumber(destAcc);
-            trans = new Transfer(transId, amount, accountId, dest);
-        } else {
-            trans = new Deposit(transId, amount, accountId, "internal");
-        }
+      try {
+    if ("Deposit".equals(type)) {
+        trans = new Deposit(transId, amount, accountId, "internal");
+    } else if ("Withdrawal".equals(type)) {
+        trans = new Withdrawal(transId, amount, accountId, "internal");
+    } else if ("Transfer".equals(type)) {
+        Account dest = getAccountByNumber(destAcc);
+        trans = new Transfer(transId, amount, accountId, dest);
+    } else {
+        trans = new Deposit(transId, amount, accountId, "internal");
+    }
+    } catch (Exception e) {
+    return null; // skip invalid transaction
+    }
         trans.setStatus(status);
         return trans;
     }

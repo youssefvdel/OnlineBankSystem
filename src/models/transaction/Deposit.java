@@ -6,71 +6,48 @@ import exceptions.InsufficientFundsException;
 import exceptions.TransactionFailedException;
 
 /**
- * @author [Tarek Saeed 252382]
- * @see Transaction
- * @since phase1
+ * @author Tarek Saeed 252382
+ * @since Phase 2
  */
+public class Deposit extends Transaction {
 
-public class Deposit extends Transaction implements java.io.Serializable {
-    private static final long serialVersionUID = 1L;
-
-    //source for deposit "cash,check,transfer"
     private String source;
 
-    /**
-     * Creates a new deposit
-     * @param transactionId
-     * @param accountId
-     * @param amount
-     * @param source
-     * */
+    public Deposit(String transactionId, double amount, String accountId, String source)
+            throws InvalidAmountException, TransactionFailedException {
 
-    public Deposit(String transactionId,double amount,String accountId,String source){
-        super(transactionId,amount,accountId);
-
-        this.source=source;
+        super(transactionId, amount, accountId);
+        this.source = source;
     }
 
-    /**
-     * returns the source of the deposit
-     * @return source "string"
-     */
-
-    public String getSource(){
+    public String getSource() {
         return source;
     }
 
-    /**
-     *excutes the deposit validation logic
-     * @return true if valid , false otherwise
-     */
     @Override
-    public boolean execute(Account account) {
+    public boolean execute(Account account)
+            throws InvalidAmountException,
+                   TransactionFailedException,
+                   InsufficientFundsException {
 
-        if(this.source==null||this.source.isEmpty()){
-            this.setStatus("failed");
-            return false ;
+        if (source == null || source.isEmpty()) {
+            setStatus(STATUS_FAILED);
+            throw new TransactionFailedException("Deposit source is invalid");
         }
 
-        if(this.getAmount()<=0){
-            this.setStatus("failed");
-            return false;
+        if (getAmount() <= 0) {
+            setStatus(STATUS_FAILED);
+            throw new InvalidAmountException(getAmount());
         }
 
-        //adding balance
-        account.setBalance(account.getBalance()+this.getAmount());
+        // add balance
+        account.setBalance(account.getBalance() + getAmount());
 
-        this.setStatus("completed");
-        
-        // Add to transaction history
+        setStatus(STATUS_COMPLETED);
         account.getTransactionHistory().addTransaction(this);
-        
+
         return true;
     }
-
-    /**
-     * @return deposit detailes
-     */
 
     @Override
     public String toString() {
@@ -81,5 +58,4 @@ public class Deposit extends Transaction implements java.io.Serializable {
                 ", status='" + getStatus() + '\'' +
                 '}';
     }
-
 }
