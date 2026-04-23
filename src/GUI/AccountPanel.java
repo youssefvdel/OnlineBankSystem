@@ -2,6 +2,7 @@
 package GUI;
 import exceptions.InvalidAccountException;
 import exceptions.OverdraftLimitExceededException;
+import GUI.*;
 import java.awt.event.ActionListener;
 /**
  *
@@ -21,34 +22,40 @@ public class AccountPanel extends javax.swing.JFrame {
     public AccountPanel() {
         initComponents();
         
-        
-       // Add this code - Next button functionality
-    jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            // Get the selected account from combo box
+            
+            // Get the selected item from the combo box
             String selectedAccount = selecctComboBox.getSelectedItem().toString();
             
-            // Check which account is selected and update the text fields
-            if (selectedAccount.equals("Savings")) {
-                interestrate.setText("5.0%");
-                overdraft.setText("Not Available");
-                benefits.setText("Earns interest + Min Balance: $100.00");
+            //  Check if "Select" was chosen (Error Case)
+            if (selectedAccount.equals("Select")) {
+                javax.swing.JOptionPane.showMessageDialog(
+                    AccountPanel.this, 
+                    "Please select an account type first!", 
+                    "Error", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+                );
+                return; // Stop here, do not open dashboard
+            }
+            
+            // If valid selection, Open Client Dashboard
+            try {
+                // Hide current Account Panel
+                AccountPanel.this.setVisible(false);
                 
-            } else if (selectedAccount.equals("Current")) {
-                interestrate.setText("0.0%");
-                overdraft.setText("$500.00");
-                benefits.setText("Transaction Limit: 50/month + Yearly Fee: $25.00");
+                // Create and show Client Dashboard 
+                // Later you will pass the actual User object.
+               GUI.ClientDashboard dashboard = new GUI.ClientDashboard(null);
+                dashboard.setVisible(true);
                 
-            } else if (selectedAccount.equals("Premium")) {
-                interestrate.setText("5.0%");
-                overdraft.setText("$10,000.00");
-                benefits.setText("5% Bonus Rate + Yearly Fee: $75.00");
-                
-            } else {
-                // If "Select" is chosen
-                interestrate.setText("");
-                overdraft.setText("");
-                benefits.setText("");
+            } catch (Exception ex) {
+                javax.swing.JOptionPane.showMessageDialog(
+                    AccountPanel.this, 
+                    "Error opening Dashboard: " + ex.getMessage(), 
+                    "System Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+                );
             }
         }
     });
@@ -66,88 +73,93 @@ public class AccountPanel extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         chooseAcccount = new javax.swing.JLabel();
         selecctComboBox = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        interestrate = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        overdraft = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        benefits = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(700, 700));
-
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        setPreferredSize(new java.awt.Dimension(500, 500));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Account Panel");
-        jPanel1.add(jLabel9, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        jPanel2.setLayout(new java.awt.BorderLayout());
-
-        jButton1.setText("Next");
-        jPanel2.add(jButton1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 521, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 27, Short.MAX_VALUE)
+        );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
-        jPanel3.setLayout(new java.awt.GridLayout(4, 0));
-
+        chooseAcccount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         chooseAcccount.setText("Choose Acccount");
-        jPanel3.add(chooseAcccount);
 
-        selecctComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Savings", "Current", "Premium" }));
+        selecctComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Saving Acccount", "Current Acccount", "Premium Acccount", "Business Account" }));
         selecctComboBox.addActionListener(this::selecctComboBoxActionPerformed);
-        jPanel3.add(selecctComboBox);
 
-        jLabel1.setText(" interest rate");
-        jLabel1.setToolTipText("");
-        jPanel3.add(jLabel1);
+        jButton1.setText("Next");
 
-        interestrate.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        interestrate.setEnabled(false);
-        interestrate.addActionListener(this::interestrateActionPerformed);
-        jPanel3.add(interestrate);
-
-        jLabel2.setText(" overdraft");
-        jLabel2.setToolTipText("");
-        jPanel3.add(jLabel2);
-
-        overdraft.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        overdraft.setEnabled(false);
-        overdraft.addActionListener(this::overdraftActionPerformed);
-        jPanel3.add(overdraft);
-
-        jLabel3.setText(" benefits");
-        jPanel3.add(jLabel3);
-
-        benefits.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        benefits.setEnabled(false);
-        jPanel3.add(benefits);
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chooseAcccount, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(selecctComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(196, 196, 196)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chooseAcccount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selecctComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+        );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void interestrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interestrateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_interestrateActionPerformed
-
     private void selecctComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecctComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_selecctComboBoxActionPerformed
-
-    private void overdraftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overdraftActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_overdraftActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,18 +187,12 @@ public class AccountPanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField benefits;
     private javax.swing.JLabel chooseAcccount;
-    private javax.swing.JTextField interestrate;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField overdraft;
     private javax.swing.JComboBox<String> selecctComboBox;
     // End of variables declaration//GEN-END:variables
 }

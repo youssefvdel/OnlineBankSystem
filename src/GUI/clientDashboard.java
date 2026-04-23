@@ -1,45 +1,78 @@
 package GUI;
+import gui.customer.TransactionPanel;
+import javax.swing.JOptionPane;
+import models.user.Client;
 
-import GUI.AccountPanel;
-
+import models.user.User;
+import models.user.Client;
 /**
  *
  * @author Yosef - 255796
  */
-public class clientDashboard extends javax.swing.JFrame {
+public class ClientDashboard extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(clientDashboard.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientDashboard.class.getName());
 
+    private User currentUser; // Store as generic User
+    private Client currentClient; // Store casted Client for specific features
     /**
      * Creates new form clientDashboard
      */
-    public clientDashboard() 
+   
+    public ClientDashboard(User user ) 
     {
         initComponents();
         
-       balance.setText("10,000,000.00");
-       
-                // Account Panel Button - Opens Account Management Page
-        AccountPanel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    // Hide current window
-                    clientDashboard.this.setVisible(false);
-                    
-                    // Open Account Panel
-                    AccountPanel accountPage = new AccountPanel();
-                    accountPage.setVisible(true);
-                    
-                } catch (Exception ex) {
-                    javax.swing.JOptionPane.showMessageDialog(
-                        clientDashboard.this,
-                        "Error opening Account Panel: " + ex.getMessage(),
-                        "Error",
-                        javax.swing.JOptionPane.ERROR_MESSAGE
-                    );
-                }
-            }
-        });
+         this.currentUser = user;
+         // you can use currentUser for transactions later
+         System.out.println("Logged in as: " + (user != null ? user.getName() : "Guest"));
+         
+    // WITHDRAW/DEPOSIT BUTTON FUNCTIONALITY
+     WithdrawDeposit.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            ClientDashboard.this.setVisible(false);
+            
+            // Pass the currentUser to TransactionPanel
+            gui.customer.TransactionPanel transPanel = new gui.customer.TransactionPanel(currentClient);
+            
+            transPanel.setVisible(true);
+            
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                ClientDashboard.this,
+                "Error: " + ex.getMessage(),
+                "System Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+});
+     
+     // MANAGE CARD BUTTON FUNCTIONALITY
+    manageCard.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            // 1. Hide current Dashboard
+            ClientDashboard.this.setVisible(false);
+            
+            // 2. Open Card Management Frame
+            // Assuming CardManagementFrame is in gui.customer package
+            gui.customer.CardManagementFrame cardFrame = new gui.customer.CardManagementFrame(client);
+            
+            // 3. Show the new window
+            cardFrame.setVisible(true);
+            
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                ClientDashboard.this,
+                "Error opening Card Management: " + ex.getMessage(),
+                "System Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+});
         
     }
 
@@ -55,15 +88,12 @@ public class clientDashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        balance = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         WithdrawDeposit = new javax.swing.JButton();
         transfer = new javax.swing.JButton();
         logout = new javax.swing.JButton();
         manageCard = new javax.swing.JButton();
-        AccountPanel = new javax.swing.JButton();
         viewHistory = new javax.swing.JButton();
+        PayBill = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("client Dashboard");
@@ -90,16 +120,6 @@ public class clientDashboard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("current balance");
-
-        balance.setEditable(false);
-        balance.setToolTipText("");
-        balance.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        balance.addActionListener(this::balanceActionPerformed);
-
-        jButton1.setText("Show");
-
         WithdrawDeposit.setText("Withdraw/Deposit");
         WithdrawDeposit.addActionListener(this::WithdrawDepositActionPerformed);
 
@@ -111,67 +131,48 @@ public class clientDashboard extends javax.swing.JFrame {
         manageCard.setText("Manage Card");
         manageCard.addActionListener(this::manageCardActionPerformed);
 
-        AccountPanel.setText("Acccount Panel");
-
         viewHistory.setText("View History");
+
+        PayBill.setText("Pay Bill");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(183, 183, 183)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
-                .addComponent(balance, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jButton1)
-                .addGap(43, 43, 43))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(manageCard)
-                    .addComponent(AccountPanel)
-                    .addComponent(WithdrawDeposit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(transfer)
-                    .addComponent(viewHistory)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(logout)))
-                .addGap(40, 40, 40))
+                        .addComponent(manageCard, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                        .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(PayBill, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(WithdrawDeposit)
+                            .addComponent(viewHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(balance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 119, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(WithdrawDeposit)
-                                    .addComponent(transfer))))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(manageCard)
-                            .addComponent(viewHistory))
-                        .addGap(39, 39, 39)
-                        .addComponent(AccountPanel)
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(logout)
-                        .addGap(42, 42, 42))))
+                .addGap(33, 33, 33)
+                .addComponent(transfer)
+                .addGap(18, 18, 18)
+                .addComponent(PayBill)
+                .addGap(18, 18, 18)
+                .addComponent(viewHistory)
+                .addGap(18, 18, 18)
+                .addComponent(WithdrawDeposit)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(logout)
+                    .addComponent(manageCard))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -182,10 +183,6 @@ public class clientDashboard extends javax.swing.JFrame {
     private void WithdrawDepositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WithdrawDepositActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_WithdrawDepositActionPerformed
-
-    private void balanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balanceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_balanceActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
@@ -217,16 +214,13 @@ public class clientDashboard extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new clientDashboard().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ClientDashboard(null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AccountPanel;
+    private javax.swing.JButton PayBill;
     private javax.swing.JButton WithdrawDeposit;
-    private javax.swing.JTextField balance;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton logout;
