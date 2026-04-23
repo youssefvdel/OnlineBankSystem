@@ -135,6 +135,14 @@ public class BankSystem {
     public User getCurrentUser() {
         return currentUser;
     }
+
+    /**
+     * Returns all users in the system.
+     * @return ArrayList of all User objects
+     */
+    public ArrayList<User> getAllUsers() {
+        return new ArrayList<>(users);
+    }
     
     // Tareq added this method for transaction panel 
     

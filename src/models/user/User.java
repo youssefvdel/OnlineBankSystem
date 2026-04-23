@@ -109,6 +109,13 @@ public void logout()
     {this.name = name;}
 
     /**
+     * Sets the user password
+     * @param password the new password for the user
+     */
+    public void setPassword(String password)
+    {this.password = password;}
+
+    /**
      * Sets the user email address
      * @param email the new email address for the user
      *
