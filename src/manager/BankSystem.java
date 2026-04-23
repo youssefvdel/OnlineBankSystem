@@ -395,4 +395,12 @@ public class BankSystem {
         trans.setStatus(status);
         return trans;
     }
+    
+    /**
+ * Returns the list of all users (for GUI display).
+ */
+public ArrayList<User> getUsers() {
+    return users;  
 }
+}
+

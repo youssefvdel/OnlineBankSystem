@@ -8,13 +8,10 @@ import javax.swing.JOptionPane;
 import exceptions.InvalidLoginException;
 import gui.admin.AdminDashboard;
 import gui.customer.ClientDashboard;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import manager.BankSystem;
 import models.user.User;
 import models.user.Admin;
-import models.user.StandardClient;
+
 
 
 /**
@@ -25,15 +22,17 @@ import models.user.StandardClient;
 public class LoginFrame extends javax.swing.JFrame {
     
 // Track Login attempts
+    
+    private BankSystem bank;
     private int failedAttempts = 0;
     private static final int MAX_ATTEMPTS = 3;
     
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginFrame.class.getName());
 
-    /**
-     * Creates new form LoginFrame
-     */
-    public LoginFrame() {
+
+    public LoginFrame(BankSystem bank) {
+        this.bank = bank;
         initComponents();
     }
 
@@ -92,34 +91,36 @@ public class LoginFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
+                    .addComponent(ShowPassword)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ShowPassword)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jpassowrd, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtuser, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jpassowrd, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtuser, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(bexit, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
-                                        .addComponent(blogin, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(52, 52, 52)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                                .addComponent(bexit, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                                .addComponent(blogin, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(103, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(214, 214, 214))
+                .addContainerGap(61, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(214, 214, 214))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(45, 45, 45))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(82, 82, 82)
+                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -157,7 +158,7 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_bexitActionPerformed
 
     private void bloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloginActionPerformed
-String username = jtuser.getText().trim();
+        String username = jtuser.getText().trim();
         char[] passwordChars = jpassowrd.getPassword();
         String password = new String(passwordChars);
         
@@ -173,39 +174,40 @@ String username = jtuser.getText().trim();
             return;
         }
         
-        try {
-            User loggedInUser = checkLogin(username, password);
+       try 
+       {
+           
+        if (bank.login(username, password)) {
             failedAttempts = 0;
-            JOptionPane.showMessageDialog(this, "Login successful. Welcome, " + loggedInUser.getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
+            User user = bank.getCurrentUser(); 
             
-            if (loggedInUser instanceof Admin) {
-                new AdminDashboard((Admin) loggedInUser).setVisible(true);
+            JOptionPane.showMessageDialog(this, "Login successful. Welcome, " + user.getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
+            
+            //  Route to correct dashboard using real object
+            if (user instanceof Admin) {
+                new AdminDashboard((Admin) user, bank).setVisible(true);
             } else {
-                new ClientDashboard(loggedInUser).setVisible(true);
+                new ClientDashboard(user).setVisible(true);
             }
             dispose();
-            
-        } catch (InvalidLoginException e) 
-        {
-            failedAttempts++;
-            if (failedAttempts >= MAX_ATTEMPTS) {
-                JOptionPane.showMessageDialog(this, e.getMessage() + "\nToo many failed attempts. Exiting.", "Access Denied", JOptionPane.ERROR_MESSAGE);
-                System.exit(0);
-            } 
-            else 
-            {
-                int left = MAX_ATTEMPTS - failedAttempts;
-                JOptionPane.showMessageDialog(this, e.getMessage() + "\nAttempts left: " + left, "Login Failed", JOptionPane.WARNING_MESSAGE);
-                jLabel4.setText("Attempts left: " + left);
-                jpassowrd.setText("");
-                jpassowrd.requestFocus();
-            }
-        } 
-        finally 
-        {
-            java.util.Arrays.fill(passwordChars, ' ');
+        } else {
+            throw new InvalidLoginException("Invalid username or password");
         }
-        
+    } catch (InvalidLoginException e) {
+        failedAttempts++;
+        if (failedAttempts >= MAX_ATTEMPTS) {
+            JOptionPane.showMessageDialog(this, e.getMessage() + "\nToo many failed attempts. Exiting.", "Access Denied", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        } else {
+            int left = MAX_ATTEMPTS - failedAttempts;
+            JOptionPane.showMessageDialog(this, e.getMessage() + "\nAttempts left: " + left, "Login Failed", JOptionPane.WARNING_MESSAGE);
+            jLabel4.setText("Attempts left: " + left);
+            jpassowrd.setText("");
+            jpassowrd.requestFocus();
+        }
+    } finally {
+        java.util.Arrays.fill(jpassowrd.getPassword(), ' ');
+    }
         
     }//GEN-LAST:event_bloginActionPerformed
 
@@ -224,62 +226,11 @@ String username = jtuser.getText().trim();
         jpassowrd.setEchoChar('*');
     }
     }//GEN-LAST:event_ShowPasswordActionPerformed
-private User checkLogin(String username, String password) throws InvalidLoginException {
-    File userFile = new File("data/users.csv");
-    if (!userFile.exists()) {
-        throw new InvalidLoginException("User data file not found.");
-    }
-    try (BufferedReader reader = new BufferedReader(new FileReader(userFile))) {
-        reader.readLine();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(",");
-            String fileUser = parts[1].trim();
-            String filePass = parts[2].trim();
-            String type = parts[3].trim();
-            
-            if (fileUser.equals(username)) {
-                if (filePass.equals(password)) {
-                    if (type.equalsIgnoreCase("Admin")) {
-                        return new Admin(parts[0], fileUser, filePass, "");
-                    } else {
-                        return new StandardClient(parts[0], fileUser, filePass, "", parts[0], "", 0.0);
-                    }
-                } else {
-                    throw new InvalidLoginException("Invalid username or password.");
-                }
-            }
-        }
-        throw new InvalidLoginException("Username not found.");
-    } catch (IOException e) {
-        throw new InvalidLoginException("Error reading user file.");
-    }
-}
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new LoginFrame().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox ShowPassword;
