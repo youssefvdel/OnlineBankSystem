@@ -33,8 +33,11 @@ public class ClientDashboard extends javax.swing.JFrame {
         try {
             ClientDashboard.this.setVisible(false);
             
-            // Pass the currentUser to TransactionPanel
-            gui.customer.TransactionPanel transPanel = new gui.customer.TransactionPanel(currentClient);
+            // Pass the first account to TransactionPanel
+            models.account.Account account = currentClient.getAccounts().isEmpty() 
+                ? new models.account.CurrentAccount("TEMP", 0.0, currentClient, 0, 0, 0, 0)
+                : currentClient.getAccounts().get(0);
+            gui.customer.TransactionPanel transPanel = new gui.customer.TransactionPanel(account);
             
             transPanel.setVisible(true);
             
