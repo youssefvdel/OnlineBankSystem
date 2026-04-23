@@ -49,7 +49,9 @@ public class Withdrawal extends Transaction {
         account.setBalance(account.getBalance() - getAmount());
 
         setStatus(STATUS_COMPLETED);
+        
         account.getTransactionHistory().addTransaction(this);
+        account.getTransactionHistory().saveToFile("data/transactions.txt");
 
         return true;
     }

@@ -32,15 +32,10 @@ public class TransactionPanel extends javax.swing.JFrame {
         initComponents();  
         setResizable(true);
         setMinimumSize(new java.awt.Dimension(400, 300));
-     this.account = new CurrentAccount(
-    user.getUserId(), // account id
-    500.0,              // balance
-    user,
-    0.0,              // overdraft limit
-    0.0,              // interest rate
-    30000000,                // transaction limit
-    0.0               // fees
-);
+this.account = new CurrentAccount("A1", 1000.0, user, 0, 0, 30000000, 0);
+
+// IMPORTANT: load transactions manually
+this.account.getTransactionHistory().loadFromFile("data/transactions.txt");
    fixResize();
     isDepositMode = true;
 
