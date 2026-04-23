@@ -46,7 +46,7 @@ public class Deposit extends Transaction {
         setStatus(STATUS_COMPLETED);
         
         account.getTransactionHistory().addTransaction(this);
-        account.getTransactionHistory().saveToFile("data/transactions.txt");
+        account.getTransactionHistory().saveToFile("data/transactions.csv");
 
         return true;
     }

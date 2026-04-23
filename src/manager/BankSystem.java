@@ -106,6 +106,26 @@ public class BankSystem {
     public User getCurrentUser() {
         return currentUser;
     }
+    
+    // Tareq added this method for transaction panel 
+    
+    public List<Account> getAccountsForCurrentUser() {
+    List<Account> result = new ArrayList<>();
+
+    if (currentUser == null) {
+        return result; // no user logged in
+    }
+
+    for (Account acc : accounts) {
+        if (acc.getOwner() != null &&
+            acc.getOwner().getUserId().equals(currentUser.getUserId())) {
+
+            result.add(acc);
+        }
+    }
+
+    return result;
+}
 
     // ========== CSV SAVE METHODS ==========
 

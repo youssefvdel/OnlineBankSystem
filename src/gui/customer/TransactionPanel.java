@@ -4,12 +4,10 @@
  */
 package gui.customer;
 
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
+import exceptions.TransactionFailedException;
 import models.account.Account;
-import models.account.CurrentAccount;
-import models.transaction.Deposit;
-import models.transaction.Withdrawal;
-import models.user.StandardClient;
-import models.user.User;
 
 
 /**
@@ -18,32 +16,25 @@ import models.user.User;
  */
 public class TransactionPanel extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TransactionPanel.class.getName());
-     private Account account;
-     private boolean isDepositMode = true;
-     
-     
-    /**
-     * Creates new form TransactionPanel
-     */
+    private Account account;
+    private boolean isDepositMode = true;
 
-     
-    public TransactionPanel(User user) {
+    public TransactionPanel(Account account) {
         initComponents();  
         setResizable(true);
-        setMinimumSize(new java.awt.Dimension(400, 300));
-this.account = new CurrentAccount("A1", 1000.0, user, 0, 0, 30000000, 0);
+        setMinimumSize(new java.awt.Dimension(400, 300)); 
+        
+        this.account = account;
 
-// IMPORTANT: load transactions manually
-this.account.getTransactionHistory().loadFromFile("data/transactions.txt");
-   fixResize();
-    isDepositMode = true;
+        fixResize();
 
-    typeLabel.setText("Source");
+        isDepositMode = true;
 
-    typeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(
-        new String[] { "cash", "check", "transfer" }
-    ));
+        typeLabel.setText("Source");
+
+        typeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(
+            new String[] { "cash", "check", "transfer" }
+        ));
     }
      
           private void fixResize() {
@@ -185,76 +176,43 @@ this.account.getTransactionHistory().loadFromFile("data/transactions.txt");
 
     private void executeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeBtnActionPerformed
         // TODO try {
-    try {
+ try {
         double amount = Double.parseDouble(amountField.getText());
-        String type = typeCombo.getSelectedItem().toString();
+
+        if (amount <= 0) {
+            statusLabel.setText("Enter valid amount");
+            return;
+        }
 
         if (isDepositMode) {
-
-            Deposit deposit = new Deposit(
-                    "DEP" + System.currentTimeMillis(),
-                    amount,
-                    account.getAccountNumber(),
-                    type
-            );
-
-            deposit.execute(account);
+            account.deposit(amount);
             statusLabel.setText("Deposit successful");
-
         } else {
-
-            Withdrawal withdrawal = new Withdrawal(
-                    "WDR" + System.currentTimeMillis(),
-                    amount,
-                    account.getAccountNumber(),
-                    type
-            );
-
-            withdrawal.execute(account);
+            account.withdraw(amount);
             statusLabel.setText("Withdrawal successful");
         }
 
+    } catch (InvalidAmountException e) {
+        statusLabel.setText("Invalid amount");
+
+    } catch (InsufficientFundsException e) {
+        statusLabel.setText("Not enough balance");
+
+    } catch (TransactionFailedException e) {
+        statusLabel.setText("Transaction failed");
+
+    } catch (NumberFormatException e) {
+        statusLabel.setText("Invalid number");
+
     } catch (Exception e) {
-           statusLabel.setText(e.getMessage());
+        statusLabel.setText("Unexpected error");
     }
     }//GEN-LAST:event_executeBtnActionPerformed
 
     /**
      * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    */
 
-        /* Create and display the form */
-java.awt.EventQueue.invokeLater(() -> {
-    User user = new StandardClient(
-        "1",
-        "test",
-        "1234",
-        "",
-        "1",
-        "",
-        500.0
-    );
-
-    new TransactionPanel(user).setVisible(true);
-});
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amountField;
     private javax.swing.JButton depositBtn;
