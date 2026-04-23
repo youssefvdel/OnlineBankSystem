@@ -177,11 +177,11 @@
 
 | File | Priority | Status | Purpose |
 |------|----------|--------|---------|
-| `ViewTransactionHistoryDialog.java` + `.form` | P2 | ❌ Missing | Transaction history viewer |
+| `ViewTransactionHistoryDialog.java` + `.form` | P2 | ✅ Done | Transaction history viewer |
 
-**Note:** Minimal scope due to non-participation. This file is optional.
+**Note:** Abdelrahman submitted unusable hand-coded Swing (deleted). Created proper NetBeans GUI Builder version with .form file.
 
-**Completed:** 0/1
+**Completed:** 1/1
 
 ---
 
@@ -191,14 +191,14 @@
 
 | Category | Required | Completed | Missing | % |
 |----------|----------|-----------|---------|---|
-| GUI Components (.java) | 15 | 12 | 3 | 80% |
-| GUI Metadata (.form) | 15 | 11 | 4 | 73% |
+| GUI Components (.java) | 15 | 13 | 2 | 87% |
+| GUI Metadata (.form) | 15 | 12 | 3 | 80% |
 | Exception Classes | 6 | 5 | 1 | 83% |
 | Model Classes | 20 | 20 | 0 | 100% |
 | Manager/Utils | 4 | 4 | 0 | 100% |
 | Data Files (.csv) | 4 | 0 | 4 | 0% |
 | Documentation | 8 | 8 | 0 | 100% |
-| **TOTAL** | **61** | **55** | 6 | **90%** |
+| **TOTAL** | **61** | **56** | 5 | **92%** |
 
 ---
 
@@ -208,10 +208,10 @@
 |--------|----|----------|------|---------|------------|
 | **YoussefAdel** | 258270 | 12 | 12 | 0 | **100%** ✅ |
 | YousifHafez | 258612 | 5 | 5 | 0 | **100%** ✅ |
+| AbdelrahmanMazen | 251979 | 1 | 1 | 0 | **100%** ✅ |
 | TarekSaeed | 252382 | 10 | 4 | 6 | **40%** ⚠️ |
 | YousefMohiey | 248679 | 6 | 1 | 5 | 17% |
 | YosefOsama | 255796 | 4 | 0 | 4 | 0% |
-| AbdelrahmanMazen | 251979 | 1 | 0 | 1 | 0% |
 
 ---
 
@@ -438,7 +438,7 @@ OnlineBankSystem/
 | YosefOsama | 255796 | yosef.osama@bue.edu.eg | ❌ Inactive |
 | TarekSaeed | 252382 | tarek.saeed@bue.edu.eg | ⚠️ Off-Track |
 | YousifHafez | 258612 | yousif.hafez@bue.edu.eg | ✅ Active |
-| AbdelrahmanMazen | 251979 | abdelrahman.mazen@bue.edu.eg | ❌ Inactive |
+| AbdelrahmanMazen | 251979 | abdelrahman.mazen@bue.edu.eg | ✅ Task Done (by YoussefAdel) |
 
 ---
 
@@ -466,10 +466,10 @@ OnlineBankSystem/
 - ❌ Missing all assigned staff features
 
 **Project Status:**
-- 12/15 GUIs complete (80%)
-- 5/6 exceptions complete (83%)
+- 13/15 GUIs complete (87%)
+- 6/7 exceptions complete (86%)
 - All models complete (100%)
-- BankSystem enhanced with getAccountsByUser() and getAllAccounts()
+- BankSystem enhanced with getAccountsByUser(), getAllAccounts(), getAllTransactions()
 
 **Features deleted (not needed):**
 - StaffDashboard, UpdateStaffDialog, StaffUpdateException, AddStaffDialog, ViewStaffListDialog, StaffCreationException, RemoveStaffDialog, StaffNotFoundException
@@ -478,12 +478,12 @@ OnlineBankSystem/
 **Still missing:**
 - YousefMohiey: AdminActionLogger, ForgotPasswordFrame (optional)
 - YosefOsama: CustomerDashboard (partial - ClientDashboard placeholder exists)
-- TODO List (unassigned): ViewAccountsDialog, TransferMoneyDialog, TransactionHistoryDialog
+- TODO List (unassigned): ViewAccountsDialog, TransferMoneyDialog
 
-**Recommendation:** YoussefAdel and YousifHafez portions are submission-ready. System is 90% complete.
+**Recommendation:** System is 92% complete. Core functionality done.
 
 ---
 
-**Report Generated:** April 23, 2026  
-**Version:** 2.2  
-**Status:** 90% Complete - Staff features removed, TODO list added
+**Report Generated:** April 23, 2026
+**Version:** 2.3
+**Status:** 92% Complete - Abdelrahman's task completed
