@@ -1,0 +1,6 @@
+type,userId,name,password,email,clientId,phone,status,cardStatus
+Admin,admin,Test Admin,admin123,admin@bank.com,,,,
+StandardClient,client1,Test Client,client123,client@bank.com,client1,01012345678,Active,INACTIVE
+Admin,A1776971041774,Yousef,123123,Yousef@gmail.com,,,,
+Admin,A1776971323982,tareq,123123,sapdaskld,,,,
+Admin,A1776973797294,Zinger,123123,Zinger@gmail.com,,,,

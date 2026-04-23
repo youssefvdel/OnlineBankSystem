@@ -1,8 +1,8 @@
 
-package GUI;
+package gui.customer;
 import exceptions.InvalidAccountException;
 import exceptions.OverdraftLimitExceededException;
-import GUI.*;
+
 import java.awt.event.ActionListener;
 /**
  *
@@ -46,7 +46,7 @@ public class AccountPanel extends javax.swing.JFrame {
                 
                 // Create and show Client Dashboard 
                 // Later you will pass the actual User object.
-               GUI.ClientDashboard dashboard = new GUI.ClientDashboard(null);
+               gui.customer.ClientDashboard dashboard = new gui.customer.ClientDashboard(null);
                 dashboard.setVisible(true);
                 
             } catch (Exception ex) {

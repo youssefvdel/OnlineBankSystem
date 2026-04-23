@@ -1,4 +1,4 @@
-package GUI;
+package gui.customer;
 import gui.customer.TransactionPanel;
 import javax.swing.JOptionPane;
 import models.user.Client;
@@ -58,7 +58,7 @@ public class ClientDashboard extends javax.swing.JFrame {
             
             // 2. Open Card Management Frame
             // Assuming CardManagementFrame is in gui.customer package
-            gui.customer.CardManagementFrame cardFrame = new gui.customer.CardManagementFrame(client);
+            gui.customer.CardManagementFrame cardFrame = new gui.customer.CardManagementFrame(currentClient);
             
             // 3. Show the new window
             cardFrame.setVisible(true);
