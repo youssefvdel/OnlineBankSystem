@@ -1,4 +1,4 @@
-package Yousif_Hafez_gui;
+package gui.customer;
     
 import models.user.Client;
 import models.user.CardStatus;

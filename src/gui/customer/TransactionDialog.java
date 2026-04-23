@@ -1,4 +1,4 @@
-package Yousif_Hafez_gui;
+package gui.customer;
 
 import exceptions.InsufficientFundsException;
 import exceptions.InvalidAmountException;

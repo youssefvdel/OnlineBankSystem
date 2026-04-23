@@ -7,7 +7,7 @@ package gui.auth;
 import javax.swing.JOptionPane;
 import exceptions.InvalidLoginException;
 import gui.admin.AdminDashboard;
-import gui.ClientDashboard;
+import gui.customer.ClientDashboard;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;

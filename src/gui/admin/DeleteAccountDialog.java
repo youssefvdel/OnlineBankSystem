@@ -1,4 +1,4 @@
-package Yousif_Hafez_gui;
+package gui.admin;
 
 import exceptions.AccountDeletionException;
 import models.account.Account;

@@ -1,4 +1,4 @@
-package gui;
+package gui.customer;
 
 import models.user.User;
 import javax.swing.JFrame;
