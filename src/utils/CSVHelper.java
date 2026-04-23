@@ -5,8 +5,11 @@ import java.util.*;
 import exceptions.DataLoadException;
 
 /**
- * CSV file helper - read/write and parse methods.
- * @author Youssef Adel - 258270
+ * Utility class for reading and writing CSV files.
+ * Handles parsing, escaping, and type conversion for CSV data.
+ * 
+ * @author Youssef Adel 258270
+ * @version Phase 2
  */
 public class CSVHelper {
     
@@ -14,8 +17,12 @@ public class CSVHelper {
     private static final String ESCAPE_CHAR = "\"";
     
     /**
-     * Read file lines, skip empty ones.
-     * Returns empty list if file not found (not an error).
+     * Reads all non-empty lines from a CSV file.
+     * Returns an empty list if the file does not exist (not an error).
+     * 
+     * @param filePath the path to the CSV file
+     * @return a list of lines from the file
+     * @throws DataLoadException if an I/O error occurs while reading
      */
     public static List<String> readLines(String filePath) throws DataLoadException {
         List<String> lines = new ArrayList<>();
@@ -36,7 +43,11 @@ public class CSVHelper {
     }
     
     /**
-     * Write lines to file, overwrites existing.
+     * Writes a list of lines to a CSV file.
+     * 
+     * @param filePath the path to the output file
+     * @param lines the lines to write
+     * @throws DataLoadException if an I/O error occurs while writing
      */
     public static void writeLines(String filePath, List<String> lines) throws DataLoadException {
         try (PrintWriter pw = new PrintWriter(new FileWriter(filePath))) {
@@ -49,7 +60,10 @@ public class CSVHelper {
     }
     
     /**
-     * Split CSV line into fields, handles quotes.
+     * Parses a CSV line into individual fields, handling quoted values.
+     * 
+     * @param line the CSV line to parse
+     * @return a list of field values with whitespace trimmed
      */
     public static List<String> parseLine(String line) {
         List<String> fields = new ArrayList<>();
@@ -71,7 +85,10 @@ public class CSVHelper {
     }
     
     /**
-     * Escape value for CSV - wrap if has comma or quote.
+     * Escapes a value for CSV output if it contains special characters.
+     * 
+     * @param value the string to escape
+     * @return the escaped string, or empty string if null
      */
     public static String escape(String value) {
         if (value == null) return "";
@@ -82,7 +99,10 @@ public class CSVHelper {
     }
     
     /**
-     * Join values with comma.
+     * Joins multiple values into a single CSV line.
+     * 
+     * @param values the values to join
+     * @return a CSV-formatted string
      */
     public static String join(String... values) {
         StringBuilder sb = new StringBuilder();
@@ -93,7 +113,13 @@ public class CSVHelper {
         return sb.toString();
     }
     
-    // Helper parsers - return default if parse fails
+    /**
+     * Parses a string as an integer, returning a default value on failure.
+     * 
+     * @param s the string to parse
+     * @param defaultValue the value to return if parsing fails
+     * @return the parsed integer or the default value
+     */
     public static int parseInt(String s, int defaultValue) {
         try {
             return Integer.parseInt(s.trim());
@@ -102,6 +128,13 @@ public class CSVHelper {
         }
     }
     
+    /**
+     * Parses a string as a double, returning a default value on failure.
+     * 
+     * @param s the string to parse
+     * @param defaultValue the value to return if parsing fails
+     * @return the parsed double or the default value
+     */
     public static double parseDouble(String s, double defaultValue) {
         try {
             return Double.parseDouble(s.trim());

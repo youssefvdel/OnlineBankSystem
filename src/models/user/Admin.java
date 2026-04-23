@@ -12,10 +12,8 @@ import java.util.ArrayList;
  * @since Phase 1
  * @see User
  */
-public class Admin extends User {
-
-    /** List of users managed by this admin */
-    private ArrayList<User> users;
+public class Admin extends User implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Admin object.
@@ -27,53 +25,48 @@ public class Admin extends User {
      */
     public Admin(String userId, String name, String password, String email) {
         super(userId, name, password, email);
-        this.users = new ArrayList<>();
     }
 
     /**
      * Adds a new user to the admin's user list.
      * NOTE: This does not check for duplicate user IDs.
      *
-     * @param user the User object to add
+     * @param user the User to add
+     * @param userList shared list from BankSystem
      */
-    public void createUser(User user) {
-        users.add(user);
-        System.out.println("User " + user.getName() + " added successfully.");
+    public void createUser(User user, ArrayList<User> userList) {
+      userList.add(user);
     }
 
-    /**
-     * Removes a user from the admin's user list.
-     *
-     * @param user the User object to remove
-     * @return true if user was found and removed
-     *         false if user was not in the list
-     */
-    public boolean deleteUser(User user) {
-        if (users.remove(user)) {
-            System.out.println("User " + user.getName() + " deleted.");
+    
+ /**
+ * Removes a user from the shared user list.
+ *
+ * @param user The user to remove
+ * @param userList The shared list from BankSystem
+ * @return true if user was found and removed, false if not found
+ */
+    
+    public boolean deleteUser(User user, ArrayList<User> userList) {
+        if (userList.remove(user)) {
             return true;
-        } else {
-            System.out.println("User not found.");
+        } 
+        else {
             return false;
-        }
+             }
     }
 
-    /**
-     * Displays all users in the admin's list.
-     * Shows name, email, and user type for each user.
-     */
-    public void viewAllUsers() {
-        if (users.isEmpty()) {
-            System.out.println("No users in system.");
-            return;
-        }
-
-        for (User user : users) {
-            System.out.println("Name: " + user.getName() +
-                    " | Email: " + user.getEmail() +
-                    " | Type: " + user.getUserType());
-        }
-    }
+/**
+ * Returns the list of all users for display.
+ *
+ * @param userList The shared list to return
+ * @return ArrayList of User objects for GUI to display
+ */
+    
+  public ArrayList<User> viewAllUsers (ArrayList<User> userList)
+  {
+      return userList;
+  }
 
     /**
      * Returns the user type for this Admin object.

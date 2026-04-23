@@ -1,5 +1,8 @@
 package models.user;
 
+
+import exceptions.InsufficientFundsException;
+import exceptions.InvalidAmountException;
 import java.util.ArrayList;
 import models.account.Account;
 
@@ -16,7 +19,8 @@ import models.account.Account;
  * @since Phase 1
  * @see User
  */
-public abstract class Client extends User {
+public abstract class Client extends User implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     // ========== ATTRIBUTES ==========
 
@@ -31,6 +35,15 @@ public abstract class Client extends User {
 
     /** Account status (e.g., "Active", "Suspended") */
     private String status;
+    
+    /** Client's password */
+    private String password;
+   
+    /**
+    * Current status of the client's card
+    */
+    private CardStatus cardStatus = CardStatus.INACTIVE;
+
 
     // ========== CONSTRUCTOR ==========
 
@@ -100,6 +113,15 @@ public abstract class Client extends User {
         return this.status;
     }
 
+    /**
+    * Gets current card status
+     * @return 
+    */
+    public CardStatus getCardStatus() {
+    return cardStatus;
+    }
+
+
     // ========== SETTERS ==========
 
     /**
@@ -119,8 +141,64 @@ public abstract class Client extends User {
     public void setStatus(String status) {
         this.status = status;
     }
+    
+    /**
+ * Sets a new password for the client
+ *
+ * @param password the new password
+ */
+public void setPassword(String password) {
 
-    // ========== ACCOUNT MANAGEMENT METHODS ==========
+    // Basic validation (not empty)
+    if (password == null || password.isEmpty()) {
+        throw new IllegalArgumentException("Password cannot be empty");
+    }
+
+    // Set new password
+    this.password = password;
+}
+
+    
+// ========== CARD METHODS ==========
+/**
+ * Issues a new card if no card exists
+ * @author Yousif Hafez - 258612
+ */
+public void issueCard() {
+    if (cardStatus != CardStatus.INACTIVE) {
+        throw new RuntimeException("Card already issued");
+    }
+    cardStatus = CardStatus.ACTIVE;
+}
+
+
+/**
+ * Updates card status.
+ * Persistence is handled by BankSystem.saveAllData() to cards.csv
+ * @param newStatus the new card status
+ */
+public void updateCardStatus(CardStatus newStatus) {
+    this.cardStatus = newStatus;
+}
+
+/**
+ * Loads card status - now handled by BankSystem via cards.csv
+ * This method is kept for backward compatibility.
+ */
+public void loadCardStatus() {
+    // Card status is loaded by BankSystem.loadAllData() from cards.csv
+}
+
+/**
+ * Blocks the client's card by updating its status to LOST.
+ * Uses the general update method for better code organization.
+ */
+public void blockCard() {
+    updateCardStatus(CardStatus.LOST);
+}
+
+
+// ========== ACCOUNT MANAGEMENT METHODS ==========
 
     /**
      * Adds a new account to this client's account list.
@@ -129,7 +207,6 @@ public abstract class Client extends User {
      */
     public void addAccount(Account account) {
         this.accounts.add(account);
-        System.out.println("Account added to client " + getName());
     }
 
     /**
@@ -139,13 +216,14 @@ public abstract class Client extends User {
      *         false if account was not in the list
      */
     public boolean removeAccount(Account account) {
-        if (accounts.remove(account)) {
-            System.out.println(
-                "Account " + account.getAccountNumber() + " removed."
-            );
+        if (accounts.remove(account)) 
+        {
+        
             return true;
-        } else {
-            System.out.println("Account not found.");
+        } 
+        else 
+        {
+     
             return false;
         }
     }
@@ -157,6 +235,37 @@ public abstract class Client extends User {
         }
         return total;
     }
+    
+// ========== BILL PAYMENT METHOD ==========
+
+/**
+ * Processes bill payment for the client
+ *
+ * @param billType the type of bill (e.g., Utilities, Subscription)
+ * @param amount the amount to be paid
+ * @return true if payment is successful
+ * @author Yousif Hafez - 258612
+ */
+public boolean payBill(String billType, double amount) throws InsufficientFundsException {
+
+    // Validate amount
+    if (amount <= 0) {
+        throw new InvalidAmountException(amount);
+    }
+
+    // Check balance
+    if (getTotalBalance() < amount) {
+        throw new InsufficientFundsException(getTotalBalance(), amount);
+    }
+
+    // Deduct
+    if (!accounts.isEmpty()) {
+        Account acc = accounts.get(0);
+        acc.withdraw(amount);
+    }
+
+    return true;
+}
 
     //    ========== ABSTRACT METHOD ==========
     /**

@@ -1,29 +1,34 @@
-import manager.BankSystem;
-import java.util.Scanner;
 import exceptions.DataLoadException;
+import java.util.Scanner;
+import manager.BankSystem;
 
 /**
  * Entry point for the banking system console app.
  * @author Youssef Adel - 258270
  */
 public class Main {
-    
+
     private static BankSystem bank;
     private static Scanner scanner;
-    
+
     /**
      * App starts here.
      */
     public static void main(String[] args) {
         System.out.println("Online Bank System - Phase 2");
         System.out.println("================================\n");
-        
+
         bank = new BankSystem();
         scanner = new Scanner(System.in);
-        
+
         // load data from files
-        bank.loadAllData();
-        
+        try {
+            bank.loadAllData();
+        } catch (DataLoadException e) {
+            System.err.println("Warning: " + e.getUserMessage());
+            System.err.println("Starting with empty data. New data will be saved on exit.");
+        }
+
         // main loop
         boolean running = true;
         while (running) {
@@ -33,13 +38,13 @@ public class Main {
                 running = showMainMenu();
             }
         }
-        
+
         // save before exit
         bank.saveAllData();
         scanner.close();
         System.out.println("Goodbye!");
     }
-    
+
     /**
      * Login/register menu.
      */
@@ -49,9 +54,9 @@ public class Main {
         System.out.println("2. Register (Client)");
         System.out.println("3. Exit");
         System.out.print("Choice: ");
-        
+
         String choice = scanner.nextLine().trim();
-        
+
         switch (choice) {
             case "1":
                 return handleLogin();
@@ -64,7 +69,7 @@ public class Main {
                 return true;
         }
     }
-    
+
     /**
      * Handle login with 3 tries max.
      */
@@ -73,13 +78,15 @@ public class Main {
         String userId = scanner.nextLine().trim();
         System.out.print("Password: ");
         String password = scanner.nextLine().trim();
-        
+
         for (int attempts = 1; attempts <= 3; attempts++) {
             if (bank.login(userId, password)) {
                 return true;
             }
             if (attempts < 3) {
-                System.out.print("Retry (" + (3-attempts) + " left) - Password: ");
+                System.out.print(
+                    "Retry (" + (3 - attempts) + " left) - Password: "
+                );
                 password = scanner.nextLine().trim();
             } else {
                 System.out.println("Too many attempts. Exiting.");
@@ -88,7 +95,7 @@ public class Main {
         }
         return false;
     }
-    
+
     /**
      * Handle new client signup.
      */
@@ -102,28 +109,30 @@ public class Main {
         String pass = scanner.nextLine().trim();
         System.out.print("Phone: ");
         String phone = scanner.nextLine().trim();
-        
+
         // TODO: actually create the client
         System.out.println("Registration received. Admin approval required.");
         return true;
     }
-    
+
     /**
      * Show menu based on user role.
      */
     private static boolean showMainMenu() {
         var user = bank.getCurrentUser();
         String role = user.getClass().getSimpleName();
-        
-        System.out.println("\n=== Welcome, " + user.getName() + " (" + role + ") ===");
-        
+
+        System.out.println(
+            "\n=== Welcome, " + user.getName() + " (" + role + ") ==="
+        );
+
         if (role.equals("Admin")) {
             return showAdminMenu();
         } else {
             return showClientMenu();
         }
     }
-    
+
     /**
      * Admin options menu.
      */
@@ -138,9 +147,9 @@ public class Main {
         System.out.println("7. Logout");
         System.out.println("8. Exit");
         System.out.print("Choice: ");
-        
+
         String choice = scanner.nextLine().trim();
-        
+
         switch (choice) {
             case "1":
                 System.out.println("Add Staff - Coming soon");
@@ -152,13 +161,17 @@ public class Main {
                 System.out.println("Update Staff - Coming soon");
                 break;
             case "4":
-                System.out.println("Report: " + bank.getCurrentUser().getName() + " logged in");
+                System.out.println(
+                    "Report: " + bank.getCurrentUser().getName() + " logged in"
+                );
                 break;
             case "5":
                 System.out.println("Delete Account - Coming soon");
                 break;
             case "6":
-                System.out.println("Users in system: " + bank.getCurrentUser().getClass());
+                System.out.println(
+                    "Users in system: " + bank.getCurrentUser().getClass()
+                );
                 break;
             case "7":
                 bank.getCurrentUser().logout();
@@ -171,7 +184,7 @@ public class Main {
         }
         return true;
     }
-    
+
     /**
      * Client options menu.
      */
@@ -188,9 +201,9 @@ public class Main {
         System.out.println("9. Logout");
         System.out.println("0. Exit");
         System.out.print("Choice: ");
-        
+
         String choice = scanner.nextLine().trim();
-        
+
         switch (choice) {
             case "1":
                 System.out.println("Accounts: [placeholder]");

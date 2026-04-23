@@ -1,30 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package src.exceptions;
+package exceptions;
 
 /**
-<<<<<<< Updated upstream
+
  *Thrown when withdrawal/transfer exceeds account balance.
  * @author tareq
- */
-public class InsufficientFundsException extends Exception{
-    private final double balance;
-    private final double amount;
-
- 
-    public InsufficientFundsException(double balance, double amount) {
-        super("insufficient funds. Balance: "+ balance +", requsted"+amount);
-        this.balance = balance;
-        this.amount = amount;
-    }
-
-    public double getBalance() {
-=======
- * Custom exception thrown when withdrawal amount exceeds available balance.
- * @author Tareq
- */
+**/
 public class InsufficientFundsException extends Exception 
 {
     private double balance;
@@ -42,13 +22,19 @@ public class InsufficientFundsException extends Exception
         
     public double getBalance() 
     {
->>>>>>> Stashed changes
         return balance;
     }
-
-    public double getAmount() {
+    
+    public double getAmount()
+    {
         return amount;
     }
     
-    
+    /**
+     * Return user-friendly error message for GUI.
+     */
+    public String getUserMessage() 
+    {
+        return ("Withdrawal failed: Your balance :$"+ balance +" ,is less than the requested amount:$"+ amount);
+    }
 }

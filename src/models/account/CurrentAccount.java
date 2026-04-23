@@ -10,7 +10,8 @@ import models.user.User;
  * @author Youssef Adel 258270
  * @since Phase 1
  */
-public class CurrentAccount extends Account {
+public class CurrentAccount extends Account implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     /** Maximum overdraft amount allowed (negative balance limit) */
     private double overdraftLimit;

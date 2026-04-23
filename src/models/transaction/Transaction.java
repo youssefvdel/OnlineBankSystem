@@ -2,15 +2,9 @@ package models.transaction;
 import models.account.Account;
 
 import java.util.Date;
-<<<<<<< Updated upstream
-import src.exceptions.InsufficientFundsException;
-import src.exceptions.InvalidAmountException;
-import src.exceptions.TransactionFailedException;
-=======
 import exceptions.InsufficientFundsException;
 import exceptions.InvalidAmountException;
 import exceptions.TransactionFailedException;
->>>>>>> Stashed changes
 
 
 /**
@@ -22,16 +16,13 @@ import exceptions.TransactionFailedException;
  * @since phase1
  */
 
-<<<<<<< Updated upstream
-public abstract class Transaction {
-=======
 public abstract class Transaction implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
->>>>>>> Stashed changes
-    
+
     protected static final String STATUS_PENDING = "Pending";
     protected static final String STATUS_COMPLETED = "Completed";
     protected static final String STATUS_FAILED = "Failed";
+
 
     private String transactionId;
     private double amount;
@@ -45,15 +36,25 @@ public abstract class Transaction implements java.io.Serializable {
      * @param accountId
      * */
 
-  public Transaction(String transactionId, double amount, String accountId)
-            throws InvalidAmountException, TransactionFailedException {
+    public Transaction(String transactionId,double amount ,String accountId){
 
-        if (accountId == null || accountId.isEmpty()) {
-            throw new TransactionFailedException("Account ID is invalid");
+        this.transactionId=transactionId;
+        this.timestamp=new Date();
+        this.status="Pending";  // Start with pending status, will be updated after execute
+
+        if (accountId==null || accountId.isEmpty()){
+            this.status="failed";
+            System.out.println("Error: account id cannot be empty");
+        }else {
+            this.accountId=accountId;
         }
 
-        if (amount <= 0) {
-            throw new InvalidAmountException(amount);
+        if (amount < 0){
+            this.status="failed";
+            this.amount=0;
+            System.out.println("Error: Amount cannot be negative");
+        }else {
+            this.amount= amount;
         }
 
         this.transactionId = transactionId;
@@ -61,11 +62,7 @@ public abstract class Transaction implements java.io.Serializable {
         this.accountId = accountId;
         this.timestamp = new Date();
         this.status = STATUS_PENDING;
-<<<<<<< Updated upstream
-
-=======
-  }
->>>>>>> Stashed changes
+}
     /**
      * returns the unique transaction ID
      * @return transactionId "string"
@@ -124,7 +121,7 @@ public abstract class Transaction implements java.io.Serializable {
       * @return true if transaction succed , false otherwise
       * */
 
-     public abstract boolean execute(Account account)throws InsufficientFundsException, InvalidAmountException, TransactionFailedException;
+     public abstract boolean execute(Account account);
 
      /**
       * @return transaction detailes for output

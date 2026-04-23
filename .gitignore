@@ -1,10 +1,7 @@
-.idea
 out
-plan
-.obsidian
 target
-pom.xml
-.classpath
-.project
-.settings
+.idea
+.obsidian
 .zed
+.trash
+graphify-out
