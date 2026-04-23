@@ -107,55 +107,51 @@
 
 **Note:** Staff-related features deleted (no Staff user type). See TODO list for unassigned features.
 
-### 2.2 YousefMohiey (248679) — 33% Complete
+### 2.2 YousefMohiey (248679) — 85% Complete
 
 | File | Priority | Status | Purpose |
 |------|----------|--------|---------|
-| `AdminActionLogger.java` | P1 | ❌ Missing | Log admin actions |
-| `ForgotPasswordFrame.java` + `.form` | P2 | ❌ Missing | Password reset (optional) |
+| `LoginFrame.java` + `.form` | P0 | ✅ Done | Login GUI |
+| `AddStaffMember.java` + `.form` | P1 | ✅ Done | Add staff dialog |
+| `ViewStaffListDialog.java` + `.form` | P1 | ✅ Done | View staff list |
+| `AdminActionLogger.java` | P1 | ✅ Done | Log admin actions |
+| `StaffCreationException.java` | P1 | ✅ Done | Staff creation error |
+| **LoginFrame BankSystem fix** | P0 | ⏳ Pending | Mohiey pushing from his PC |
 
-**Completed:** 1/3 (LoginFrame done, AddStaff/ViewStaff deleted as not needed)
+**Note:** Mohiey confirmed his local version uses BankSystem (not CSV). Waiting for him to push.
+
+**Completed:** 5/6
 
 ---
 
-### 2.3 YosefOsama (255796) — 0% Complete
+### 2.3 YosefOsama (255796) — 100% Complete ✅
 
 | File | Priority | Status | Purpose |
 |------|----------|--------|---------|
-| `CustomerDashboard.java` + `.form` | P0 | ❌ Missing | Customer main menu |
-| `RemoveStaffDialog.java` + `.form` | P1 | ❌ Not Needed | **DELETED** - no Staff role |
-| `TransferMoneyDialog.java` + `.form` | P1 | ❌ Missing | Moved to TODO list |
-| `StaffNotFoundException.java` | P1 | ❌ Not Needed | **DELETED** - no Staff role |
+| `ClientDashboard.java` + `.form` | P0 | ✅ Done | Customer main menu |
+| `AccountPanel.java` + `.form` | P1 | ✅ Done | Account management panel |
+| `InvalidAccountException.java` | P1 | ✅ Done | Invalid account error |
+| `OverdraftLimitExceededException.java` | P1 | ✅ Done | Overdraft error |
 
-**Completed:** 0/2 (2 staff tasks deleted as not needed)
+**Note:** Original assigned tasks (RemoveStaff, TransferMoneyDialog) were deleted/replaced. Yosef delivered ClientDashboard + AccountPanel instead.
+
+**Completed:** 4/4
 
 ---
 
-### 2.4 TarekSaeed (252382) — 40% Complete (Off-Track)
+### 2.4 TarekSaeed (252382) — 85% Complete
 
-**What he actually did (not his assigned tasks):**
+**What he did:**
 
 | File | Priority | Status | Purpose |
 |------|----------|--------|---------|
 | `TransactionFailedException.java` | P1 | ✅ Done | Generic transaction failure exception |
-| `TransactionPanel.java` + `.form` | P1 | ✅ Done | Deposit/Withdraw GUI (duplicates Hafez) |
+| `TransactionPanel.java` + `.form` | P1 | ✅ Done | Deposit/Withdraw GUI |
+| `TransactionHistoryFrame.java` + `.form` | P1 | ✅ Done | View transaction history |
+| `TransferFrame.java` + `.form` | P1 | ✅ Done | Transfer money between accounts |
 | Transaction exceptions in Account classes | P1 | ✅ Done | Added to all Account subclasses |
-| `TransactionHistory` file handling | P1 | ✅ Done | Loads from transactions.txt |
 
-**His ASSIGNED work evaluation:**
-
-| File | Priority | Status | Decision | Reason |
-|------|----------|--------|----------|--------|
-| `StaffDashboard.java` + `.form` | P0 | ❌ Not Needed | **DELETE** | No Staff user type exists (only Admin/Client) |
-| `UpdateStaffDialog.java` + `.form` | P1 | ❌ Not Needed | **DELETE** | No Staff user type exists |
-| `StaffUpdateException.java` | P1 | ❌ Not Needed | **DELETE** | No Staff user type exists |
-| `ViewAccountsDialog.java` + `.form` | P1 | ❌ Missing | **TODO** | Useful for Admin - moved to general backlog |
-| `TransferMoneyDialog.java` + `.form` | P1 | 🚧 Under Work | **TODO** | Needed for customer transfers |
-| `TransactionHistoryDialog.java` + `.form` | P2 | ❌ Missing | **TODO** | Useful for viewing history |
-
-**Note:** Tarek's assigned staff features are NOT NEEDED because there's no Staff user type in the system. Only Admin and Client roles exist. His transaction work (TransactionFailedException, TransactionPanel) is useful and kept.
-
-**Completed:** 4/7 (0/3 assigned staff tasks done, but staff tasks deleted as unnecessary)
+**Completed:** 5/5
 
 ---
 
@@ -178,10 +174,11 @@
 | File | Priority | Status | Purpose |
 |------|----------|--------|---------|
 | `ForgotPasswordFrame.java` + `.form` | P2 | ✅ Done | Password reset functionality |
+| `ViewAccountsDialog.java` + `.form` | P1 | ✅ Done | Admin views all accounts |
 
-**Note:** ViewTransactionHistoryDialog was replaced by Tarek's TransactionHistoryFrame. Assigned ForgotPasswordFrame to Abdelrahman instead.
+**Note:** ViewTransactionHistoryDialog was replaced by Tarek's TransactionHistoryFrame. Assigned ForgotPasswordFrame + ViewAccountsDialog to Abdelrahman instead.
 
-**Completed:** 1/1
+**Completed:** 2/2
 
 ---
 
@@ -191,14 +188,14 @@
 
 | Category | Required | Completed | Missing | % |
 |----------|----------|-----------|---------|---|
-| GUI Components (.java) | 16 | 16 | 0 | 100% |
-| GUI Metadata (.form) | 16 | 15 | 1 | 94% |
+| GUI Components (.java) | 17 | 17 | 0 | 100% |
+| GUI Metadata (.form) | 17 | 16 | 1 | 94% |
 | Exception Classes | 9 | 9 | 0 | 100% |
 | Model Classes | 20 | 20 | 0 | 100% |
 | Manager/Utils | 4 | 4 | 0 | 100% |
 | Data Files (.csv) | 4 | 0 | 4 | 0% |
 | Documentation | 8 | 8 | 0 | 100% |
-| **TOTAL** | **65** | **64** | 1 | **98%** |
+| **TOTAL** | **66** | **65** | 1 | **99%** |
 
 ---
 
@@ -208,10 +205,10 @@
 |--------|----|----------|------|---------|------------|
 | **YoussefAdel** | 258270 | 12 | 12 | 0 | **100%** ✅ |
 | YousifHafez | 258612 | 5 | 5 | 0 | **100%** ✅ |
-| YousefMohiey | 248679 | 6 | 3 | 3 | **50%** ⚠️ |
-| YosefOsama | 255796 | 4 | 2 | 2 | **50%** ⚠️ |
-| TarekSaeed | 252382 | 10 | 7 | 3 | **70%** ⚠️ |
-| AbdelrahmanMazen | 251979 | 1 | 1 | 0 | **100%** ✅ |
+| YousefMohiey | 248679 | 6 | 5 | 1 | **85%** ⏳ |
+| YosefOsama | 255796 | 4 | 4 | 0 | **100%** ✅ |
+| TarekSaeed | 252382 | 5 | 5 | 0 | **100%** ✅ |
+| AbdelrahmanMazen | 251979 | 2 | 2 | 0 | **100%** ✅ |
 
 ---
 
@@ -458,36 +455,34 @@ OnlineBankSystem/
 - AccountDeletionException.java
 - PayBillForm.java + .form (Extra - not assigned)
 
-**TarekSaeed partial completion (70%):**
+**TarekSaeed completion (100%):**
 - TransactionFailedException.java ✅
 - TransactionPanel.java + .form ✅
 - TransactionHistoryFrame.java + .form ✅
 - TransferFrame.java + .form ✅
 - Transaction exceptions in Account classes ✅
-- TransactionHistory file handling ✅
-- ❌ Missing assigned staff features (deleted as not needed)
 
 **AbdelrahmanMazen completion (100%):**
 - ForgotPasswordFrame.java + .form ✅ (Password reset functionality)
+- ViewAccountsDialog.java + .form ✅ (Admin views all accounts)
 
 **Project Status:**
-- 16/16 GUIs complete (100%) ✅
+- 17/17 GUIs complete (100%) ✅
 - 9/9 exceptions complete (100%) ✅
 - All models complete (100%) ✅
 - BankSystem enhanced with getAccountsByUser(), getAllAccounts(), getAllTransactions(), getAllUsers()
 
 **Features deleted (not needed):**
-- StaffDashboard, UpdateStaffDialog, StaffUpdateException, AddStaffDialog, ViewStaffListDialog, StaffCreationException, RemoveStaffDialog, StaffNotFoundException
+- StaffDashboard, UpdateStaffDialog, StaffUpdateException, RemoveStaffDialog, StaffNotFoundException
 - Reason: No Staff user type exists in system (only Admin and Client)
 
-**Still missing:**
-- None! All required features are complete
-- Optional enhancements: Better styling, more validation, unit tests
+**Still pending:**
+- YousefMohiey: LoginFrame BankSystem fix (pushing from his PC)
 
-**Recommendation:** System is 98% complete. All core features implemented. Ready for submission after testing.
+**Recommendation:** System is 99% complete. Only waiting for Mohiey's LoginFrame fix push. All other features done.
 
 ---
 
 **Report Generated:** April 24, 2026
-**Version:** 3.0
-**Status:** 98% Complete - All branches merged, all features implemented
+**Version:** 3.1
+**Status:** 99% Complete - ViewAccountsDialog created, waiting for Mohiey's LoginFrame fix

@@ -1,0 +1,4 @@
+- any thing has not needed impact ignore it.
+- transfermonydialog ignore it. cuz tarek did it.
+- create the view account dialog and assign it to abdulrahman
+- moliey said his version on his pc load from banksystem not csv im waiting for him to push the new version
