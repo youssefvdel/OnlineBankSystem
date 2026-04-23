@@ -83,6 +83,14 @@ public class RegisterFrame extends javax.swing.JFrame {
         txtConfirmPassword = new javax.swing.JPasswordField();
         txtConfirmPassword.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
 
+        chkShowPassword.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        chkShowPassword.setText("Show Password");
+        chkShowPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkShowPasswordActionPerformed(evt);
+            }
+        });
+
         btnRegister.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +128,8 @@ public class RegisterFrame extends javax.swing.JFrame {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkShowPassword))
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -152,6 +161,8 @@ public class RegisterFrame extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkShowPassword)
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,9 +279,20 @@ public class RegisterFrame extends javax.swing.JFrame {
         });
     }
 
+    private void chkShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {
+        if (chkShowPassword.isSelected()) {
+            txtPassword.setEchoChar((char) 0);
+            txtConfirmPassword.setEchoChar((char) 0);
+        } else {
+            txtPassword.setEchoChar('•');
+            txtConfirmPassword.setEchoChar('•');
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JCheckBox chkShowPassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

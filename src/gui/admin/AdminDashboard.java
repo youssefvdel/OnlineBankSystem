@@ -75,11 +75,17 @@ public class AdminDashboard extends javax.swing.JFrame {
         btnReports.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnReports.setText("View Reports");
         btnReports.setPreferredSize(new java.awt.Dimension(150, 40));
+        btnReports.setBackground(new java.awt.Color(70, 130, 180));
+        btnReports.setForeground(new java.awt.Color(255, 255, 255));
+        btnReports.setFocusPainted(false);
         btnReports.addActionListener(this::btnReportsActionPerformed);
 
         btnLogout.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.setPreferredSize(new java.awt.Dimension(150, 40));
+        btnLogout.setBackground(new java.awt.Color(220, 20, 60));
+        btnLogout.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogout.setFocusPainted(false);
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,18 +129,15 @@ public class AdminDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStaffActionPerformed
-        // TODO: Open AddStaffDialog (YousefMohiey)
-        Toast.showInfo(this, "Add Staff - Coming soon");
+        Toast.showInfo(this, "Feature not available - No staff management in this version");
     }//GEN-LAST:event_btnAddStaffActionPerformed
 
     private void btnRemoveStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveStaffActionPerformed
-        // TODO: Open RemoveStaffDialog (YosefOsama)
-        Toast.showInfo(this, "Remove Staff - Coming soon");
+        Toast.showInfo(this, "Feature not available - No staff management in this version");
     }//GEN-LAST:event_btnRemoveStaffActionPerformed
 
     private void btnUpdateStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStaffActionPerformed
-        // TODO: Open UpdateStaffDialog (TarekSaeed)
-        Toast.showInfo(this, "Update Staff - Coming soon");
+        Toast.showInfo(this, "Feature not available - No staff management in this version");
     }//GEN-LAST:event_btnUpdateStaffActionPerformed
 
     private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
