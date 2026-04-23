@@ -173,36 +173,20 @@ public void issueCard() {
 
 
 /**
- * Updates card status and saves it to file
-     * @param newStatus
+ * Updates card status.
+ * Persistence is handled by BankSystem.saveAllData() to cards.csv
+ * @param newStatus the new card status
  */
 public void updateCardStatus(CardStatus newStatus) {
     this.cardStatus = newStatus;
-
-    // Save to file
-    try {
-        java.io.FileWriter writer = new java.io.FileWriter("card.txt");
-        writer.write(cardStatus.toString());
-        writer.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
 }
 
 /**
- * Loads card status from file if exists
+ * Loads card status - now handled by BankSystem via cards.csv
+ * This method is kept for backward compatibility.
  */
 public void loadCardStatus() {
-    try {
-        java.io.BufferedReader reader =
-            new java.io.BufferedReader(new java.io.FileReader("card.txt"));
-
-        String status = reader.readLine();
-        cardStatus = CardStatus.valueOf(status);
-
-        reader.close();
-    } catch (Exception e) {
-    }
+    // Card status is loaded by BankSystem.loadAllData() from cards.csv
 }
 
 /**

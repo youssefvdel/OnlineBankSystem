@@ -82,6 +82,15 @@ public void logout()
         return this.name;
     }
 
+    /**
+     * Gets the user password.
+     * @return the password as a String
+     */
+    public String getPassword()
+    {
+        return this.password;
+    }
+
 //   =============== [SETTERS]===============
 /**
  * Sets the user id

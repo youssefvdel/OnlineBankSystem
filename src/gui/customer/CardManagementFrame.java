@@ -8,16 +8,16 @@ import models.user.CardStatus;
  *
  * @author Yousif Hafez - 258612
  */
-public class CardForm extends javax.swing.JFrame {
+public class CardManagementFrame extends javax.swing.JFrame {
 
     Client client;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CardForm.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CardManagementFrame.class.getName());
 
     /**
-     * Creates new form CardForm
+     * Creates new form CardManagementFrame
      * @param client
      */
-    public CardForm(Client client) {
+    public CardManagementFrame(Client client) {
     initComponents();
     this.client = client;
     setLocationRelativeTo(null);
@@ -26,7 +26,7 @@ public class CardForm extends javax.swing.JFrame {
     refreshStatus();           
 }
 
-    private CardForm() {
+    private CardManagementFrame() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
@@ -262,7 +262,7 @@ private void refreshStatus() {
 
         /* Create and display the form */
     java.awt.EventQueue.invokeLater(() -> {
-        new CardForm().setVisible(true);
+        new CardManagementFrame().setVisible(true);
     });
     }
 
