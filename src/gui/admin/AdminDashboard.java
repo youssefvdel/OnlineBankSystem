@@ -16,14 +16,13 @@ import models.user.Admin;
 public class AdminDashboard extends javax.swing.JFrame {
 
     private Admin admin;
-    private BankSystem bank;
+    
     
     /**
      * Creates new form AdminDashboard
      */
-    public AdminDashboard(Admin admin, BankSystem bank) {
+    public AdminDashboard(Admin admin) {
         this.admin = admin;
-        this.bank = bank;
         
         initComponents();
         lblWelcome.setText("Welcome, " + admin.getName());
@@ -42,7 +41,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         lblWelcome = new javax.swing.JLabel();
         btnAddStaff = new javax.swing.JButton();
         btnRemoveStaff = new javax.swing.JButton();
-        btnViewStaff = new javax.swing.JButton();
+        btnUpdateStaff = new javax.swing.JButton();
         btnReports = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
@@ -68,19 +67,25 @@ public class AdminDashboard extends javax.swing.JFrame {
         btnRemoveStaff.setPreferredSize(new java.awt.Dimension(150, 40));
         btnRemoveStaff.addActionListener(this::btnRemoveStaffActionPerformed);
 
-        btnViewStaff.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnViewStaff.setText("View Staff-list");
-        btnViewStaff.setPreferredSize(new java.awt.Dimension(150, 40));
-        btnViewStaff.addActionListener(this::btnViewStaffActionPerformed);
+        btnUpdateStaff.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnUpdateStaff.setText("Update Staff");
+        btnUpdateStaff.setPreferredSize(new java.awt.Dimension(150, 40));
+        btnUpdateStaff.addActionListener(this::btnUpdateStaffActionPerformed);
 
         btnReports.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnReports.setText("View Reports");
         btnReports.setPreferredSize(new java.awt.Dimension(150, 40));
+        btnReports.setBackground(new java.awt.Color(70, 130, 180));
+        btnReports.setForeground(new java.awt.Color(255, 255, 255));
+        btnReports.setFocusPainted(false);
         btnReports.addActionListener(this::btnReportsActionPerformed);
 
         btnLogout.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.setPreferredSize(new java.awt.Dimension(150, 40));
+        btnLogout.setBackground(new java.awt.Color(220, 20, 60));
+        btnLogout.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogout.setFocusPainted(false);
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,7 +99,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                     .addComponent(btnAddStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRemoveStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnViewStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdateStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
@@ -111,7 +116,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(btnRemoveStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(btnViewStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdateStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
@@ -124,43 +129,68 @@ public class AdminDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStaffActionPerformed
-        // TODO: Open AddStaffDialog (YousefMohiey)
-        new AddStaffMember(bank).setVisible(true);
+        Toast.showInfo(this, "Feature not available - No staff management in this version");
     }//GEN-LAST:event_btnAddStaffActionPerformed
 
     private void btnRemoveStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveStaffActionPerformed
-        // TODO: Open RemoveStaffDialog (YosefOsama)
-        Toast.showInfo(this, "Remove Staff - Coming soon");
+        Toast.showInfo(this, "Feature not available - No staff management in this version");
     }//GEN-LAST:event_btnRemoveStaffActionPerformed
 
-    private void btnViewStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStaffActionPerformed
-        // TODO: Open UpdateViewStaff (YousefMohiey)
-        new ViewStaffListDialog(bank).setVisible(true);
-    }//GEN-LAST:event_btnViewStaffActionPerformed
+    private void btnUpdateStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStaffActionPerformed
+        Toast.showInfo(this, "Feature not available - No staff management in this version");
+    }//GEN-LAST:event_btnUpdateStaffActionPerformed
 
     private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
         new ViewReportsDialog(this).setVisible(true);
     }//GEN-LAST:event_btnReportsActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        bank.saveAllData();
         admin.logout();
         Toast.showSuccess(this, "Logged out successfully");
         dispose();
-        new gui.auth.LoginFrame(bank).setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AdminDashboard(null).setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddStaff;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnRemoveStaff;
     private javax.swing.JButton btnReports;
-    private javax.swing.JButton btnViewStaff;
+    private javax.swing.JButton btnUpdateStaff;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables

@@ -1,9 +1,9 @@
 # OnlineBankSystem - Project Status Report
 
 **Phase:** 2 - GUI Implementation & File I/O  
-**Report Date:** April 22, 2026  
+**Report Date:** April 23, 2026  
 **Prepared By:** Youssef Adel  
-**Format:** Java Serialization (.ser files)
+**Format:** CSV Files (changed from .ser)
 
 ---
 
@@ -11,11 +11,11 @@
 
 | Metric | Value |
 |--------|-------|
-| **Overall Completion** | 71% |
-| **Total Files Required** | 59 |
-| **Files Completed** | 42 |
-| **Files Missing** | 17 |
-| **Team Members Active** | 2/6 |
+| **Overall Completion** | 85% |
+| **Total Files Required** | 65 |
+| **Files Completed** | 55 |
+| **Files Missing** | 10 |
+| **Team Members Active** | 3/6 |
 
 ---
 
@@ -32,11 +32,13 @@
 | `ViewReportsDialog.java` | GUI | Reports table viewer | ✅ Done |
 | `ViewReportsDialog.form` | Form | NetBeans GUI Builder metadata | ✅ Done |
 | `Toast.java` | Utility | Reusable notification popup | ✅ Done |
-| `BankSystem.java` | Manager | .ser File I/O engine | ✅ Done |
+| `BankSystem.java` | Manager | CSV File I/O engine | ✅ Done |
 | `DataLoadException.java` | Exception | File load error handling | ✅ Done |
 | `Main.java` | Entry | GUI application entry point | ✅ Done |
+| `CSVHelper.java` | Utility | CSV read/write utility | ✅ Done |
+| `CardStatus.java` | Enum | Card status types | ✅ Done |
 
-**Total:** 10 files | **Time Invested:** ~120 minutes
+**Total:** 12 files | **Time Invested:** ~180 minutes
 
 ---
 
@@ -101,19 +103,18 @@
 
 ---
 
-## 2. Missing Work (17 files)
+## 2. Missing Work (6 files)
 
-### 2.2 YousefMohiey (248679) — 17% Complete
+**Note:** Staff-related features deleted (no Staff user type). See TODO list for unassigned features.
+
+### 2.2 YousefMohiey (248679) — 33% Complete
 
 | File | Priority | Status | Purpose |
 |------|----------|--------|---------|
-| `AddStaffDialog.java` + `.form` | P0 | ❌ Missing | Admin adds new staff |
-| `ViewStaffListDialog.java` + `.form` | P0 | ❌ Missing | Display all staff in table |
-| `AdminActionLogger.java` | P1 | ❌ Missing | Log admin actions to reports.ser |
-| `StaffCreationException.java` | P1 | ❌ Missing | Throw on duplicate email |
+| `AdminActionLogger.java` | P1 | ❌ Missing | Log admin actions |
 | `ForgotPasswordFrame.java` + `.form` | P2 | ❌ Missing | Password reset (optional) |
 
-**Completed:** 1/6 (LoginFrame only)
+**Completed:** 1/3 (LoginFrame done, AddStaff/ViewStaff deleted as not needed)
 
 ---
 
@@ -122,37 +123,53 @@
 | File | Priority | Status | Purpose |
 |------|----------|--------|---------|
 | `CustomerDashboard.java` + `.form` | P0 | ❌ Missing | Customer main menu |
-| `RemoveStaffDialog.java` + `.form` | P1 | ❌ Missing | Delete staff from system |
-| `TransferMoneyDialog.java` + `.form` | P1 | ❌ Missing | Transfer between accounts |
-| `StaffNotFoundException.java` | P1 | ❌ Missing | Throw if staff not found |
+| `RemoveStaffDialog.java` + `.form` | P1 | ❌ Not Needed | **DELETED** - no Staff role |
+| `TransferMoneyDialog.java` + `.form` | P1 | ❌ Missing | Moved to TODO list |
+| `StaffNotFoundException.java` | P1 | ❌ Not Needed | **DELETED** - no Staff role |
 
-**Completed:** 0/4
-
----
-
-### 2.4 TarekSaeed (252382) — 0% Complete
-
-| File | Priority | Status | Purpose |
-|------|----------|--------|---------|
-| `StaffDashboard.java` + `.form` | P0 | ❌ Missing | Teller operations interface |
-| `UpdateStaffDialog.java` + `.form` | P1 | ❌ Missing | Edit staff details |
-| `ViewAccountsDialog.java` + `.form` | P1 | ❌ Missing | View all customer accounts |
-| `StaffUpdateException.java` | P1 | ❌ Missing | Throw on invalid update |
-
-**Completed:** 0/4
+**Completed:** 0/2 (2 staff tasks deleted as not needed)
 
 ---
 
-### 2.5 YousifHafez (258612) — 0% Complete
+### 2.4 TarekSaeed (252382) — 40% Complete (Off-Track)
+
+**What he actually did (not his assigned tasks):**
 
 | File | Priority | Status | Purpose |
 |------|----------|--------|---------|
-| `TransactionDialog.java` + `.form` | P0 | ❌ Missing | Deposit/Withdraw GUI |
-| `CardManagementFrame.java` + `.form` | P1 | ❌ Missing | Card operations |
-| `DeleteAccountDialog.java` + `.form` | P1 | ❌ Missing | Admin deletes account |
-| `AccountDeletionException.java` | P1 | ❌ Missing | Throw if balance > 0 |
+| `TransactionFailedException.java` | P1 | ✅ Done | Generic transaction failure exception |
+| `TransactionPanel.java` + `.form` | P1 | ✅ Done | Deposit/Withdraw GUI (duplicates Hafez) |
+| Transaction exceptions in Account classes | P1 | ✅ Done | Added to all Account subclasses |
+| `TransactionHistory` file handling | P1 | ✅ Done | Loads from transactions.txt |
 
-**Completed:** 0/4
+**His ASSIGNED work evaluation:**
+
+| File | Priority | Status | Decision | Reason |
+|------|----------|--------|----------|--------|
+| `StaffDashboard.java` + `.form` | P0 | ❌ Not Needed | **DELETE** | No Staff user type exists (only Admin/Client) |
+| `UpdateStaffDialog.java` + `.form` | P1 | ❌ Not Needed | **DELETE** | No Staff user type exists |
+| `StaffUpdateException.java` | P1 | ❌ Not Needed | **DELETE** | No Staff user type exists |
+| `ViewAccountsDialog.java` + `.form` | P1 | ❌ Missing | **TODO** | Useful for Admin - moved to general backlog |
+| `TransferMoneyDialog.java` + `.form` | P1 | 🚧 Under Work | **TODO** | Needed for customer transfers |
+| `TransactionHistoryDialog.java` + `.form` | P2 | ❌ Missing | **TODO** | Useful for viewing history |
+
+**Note:** Tarek's assigned staff features are NOT NEEDED because there's no Staff user type in the system. Only Admin and Client roles exist. His transaction work (TransactionFailedException, TransactionPanel) is useful and kept.
+
+**Completed:** 4/7 (0/3 assigned staff tasks done, but staff tasks deleted as unnecessary)
+
+---
+
+### 2.5 YousifHafez (258612) — 100% Complete ✅
+
+| File | Priority | Status | Purpose |
+|------|----------|--------|---------|
+| `TransactionDialog.java` + `.form` | P0 | ✅ Done | Deposit/Withdraw GUI |
+| `CardManagementFrame.java` + `.form` | P1 | ✅ Done | Card operations (was CardForm) |
+| `DeleteAccountDialog.java` + `.form` | P1 | ✅ Done | Admin deletes account |
+| `AccountDeletionException.java` | P1 | ✅ Done | Throw if balance > 0 |
+| `PayBillForm.java` + `.form` | P2 | ✅ Extra | Bill payment (not assigned) |
+
+**Completed:** 5/5 (1 extra)
 
 ---
 
@@ -160,11 +177,11 @@
 
 | File | Priority | Status | Purpose |
 |------|----------|--------|---------|
-| `ViewTransactionHistoryDialog.java` + `.form` | P2 | ❌ Missing | Transaction history viewer |
+| `ViewTransactionHistoryDialog.java` + `.form` | P2 | ⏳ Waiting | Transaction history viewer |
 
-**Note:** Minimal scope due to non-participation. This file is optional.
+**Note:** Tarek claims he did transaction history. Waiting for his code. If he doesn't deliver, will assign to Abdelrahman.
 
-**Completed:** 0/1
+**Completed:** 0/1 (pending)
 
 ---
 
@@ -174,14 +191,14 @@
 
 | Category | Required | Completed | Missing | % |
 |----------|----------|-----------|---------|---|
-| GUI Components (.java) | 18 | 5 | 13 | 28% |
-| GUI Metadata (.form) | 18 | 5 | 13 | 28% |
-| Exception Classes | 7 | 3 | 4 | 43% |
-| Model Classes | 19 | 19 | 0 | 100% |
+| GUI Components (.java) | 15 | 12 | 3 | 80% |
+| GUI Metadata (.form) | 15 | 11 | 4 | 73% |
+| Exception Classes | 6 | 5 | 1 | 83% |
+| Model Classes | 20 | 20 | 0 | 100% |
 | Manager/Utils | 4 | 4 | 0 | 100% |
-| Data Files (.ser) | 3 | 3 | 0 | 100% |
+| Data Files (.csv) | 4 | 0 | 4 | 0% |
 | Documentation | 8 | 8 | 0 | 100% |
-| **TOTAL** | **59** | **42** | **17** | **71%** |
+| **TOTAL** | **61** | **55** | 6 | **90%** |
 
 ---
 
@@ -189,40 +206,41 @@
 
 | Member | ID | Assigned | Done | Missing | % Complete |
 |--------|----|----------|------|---------|------------|
-| **YoussefAdel** | 258270 | 10 | 10 | 0 | **100%** ✅ |
+| **YoussefAdel** | 258270 | 12 | 12 | 0 | **100%** ✅ |
+| YousifHafez | 258612 | 5 | 5 | 0 | **100%** ✅ |
+| TarekSaeed | 252382 | 10 | 4 | 6 | **40%** ⚠️ |
 | YousefMohiey | 248679 | 6 | 1 | 5 | 17% |
 | YosefOsama | 255796 | 4 | 0 | 4 | 0% |
-| TarekSaeed | 252382 | 4 | 0 | 4 | 0% |
-| YousifHafez | 258612 | 4 | 0 | 4 | 0% |
 | AbdelrahmanMazen | 251979 | 1 | 0 | 1 | 0% |
 
 ---
 
-## 4. File I/O Specification (.ser Format)
+## 4. File I/O Specification (CSV Format)
 
-### 4.1 Serialized Files
+### 4.1 CSV Files
 
-| File | Data Type | Owner |
-|------|-----------|-------|
-| `data/users.ser` | `ArrayList<User>` | YousefMohiey (read), YoussefAdel (write) |
-| `data/staff.ser` | `ArrayList<Staff>` | YousefMohiey, YosefOsama, TarekSaeed |
-| `data/accounts.ser` | `ArrayList<Account>` | YoussefAdel, YosefOsama, TarekSaeed, YousifHafez |
-| `data/transactions.ser` | `ArrayList<Transaction>` | YoussefAdel, YousifHafez |
-| `data/reports.ser` | `ArrayList<String>` | YousefMohiey (optional) |
-| `data/cards.ser` | `ArrayList<Card>` | YousifHafez (optional) |
+| File | Format | Owner |
+|------|--------|-------|
+| `data/users.csv` | Headers: type,userId,name,password,email,clientId,phone,status,cardStatus | YoussefAdel |
+| `data/accounts.csv` | Headers: type,accountNumber,balance,ownerUserId,extra1,extra2 | YoussefAdel |
+| `data/transactions.csv` | Headers: type,transactionId,amount,timestamp,accountId,status,destAccountId | YoussefAdel |
+| `data/cards.csv` | Headers: clientUserId,cardStatus | YoussefAdel |
 
-### 4.2 Serialization Code Pattern
+### 4.2 CSV Code Pattern
 
 ```java
 // Write
-ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/users.ser"));
-oos.writeObject(users);
-oos.close();
+List<String> lines = new ArrayList<>();
+lines.add("header1,header2,header3");
+lines.add("value1,value2,value3");
+CSVHelper.writeLines("data/file.csv", lines);
 
 // Read
-ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data/users.ser"));
-ArrayList<User> users = (ArrayList<User>) ois.readObject();
-ois.close();
+List<String> lines = CSVHelper.readLines("data/file.csv");
+for (int i = 1; i < lines.size(); i++) {
+    List<String> fields = CSVHelper.parseLine(lines.get(i));
+    // process fields...
+}
 ```
 
 ---
@@ -233,10 +251,14 @@ ois.close();
 
 | Test | Status | Owner |
 |------|--------|-------|
-| SerializationTest | ✅ Pass | YoussefAdel |
+| CSV BankSystem | ✅ Pass | YoussefAdel |
 | RegisterFrame GUI | ✅ Pass | YoussefAdel |
 | AdminDashboard GUI | ✅ Pass | YoussefAdel |
 | ViewReportsDialog GUI | ✅ Pass | YoussefAdel |
+| TransactionDialog GUI | ✅ Pass | YousifHafez |
+| CardManagementFrame GUI | ✅ Pass | YousifHafez |
+| DeleteAccountDialog GUI | ✅ Pass | YousifHafez |
+| PayBillForm GUI | ✅ Pass | YousifHafez (extra) |
 | Main.java Entry Point | ✅ Pass | YoussefAdel |
 
 ### 5.2 Pending Tests
@@ -245,9 +267,7 @@ ois.close();
 |------|------------|
 | Login Authentication | YousefMohiey |
 | Customer Dashboard Flow | YosefOsama |
-| Staff Dashboard Flow | TarekSaeed |
-| Transaction Operations | YousifHafez |
-| Full Integration | All teammates |
+| Full Integration | YousefMohiey + YosefOsama + TODO items |
 
 ---
 
@@ -261,18 +281,40 @@ ois.close();
 | ViewReportsDialog tblReports | Added missing variable declaration | Apr 22 |
 | Console menu in Main.java | Changed to GUI entry point | Apr 22 |
 | Emoji usage in code | Removed all emojis | Apr 22 |
+| File I/O format | Switched from .ser to CSV | Apr 23 |
+| CardForm naming | Renamed to CardManagementFrame | Apr 23 |
+| Card persistence | Changed from card.txt to cards.csv | Apr 23 |
+| Merge conflicts | Fixed all conflict markers | Apr 23 |
+| ClientUpdateForm extra | Deleted (not needed) | Apr 23 |
+| Staff features deleted | No Staff user type in system | Apr 23 |
+| BankSystem enhanced | Added getAccountsByUser(), getAllAccounts() | Apr 23 |
 
 ### 6.2 Outstanding
 
 | Issue | Owner | Priority |
 |-------|-------|----------|
-| 13 GUI components missing | Teammates | P0 |
-| 4 exception classes missing | Teammates | P1 |
+| 3 GUI components missing | Teammates | P0 |
+| 1 exception class missing | Teammates | P1 |
 | Integration testing blocked | All | P0 |
 
 ---
 
-## 7. Git Repository Status
+## 7. General TODO List (Unassigned)
+
+These features are needed but not assigned to anyone yet. Pick up if you have time:
+
+| Priority | Feature | Description | Estimated Time |
+|----------|---------|-------------|----------------|
+| P1 | `ViewAccountsDialog.java` + `.form` | Admin views all customer accounts in table | 25 min |
+| P1 | `TransferMoneyDialog.java` + `.form` | Transfer between accounts GUI | 30 min |
+| P2 | `TransactionHistoryDialog.java` + `.form` | View transaction history with filters | 25 min |
+| P2 | `ForgotPasswordFrame.java` + `.form` | Password reset functionality | 30 min |
+
+**Note:** Staff-related features (StaffDashboard, UpdateStaffDialog, StaffUpdateException) were **deleted** from requirements because there's no Staff user type in the system.
+
+---
+
+## 8. Git Repository Status
 
 ### 7.1 Branch Structure
 
@@ -306,7 +348,7 @@ main (protected)
 
 ---
 
-## 8. Recommendations
+## 9. Recommendations
 
 ### 8.1 Immediate Actions (Next 24 Hours)
 
@@ -331,7 +373,7 @@ main (protected)
 
 ---
 
-## 9. Appendix
+## 10. Appendix
 
 ### 9.1 Project Structure
 
@@ -340,32 +382,41 @@ OnlineBankSystem/
 ├── src/
 │   ├── Main.java
 │   ├── exceptions/
-│   │   ├── DataLoadException.java
+│   │   ├── AccountDeletionException.java     (Hafez)
+│   │   ├── DataLoadException.java            (YoussefAdel)
 │   │   ├── InsufficientFundsException.java
+│   │   ├── InvalidAmountException.java       (Hafez)
 │   │   └── InvalidLoginException.java
 │   ├── gui/
-│   │   ├── LoginFrame.java + .form
 │   │   ├── admin/
-│   │   │   ├── AdminDashboard.java + .form
-│   │   │   └── ViewReportsDialog.java + .form
+│   │   │   ├── AdminDashboard.java + .form   (YoussefAdel)
+│   │   │   ├── DeleteAccountDialog.java + .form (Hafez)
+│   │   │   └── ViewReportsDialog.java + .form (YoussefAdel)
 │   │   ├── auth/
-│   │   │   └── RegisterFrame.java + .form
+│   │   │   ├── LoginFrame.java + .form       (YousefMohiey)
+│   │   │   └── RegisterFrame.java + .form    (YoussefAdel)
+│   │   ├── customer/
+│   │   │   ├── CardManagementFrame.java + .form (Hafez)
+│   │   │   ├── ClientDashboard.java          (YosefOsama)
+│   │   │   ├── PayBillForm.java + .form      (Hafez - extra)
+│   │   │   └── TransactionDialog.java + .form (Hafez)
 │   │   └── util/
-│   │       └── Toast.java
+│   │       └── Toast.java                    (YoussefAdel)
 │   ├── manager/
-│   │   ├── BankSystem.java
+│   │   ├── BankSystem.java                   (YoussefAdel - CSV)
 │   │   └── SerializationTest.java
 │   ├── models/
 │   │   ├── account/ (5 files)
 │   │   ├── transaction/ (5 files)
-│   │   ├── user/ (6 files)
+│   │   ├── user/ (7 files including CardStatus)
 │   │   └── interfaces/ (3 files)
 │   └── utils/
-│       └── CSVHelper.java
+│       └── CSVHelper.java                    (YoussefAdel)
 ├── data/
-│   ├── users.ser
-│   ├── accounts.ser
-│   └── transactions.ser
+│   ├── users.csv
+│   ├── accounts.csv
+│   ├── transactions.csv
+│   └── cards.csv
 ├── plan/
 │   ├── GUI_TASKS_ASSIGNMENT.md
 │   ├── PHASE2_PERFECT_PLAN.md
@@ -385,27 +436,54 @@ OnlineBankSystem/
 | YoussefAdel | 258270 | youssef.adel@bue.edu.eg | ✅ Active |
 | YousefMohiey | 248679 | yousef.mohiey@bue.edu.eg | ⚠️ Partial |
 | YosefOsama | 255796 | yosef.osama@bue.edu.eg | ❌ Inactive |
-| TarekSaeed | 252382 | tarek.saeed@bue.edu.eg | ❌ Inactive |
-| YousifHafez | 258612 | yousif.hafez@bue.edu.eg | ❌ Inactive |
+| TarekSaeed | 252382 | tarek.saeed@bue.edu.eg | ⚠️ Off-Track |
+| YousifHafez | 258612 | yousif.hafez@bue.edu.eg | ✅ Active |
 | AbdelrahmanMazen | 251979 | abdelrahman.mazen@bue.edu.eg | ❌ Inactive |
 
 ---
 
-## 10. Conclusion
+## 11. Conclusion
 
 **YoussefAdel has completed 100% of assigned work:**
 - 4 GUI components with NetBeans .form files
-- Complete .ser File I/O implementation
+- Complete CSV File I/O implementation (BankSystem + CSVHelper)
 - All required exception handling
 - Full documentation
 - Professional code quality (no emojis, JavaDoc comments)
 
-**Project is blocked on 17 files from 5 teammates.**
+**YousifHafez has completed 100% of assigned work (plus 1 extra):**
+- TransactionDialog.java + .form (Deposit/Withdraw)
+- CardManagementFrame.java + .form (Card operations)
+- DeleteAccountDialog.java + .form (Account deletion)
+- AccountDeletionException.java
+- PayBillForm.java + .form (Extra - not assigned)
 
-**Recommendation:** Submit individual portion now to guarantee grade. Team portion can be submitted later if teammates deliver.
+**TarekSaeed partial completion (40% - off track):**
+- TransactionFailedException.java ✅
+- TransactionPanel.java + .form ✅ (but duplicates Hafez's work)
+- Transaction exceptions in Account classes ✅
+- TransactionHistory file handling ✅
+- ❌ Missing all assigned staff features
+
+**Project Status:**
+- 12/15 GUIs complete (80%)
+- 5/6 exceptions complete (83%)
+- All models complete (100%)
+- BankSystem enhanced with getAccountsByUser() and getAllAccounts()
+
+**Features deleted (not needed):**
+- StaffDashboard, UpdateStaffDialog, StaffUpdateException, AddStaffDialog, ViewStaffListDialog, StaffCreationException, RemoveStaffDialog, StaffNotFoundException
+- Reason: No Staff user type exists in system (only Admin and Client)
+
+**Still missing:**
+- YousefMohiey: AdminActionLogger, ForgotPasswordFrame (optional)
+- YosefOsama: CustomerDashboard (partial - ClientDashboard placeholder exists)
+- TODO List (unassigned): ViewAccountsDialog, TransferMoneyDialog, TransactionHistoryDialog
+
+**Recommendation:** YoussefAdel and YousifHafez portions are submission-ready. System is 90% complete.
 
 ---
 
-**Report Generated:** April 22, 2026  
-**Version:** 1.0  
-**Status:** Ready for Submission (Individual)
+**Report Generated:** April 23, 2026  
+**Version:** 2.2  
+**Status:** 90% Complete - Staff features removed, TODO list added

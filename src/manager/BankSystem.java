@@ -101,6 +101,35 @@ public class BankSystem {
     }
 
     /**
+     * Returns all accounts belonging to a specific user.
+     * A user may have multiple accounts.
+     *
+     * @param user the user whose accounts to retrieve
+     * @return ArrayList of Account objects owned by the user
+     */
+    public ArrayList<Account> getAccountsByUser(User user) {
+        ArrayList<Account> userAccounts = new ArrayList<>();
+        if (user == null) return userAccounts;
+        String userId = user.getUserId();
+        for (Account acc : accounts) {
+            if (acc.getOwner() != null && acc.getOwner().getUserId().equals(userId)) {
+                userAccounts.add(acc);
+            }
+        }
+        return userAccounts;
+    }
+
+    /**
+     * Returns all accounts in the system.
+     * Useful for admin views.
+     *
+     * @return ArrayList of all Account objects
+     */
+    public ArrayList<Account> getAllAccounts() {
+        return new ArrayList<>(accounts);
+    }
+
+    /**
      * Returns the currently authenticated user.
      */
     public User getCurrentUser() {
