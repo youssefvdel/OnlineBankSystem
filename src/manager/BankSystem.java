@@ -144,13 +144,14 @@ public class BankSystem {
         return new ArrayList<>(users);
     }
     
-    // Tareq added this method for transaction panel 
-    
+    /**
+     * Returns accounts for the currently logged-in user.
+     */
     public List<Account> getAccountsForCurrentUser() {
     List<Account> result = new ArrayList<>();
 
     if (currentUser == null) {
-        return result; // no user logged in
+        return result;
     }
 
     for (Account acc : accounts) {
@@ -164,7 +165,6 @@ public class BankSystem {
     return result;
 }
 
-    // ========== CSV SAVE METHODS ==========
 
     /**
      * Saves all system data to CSV files.
@@ -221,7 +221,6 @@ public class BankSystem {
         CSVHelper.writeLines(CARDS_FILE, lines);
     }
 
-    // ========== CSV LOAD METHODS ==========
 
     /**
      * Loads all system data from CSV files.
@@ -286,14 +285,12 @@ public class BankSystem {
                     try {
                         ((Client) user).updateCardStatus(CardStatus.valueOf(statusStr));
                     } catch (Exception e) {
-                        // ignore invalid status
                     }
                 }
             }
         }
     }
 
-    // ========== CONVERSION HELPERS ==========
 
     private User findUserById(String userId) {
         for (User user : users) {
@@ -362,7 +359,6 @@ public class BankSystem {
             try {
                 ((Client) user).updateCardStatus(CardStatus.valueOf(cardStatusStr));
             } catch (Exception e) {
-                // ignore
             }
         }
         return user;
@@ -457,7 +453,7 @@ public class BankSystem {
         trans = new Deposit(transId, amount, accountId, "internal");
     }
     } catch (Exception e) {
-    return null; // skip invalid transaction
+    return null;
     }
         trans.setStatus(status);
         return trans;

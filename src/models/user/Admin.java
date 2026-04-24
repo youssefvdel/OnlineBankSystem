@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class Admin extends User implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     
-    // Add these two fields
     private String phoneNumber;
     private String jobTitle;
     
@@ -35,7 +34,6 @@ public class Admin extends User implements java.io.Serializable {
         this.jobTitle = job;        
     }
     
-    // Getters
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -70,4 +68,4 @@ public class Admin extends User implements java.io.Serializable {
         return "Admin";
     }
 
-} // End of Admin class
+}

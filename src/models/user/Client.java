@@ -23,8 +23,6 @@ import models.account.Account;
 public abstract class Client extends User implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
 
-    // ========== ATTRIBUTES ==========
-
     /** Client unique ID */
     private String client_ID;
 
@@ -46,8 +44,6 @@ public abstract class Client extends User implements java.io.Serializable {
     private CardStatus cardStatus = CardStatus.INACTIVE;
 
 
-    // ========== CONSTRUCTOR ==========
-
     /**
      * Constructs a new Client object.
      *
@@ -68,15 +64,12 @@ public abstract class Client extends User implements java.io.Serializable {
         String client_ID,
         String phoneNumber,
         String status) {
-        // Call parent (User) constructor
         super(userId, name, password, email);
         this.client_ID = client_ID;
         this.phoneNumber = phoneNumber;
-        this.accounts = new ArrayList<>(); // Initialize empty list
+        this.accounts = new ArrayList<>();
         this.status = status;
     }
-
-    // ========== GETTERS ==========
 
     /**
      * Gets the client's ID.*
@@ -123,8 +116,6 @@ public abstract class Client extends User implements java.io.Serializable {
     }
 
 
-    // ========== SETTERS ==========
-
     /**
      * Sets the client's phone number.
      *
@@ -150,17 +141,13 @@ public abstract class Client extends User implements java.io.Serializable {
  */
 public void setPassword(String password) {
 
-    // Basic validation (not empty)
     if (password == null || password.isEmpty()) {
         throw new IllegalArgumentException("Password cannot be empty");
     }
 
-    // Set new password
     this.password = password;
 }
 
-    
-// ========== CARD METHODS ==========
 /**
  * Issues a new card if no card exists
  * @author Yousif Hafez - 258612
@@ -187,7 +174,6 @@ public void updateCardStatus(CardStatus newStatus) {
  * This method is kept for backward compatibility.
  */
 public void loadCardStatus() {
-    // Card status is loaded by BankSystem.loadAllData() from cards.csv
 }
 
 /**
@@ -198,8 +184,6 @@ public void blockCard() {
     updateCardStatus(CardStatus.LOST);
 }
 
-
-// ========== ACCOUNT MANAGEMENT METHODS ==========
 
     /**
      * Adds a new account to this client's account list.
@@ -236,8 +220,6 @@ public void blockCard() {
         }
         return total;
     }
-    
-// ========== BILL PAYMENT METHOD ==========
 
 /**
  * Processes bill payment for the client
@@ -249,17 +231,14 @@ public void blockCard() {
  */
 public boolean payBill(String billType, double amount)
         throws InsufficientFundsException, InvalidAmountException, TransactionFailedException{
-    // Validate amount
     if (amount <= 0) {
         throw new InvalidAmountException(amount);
     }
 
-    // Check balance
     if (getTotalBalance() < amount) {
         throw new InsufficientFundsException(getTotalBalance(), amount);
     }
 
-    // Deduct
     if (!accounts.isEmpty()) {
         Account acc = accounts.get(0);
         acc.withdraw(amount);
@@ -268,12 +247,9 @@ public boolean payBill(String billType, double amount)
     return true; 
 }
 
-    //    ========== ABSTRACT METHOD ==========
     /**
      * Returns the benefits for this client type.
      * @return String describing the client's benefits
      */
     public abstract String getBenefits();
 }
-
-// End of Client class

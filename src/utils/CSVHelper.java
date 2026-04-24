@@ -34,7 +34,6 @@ public class CSVHelper {
                 }
             }
         } catch (FileNotFoundException e) {
-            // file not found is ok, return empty list
             return lines;
         } catch (IOException e) {
             throw new DataLoadException(filePath, "read", e);

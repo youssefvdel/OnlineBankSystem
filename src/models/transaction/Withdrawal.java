@@ -30,31 +30,25 @@ public class Withdrawal extends Transaction {
                    InvalidAmountException,
                    TransactionFailedException {
 
-        // validate method
         if (method == null || method.isEmpty()) {
             setStatus(STATUS_FAILED);
             throw new TransactionFailedException("Withdrawal method is invalid");
         }
 
-        // validate amount
         if (getAmount() <= 0) {
             setStatus(STATUS_FAILED);
             throw new InvalidAmountException(getAmount());
         }
 
-        // check balance
         if (account.getBalance() < getAmount()) {
             setStatus(STATUS_FAILED);
             throw new InsufficientFundsException(account.getBalance(), getAmount());
         }
 
-        // deduct balance
         account.setBalance(account.getBalance() - getAmount());
 
-        // mark transaction as completed
         setStatus(STATUS_COMPLETED);
 
-        // add transaction to history (no file saving here)
         account.getTransactionHistory().addTransaction(this);
 
         return true;

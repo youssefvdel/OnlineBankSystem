@@ -39,7 +39,6 @@ public class PremiumAccount extends Account implements java.io.Serializable {
         double higherLimit,
         double premiumRate
     ) {
-        // Call the parent Account constructor to set up base attributes
         super(accountNumber, balance, owner);
         this.higherLimit = higherLimit;
         this.premiumRate = premiumRate;
@@ -63,7 +62,6 @@ public class PremiumAccount extends Account implements java.io.Serializable {
             );
             return false;
         }
-        // Check if withdrawal exceeds the higher limit allowed
         if (value > higherLimit) {
             System.out.println(
                 "Error Amount exceeds premium withdrawal limit of: " +
@@ -71,14 +69,12 @@ public class PremiumAccount extends Account implements java.io.Serializable {
             );
             return false;
         }
-        // Check if balance is sufficient
         if (value > getBalance()) {
             System.out.println(
                 "Error Insufficient balance Available: " + getBalance()
             );
             return false;
         }
-        // If all checks pass call the parent withdraw method
         boolean success = super.withdraw(value);
         if (success) {
             System.out.println(
@@ -95,16 +91,13 @@ public class PremiumAccount extends Account implements java.io.Serializable {
      * Called when the client wants to view their premium perks.
      */
     public void getPremiumBenefits() {
-        // Calculate the bonus amount the client is entitled to
         double bonusAmount = getBalance() * premiumRate;
-        // Get owner name
         String ownerName;
         if (getOwner() != null) {
             ownerName = getOwner().getName();
         } else {
             ownerName = "Unknown";
         }
-        // Print a full benefits summary to the screen
         System.out.println("Premium Account Benefits");
         System.out.println("Account No: " + getAccountNumber());
         System.out.println("Current Balance: " + getBalance());
@@ -124,11 +117,8 @@ public class PremiumAccount extends Account implements java.io.Serializable {
                throws InsufficientFundsException,
                InvalidAmountException,
                TransactionFailedException {
-        // yearly fee amount for premium accounts
         double fee = 75.0;
-        // Deduct the fee using the overridden withdraw method
         withdraw(fee);
-        // Return the fee so the caller knows how much was deducted
         return fee;
     }
 
@@ -169,7 +159,6 @@ public class PremiumAccount extends Account implements java.io.Serializable {
      */
     @Override
     public String toString() {
-        // Get owner name
         String ownerName;
         if (getOwner() != null) {
             ownerName = getOwner().getName();

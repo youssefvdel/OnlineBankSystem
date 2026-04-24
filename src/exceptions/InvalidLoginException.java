@@ -6,7 +6,7 @@ package exceptions;
  * @since Phase 2
  */
 public class InvalidLoginException extends Exception {
-    
+
     /**
      * Constructor with error message
      * @param message The error message to display

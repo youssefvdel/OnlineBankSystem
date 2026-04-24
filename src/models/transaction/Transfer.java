@@ -32,11 +32,8 @@ public class Transfer extends Transaction implements java.io.Serializable {
     public Transfer(String transactionId, double amount, String sourceAccountId, Account destinationAccount)
     throws InvalidAmountException, TransactionFailedException
     {
-        // Call the parent Transaction constructor with transactionId, amount, sourceAccountId
         super(transactionId, amount, sourceAccountId);
-        // Save the source account id into the attribute
         this.sourceAccountId = sourceAccountId;
-        // Save the destination account into the attribute
         this.destinationAccount = destinationAccount;
     }
     /**
@@ -51,67 +48,44 @@ public class Transfer extends Transaction implements java.io.Serializable {
                throws InsufficientFundsException,
                InvalidAmountException,
                TransactionFailedException {
-        // Check source account is not null
         if (account == null) {
             System.out.println("Error Source account is null");
-            // Mark transaction as failed
             setStatus("failed");
             return false;
         }
-        // Check destination account is not null
         if (destinationAccount == null) {
             System.out.println("Error Destination account is null");
-            // Mark transaction as failed
             setStatus("failed");
             return false;
         }
-        // Check source and destination are not the same account
         if (account.getAccountNumber().equals(destinationAccount.getAccountNumber()))
         {
             System.out.println("Error Cannot transfer to the same account");
-            // Mark transaction as failed
             setStatus("failed");
             return false;
         }
-        // Check source account has enough balance
         if (getAmount() > account.getBalance())
         {
             System.out.println("Error Insufficient balance for transfer. Available: " + account.getBalance());
-            // Mark transaction as failed
             setStatus("failed");
             return false;
         }
 
         /**
-         * Tarek added this comment
-         * to use transferable interface
-         *         // Check if accounts support transfer (Polymorphism via Interface)
-         *         if (sourceAccount instanceof Transferable) {
-         *             // Use the interface method
-         *             return ((Transferable) sourceAccount).transfer(destAccount, this.getAmount());
-         *         }
-         *         return false;
+         * Uses the Transferable interface for polymorphic transfers.
          */
 
 
-        // Save balances before the transfer
         double srcBefore = account.getBalance();
         double dstBefore = destinationAccount.getBalance();
 
-        // Withdraw the amount from the source account
         account.withdraw(getAmount());
-        // Deposit the same amount into the destination account
         destinationAccount.deposit(getAmount());
-        // Mark transaction as completed
         setStatus("Completed");
-        // Print confirmation of the successful transfer
         System.out.println("Transfer successful!" + " From: " + account.getAccountNumber() + " To: " + destinationAccount.getAccountNumber() + " Amount: " + getAmount());
-        // Return true to indicate success
-        // Print updated balances
         System.out.println("Source: " + srcBefore + " ==> " + account.getBalance());
         System.out.println("Destination: " + dstBefore + " ==> " + destinationAccount.getBalance());
         
-        // Add to transaction history
         account.getTransactionHistory().addTransaction(this);
         
         return true;
@@ -142,7 +116,6 @@ public class Transfer extends Transaction implements java.io.Serializable {
      */
     @Override
     public String toString() {
-        // Get destination account number
         String destAccountNo;
         if (destinationAccount != null) {
             destAccountNo = destinationAccount.getAccountNumber();

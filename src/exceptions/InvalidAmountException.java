@@ -2,7 +2,7 @@ package exceptions;
 
 /**
  * Exception thrown when amount is invalid
- * 
+ *
  * @author Yousif Hafez - 258612
  */
 public class InvalidAmountException extends RuntimeException {

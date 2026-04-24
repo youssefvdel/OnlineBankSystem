@@ -37,7 +37,6 @@ public class SavingsAccount extends Account implements java.io.Serializable {
         double interestRate,
         double minBalance
     ) {
-        // Call the parent Account constructor to set up base attributes
         super(accountNumber, balance, owner);
         this.interestRate = interestRate;
         this.minBalance = minBalance;
@@ -52,9 +51,7 @@ public class SavingsAccount extends Account implements java.io.Serializable {
                throws InsufficientFundsException,
                InvalidAmountException,
                TransactionFailedException {
-        // Calculate interest amount based on current balance
         double interest = getBalance() * interestRate;
-        // Add the interest using the inherited deposit method
         deposit(interest);
         System.out.println(
             "Interest added: " + interest + " / New Balance: " + getBalance()
@@ -80,7 +77,6 @@ public class SavingsAccount extends Account implements java.io.Serializable {
             );
             return false;
         }
-        // Check if withdrawal would drop balance below minimum
         if (getBalance() - value < minBalance) {
             System.out.println(
                 "Error Withdrawal would breach minimum balance of: " +
@@ -90,7 +86,6 @@ public class SavingsAccount extends Account implements java.io.Serializable {
             );
             return false;
         }
-        // If balance is safe call the parent withdraw method
         boolean success = super.withdraw(value);
         if (success) {
             System.out.println(
@@ -111,11 +106,8 @@ public class SavingsAccount extends Account implements java.io.Serializable {
                throws InsufficientFundsException,
                InvalidAmountException,
                TransactionFailedException {
-        //  yearly fee amount
         double fee = 5.0;
-        // Deduct the fee using the overridden withdraw method
         withdraw(fee);
-        // Return the fee so the caller knows how much was deducted
         return fee;
     }
 

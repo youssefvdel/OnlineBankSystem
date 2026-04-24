@@ -40,7 +40,6 @@ public class Deposit extends Transaction {
             throw new InvalidAmountException(getAmount());
         }
 
-        // add balance
         account.setBalance(account.getBalance() + getAmount());
 
         setStatus(STATUS_COMPLETED);

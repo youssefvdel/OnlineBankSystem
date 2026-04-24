@@ -33,7 +33,7 @@ public class TransactionHistory implements Serializable {
     }
 
     public ArrayList<Transaction> getHistory() {
-        return new ArrayList<>(transactions); // defensive copy
+        return new ArrayList<>(transactions);
     }
 
     public int getTransactionCount() {

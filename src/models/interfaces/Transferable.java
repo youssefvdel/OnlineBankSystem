@@ -7,14 +7,14 @@ import models.account.Account;
 
 /**
  * @author Tarek Saeed 252382
- * @see Account //implementation
- * @see Transfer //use
+ * @see Account
+ * @see Transfer
  * @since phase 1
  */
-//defining the capability to transfer money.
-
 public interface Transferable {
-    // transfer money from account to another if it's elibible
+    /**
+     * transfer money from account to another if it's elibible
+     */
     public boolean transfer(Account destination, double amount)
         throws InsufficientFundsException,
                InvalidAmountException,

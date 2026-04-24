@@ -92,7 +92,6 @@ public class CurrentAccount extends Account implements java.io.Serializable {
             "Withdrew: $" + amount + " | New Balance: $" + getBalance()
         );
 
-        // Add to transaction history
         String transId = "WDR" + System.currentTimeMillis();
         Withdrawal withdrawal = new Withdrawal(
             transId,

@@ -79,16 +79,13 @@ public class StandardClient extends Client implements Insurable {
     public void claimInsurable() {
         String insuranceType = getInsurance();
 
-        // checks if there is no insurance assigned to this client
         if (insuranceType == null || insuranceType.isEmpty()) {
             System.out.println("No insurance available for this client.");
             return;
         }
 
-        // prints confirmation that the insurance claim was submitted
         System.out.println("Insurance claim submitted successfully.");
 
-        // prints the type of insurance for this client
         System.out.println("Insurance Type: " + insuranceType);
     }
 

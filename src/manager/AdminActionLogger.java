@@ -23,7 +23,6 @@ public class AdminActionLogger {
             writer.write(entry);
             writer.newLine();
         } catch (IOException e) {
-            // Silently ignore in GUI to avoid crashing
         }
     }
 }

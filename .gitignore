@@ -5,3 +5,4 @@ target
 .zed
 .trash
 graphify-out
+*.class
