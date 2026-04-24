@@ -1,6 +1,4 @@
 /*
- * Click nbfs:
- * Click nbfs:
  */
 package gui.customer;
 
@@ -222,7 +220,7 @@ public class TransactionPanel extends javax.swing.JFrame {
      * @param args the command line arguments
     */
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JTextField amountField;
     private javax.swing.JButton depositBtn;
     private javax.swing.JButton executeBtn;
@@ -232,5 +230,5 @@ public class TransactionPanel extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> typeCombo;
     private javax.swing.JLabel typeLabel;
     private javax.swing.JButton withdrawBtn;
-    // End of variables declaration//GEN-END:variables
+    
 }

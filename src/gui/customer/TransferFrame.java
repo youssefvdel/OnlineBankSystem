@@ -1,6 +1,4 @@
 /*
- * Click nbfs:
- * Click nbfs:
  */
 package gui.customer;
 
@@ -159,7 +157,7 @@ public class TransferFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JTextField amountField;
     private javax.swing.JTextField destField;
     private javax.swing.JLabel jLabel1;
@@ -167,5 +165,5 @@ public class TransferFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JButton transferBtn;
-    // End of variables declaration//GEN-END:variables
+    
 }

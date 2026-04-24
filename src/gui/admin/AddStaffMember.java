@@ -1,6 +1,4 @@
 /*
- * Click nbfs:
- * Click nbfs:
  */
 package gui.admin;
 import models.user.Admin;
@@ -19,7 +17,6 @@ public class AddStaffMember extends javax.swing.JFrame {
     /**
      * Creates new form AddStaffMember
      */
-
 
     public AddStaffMember(BankSystem bank) {
         this.bank = bank;
@@ -163,23 +160,17 @@ public class AddStaffMember extends javax.swing.JFrame {
         String job = txtJob.getText().trim();
         String pass = new String(txtPassword.getPassword());
 
-
-
         if (name.isEmpty() || email.isEmpty() || pass.isEmpty()) {
             throw new StaffCreationException("Please fill all required fields");
         }
-
 
         if (!email.contains("@")) {
             throw new StaffCreationException("Email must contain @");
         }
 
-
         if (phone.length() < 11) {
             throw new StaffCreationException("Phone must be at least 11 digits");
         }
-
-
 
         String id = "A" + System.currentTimeMillis();
         Admin newAdmin = new Admin(id, name, pass, email, phone, job);
@@ -202,8 +193,7 @@ public class AddStaffMember extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton bAdd;
     private javax.swing.JButton bCancel;
     private javax.swing.JLabel jLabel1;
@@ -217,5 +207,5 @@ public class AddStaffMember extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhone;
-    // End of variables declaration//GEN-END:variables
+    
 }

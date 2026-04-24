@@ -1,8 +1,6 @@
 package gui.admin;
 
 /*
- * Click nbfs:
- * Click nbfs:
  */
 import javax.swing.table.DefaultTableModel;
 import manager.BankSystem;
@@ -119,13 +117,11 @@ public class ViewStaffListDialog extends javax.swing.JFrame {
         dispose();
     }
 
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton bClose;
     private javax.swing.JButton bRefresh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    // End of variables declaration//GEN-END:variables
+    
 }

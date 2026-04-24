@@ -288,7 +288,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         }
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRegister;
     private javax.swing.JCheckBox chkShowPassword;
@@ -303,5 +303,5 @@ public class RegisterFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JPasswordField txtPassword;
-    // End of variables declaration//GEN-END:variables
+    
 }

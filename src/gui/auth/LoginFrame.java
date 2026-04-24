@@ -1,6 +1,4 @@
 /*
- * Click nbfs:
- * Click nbfs:
  */
 package gui.auth;
 
@@ -12,8 +10,6 @@ import manager.BankSystem;
 import models.user.User;
 import models.user.Admin;
 
-
-
 /**
  * LoginFrame - Main login GUI for Phase 2
  * @author Yousef Mohiey - 248679
@@ -21,14 +17,11 @@ import models.user.Admin;
  */
 public class LoginFrame extends javax.swing.JFrame {
 
-
     private BankSystem bank;
     private int failedAttempts = 0;
     private static final int MAX_ATTEMPTS = 3;
 
-
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginFrame.class.getName());
-
 
     public LoginFrame(BankSystem bank) {
         this.bank = bank;
@@ -208,7 +201,6 @@ public class LoginFrame extends javax.swing.JFrame {
 
     }
 
-
     private void jpassowrdActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
@@ -224,8 +216,7 @@ public class LoginFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JCheckBox ShowPassword;
     private javax.swing.JButton bexit;
     private javax.swing.JButton blogin;
@@ -235,5 +226,5 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jpassowrd;
     private javax.swing.JTextField jtuser;
-    // End of variables declaration//GEN-END:variables
+    
 }

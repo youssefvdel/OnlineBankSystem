@@ -1,6 +1,4 @@
 /*
- * Click nbfs:
- * Click nbfs:
  */
 package gui.customer;
 import javax.swing.table.DefaultTableModel;
@@ -113,9 +111,8 @@ public static void main(String args[]) {
     });
 }
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JTable historyTable;
     private javax.swing.JScrollPane jScrollPane1;
-    // End of variables declaration//GEN-END:variables
+    
 }

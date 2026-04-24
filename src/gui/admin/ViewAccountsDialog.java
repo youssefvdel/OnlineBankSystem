@@ -1,6 +1,4 @@
 /*
- * Click nbfs:
- * Click nbfs:
  */
 package gui.admin;
 
@@ -158,13 +156,13 @@ public class ViewAccountsDialog extends javax.swing.JDialog {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblAccounts;
-    // End of variables declaration//GEN-END:variables
+    
 
     private void loadAccounts() {
         tableModel = (DefaultTableModel) tblAccounts.getModel();

@@ -1,6 +1,4 @@
 /*
- * Click nbfs:
- * Click nbfs:
  */
 package gui.auth;
 
@@ -213,7 +211,7 @@ public class ForgotPasswordFrame extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnReset;
     private javax.swing.JLabel jLabel1;
@@ -223,5 +221,5 @@ public class ForgotPasswordFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtConfirmPassword;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtNewPassword;
-    // End of variables declaration//GEN-END:variables
+    
 }

@@ -1,6 +1,4 @@
 /*
- * Click nbfs:
- * Click nbfs:
  */
 package gui.admin;
 
@@ -156,8 +154,7 @@ public class AdminDashboard extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton btnAddStaff;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnRemoveStaff;
@@ -165,5 +162,5 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnViewStaff;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblWelcome;
-    // End of variables declaration//GEN-END:variables
+    
 }

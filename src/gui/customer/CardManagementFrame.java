@@ -32,8 +32,6 @@ public class CardManagementFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-
-
 /**
  * Updates the status label
  */
@@ -173,7 +171,6 @@ private void refreshStatus() {
     refreshStatus();
     }
 
-
     /**
     * Sets card status to LOST when the Lost option is selected.
     * Used when the card is reported lost or stolen.
@@ -207,7 +204,6 @@ private void refreshStatus() {
     refreshStatus();
     }
 
-
     /**
     * Sets card status to INACTIVE when the Inactive option is selected.
     * Updates the UI label to reflect the new status.
@@ -224,7 +220,7 @@ private void refreshStatus() {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http:
          */
@@ -245,7 +241,7 @@ private void refreshStatus() {
     });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JRadioButton Active;
     private javax.swing.JLabel Cardmanagement;
     private javax.swing.JRadioButton Inactive;
@@ -255,5 +251,5 @@ private void refreshStatus() {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton issueCard;
     private javax.swing.JLabel statusLabel;
-    // End of variables declaration//GEN-END:variables
+    
 }
