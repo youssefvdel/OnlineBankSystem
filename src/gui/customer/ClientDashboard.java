@@ -1,89 +1,82 @@
 package gui.customer;
-
+import gui.customer.TransactionPanel;
 import javax.swing.JOptionPane;
-import manager.BankSystem;
-import models.account.Account;
 import models.user.Client;
-import models.user.User;
 
+import models.user.User;
+import models.user.Client;
 /**
  *
  * @author Yosef - 255796
  */
 public class ClientDashboard extends javax.swing.JFrame {
-
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClientDashboard.class.getName());
 
-    private User currentUser;
-    private Client currentClient;
-    private BankSystem bank;
-
-    public ClientDashboard(User user) {
-        this(user, null);
-    }
-
-    public ClientDashboard(User user, BankSystem bank) {
+    private User currentUser; // Store as generic User
+    private Client currentClient; // Store casted Client for specific features
+    /**
+     * Creates new form clientDashboard
+     */
+   
+    public ClientDashboard(User user ) 
+    {
         initComponents();
-        this.currentUser = user;
-        this.bank = bank;
-        this.currentClient = (user instanceof Client) ? (Client) user : null;
-
-        System.out.println("Logged in as: " + (user != null ? user.getName() : "Guest"));
-
-        setupButtonListeners();
+        
+         this.currentUser = user;
+         // you can use currentUser for transactions later
+         System.out.println("Logged in as: " + (user != null ? user.getName() : "Guest"));
+         
+    // WITHDRAW/DEPOSIT BUTTON FUNCTIONALITY
+     WithdrawDeposit.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            ClientDashboard.this.setVisible(false);
+            
+            // Pass the first account to TransactionPanel
+            models.account.Account account = currentClient.getAccounts().isEmpty() 
+                ? new models.account.CurrentAccount("TEMP", 0.0, currentClient, 0, 0, 0, 0)
+                : currentClient.getAccounts().get(0);
+            gui.customer.TransactionPanel transPanel = new gui.customer.TransactionPanel(account);
+            
+            transPanel.setVisible(true);
+            
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                ClientDashboard.this,
+                "Error: " + ex.getMessage(),
+                "System Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
-
-    private void setupButtonListeners() {
-        WithdrawDeposit.addActionListener(evt -> {
-            if (currentClient == null || currentClient.getAccounts().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No accounts available");
-                return;
-            }
-            Account account = currentClient.getAccounts().get(0);
-            new TransactionPanel(account, bank).setVisible(true);
-        });
-
-        transfer.addActionListener(evt -> {
-            if (currentClient == null || currentClient.getAccounts().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No accounts available");
-                return;
-            }
-            Account account = currentClient.getAccounts().get(0);
-            new TransferFrame(account, bank).setVisible(true);
-        });
-
-        PayBill.addActionListener(evt -> {
-            if (currentClient == null) {
-                JOptionPane.showMessageDialog(this, "No client selected");
-                return;
-            }
-            new PayBillForm(currentClient, bank).setVisible(true);
-        });
-
-        viewHistory.addActionListener(evt -> {
-            if (currentClient == null || currentClient.getAccounts().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No accounts available");
-                return;
-            }
-            Account account = currentClient.getAccounts().get(0);
-            new TransactionHistoryFrame(account).setVisible(true);
-        });
-
-        manageCard.addActionListener(evt -> {
-            if (currentClient == null) {
-                JOptionPane.showMessageDialog(this, "No client selected");
-                return;
-            }
-            new CardManagementFrame(currentClient, bank).setVisible(true);
-        });
-
-        logout.addActionListener(evt -> {
-            if (bank != null) {
-                bank.saveAllData();
-            }
-            dispose();
-            new gui.auth.LoginFrame(bank).setVisible(true);
-        });
+});
+     
+     // MANAGE CARD BUTTON FUNCTIONALITY
+    manageCard.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            // 1. Hide current Dashboard
+            ClientDashboard.this.setVisible(false);
+            
+            // 2. Open Card Management Frame
+            // Assuming CardManagementFrame is in gui.customer package
+            gui.customer.CardManagementFrame cardFrame = new gui.customer.CardManagementFrame(currentClient);
+            
+            // 3. Show the new window
+            cardFrame.setVisible(true);
+            
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                ClientDashboard.this,
+                "Error opening Card Management: " + ex.getMessage(),
+                "System Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+});
+        
     }
 
     /**
@@ -92,6 +85,7 @@ public class ClientDashboard extends javax.swing.JFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -107,7 +101,7 @@ public class ClientDashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("client Dashboard");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Client Dashboard");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -187,25 +181,28 @@ public class ClientDashboard extends javax.swing.JFrame {
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         pack();
-    }
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void WithdrawDepositActionPerformed(java.awt.event.ActionEvent evt) {
-    }
+    private void WithdrawDepositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WithdrawDepositActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_WithdrawDepositActionPerformed
 
-    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {
-    }
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutActionPerformed
 
-    private void manageCardActionPerformed(java.awt.event.ActionEvent evt) {
-    }
+    private void manageCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manageCardActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http:
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -217,12 +214,13 @@ public class ClientDashboard extends javax.swing.JFrame {
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new ClientDashboard(null).setVisible(true));
     }
 
-    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton PayBill;
     private javax.swing.JButton WithdrawDeposit;
     private javax.swing.JLabel jLabel1;
@@ -232,5 +230,5 @@ public class ClientDashboard extends javax.swing.JFrame {
     private javax.swing.JButton manageCard;
     private javax.swing.JButton transfer;
     private javax.swing.JButton viewHistory;
-    
+    // End of variables declaration//GEN-END:variables
 }
