@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  */
 public class AdminActionLogger {
     
-    private static final String LOG_FILE = "data/admin_logs.t";
+    private static final String LOG_FILE = "data/admin_logs.txt";
 
     /**
      * Appends an action with timestamp to the log file.

@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import manager.BankSystem;
 import models.user.Admin;
 import models.user.User;
+import exceptions.DataLoadException;
 
 /**
  * Displays all staff members in a table.
@@ -28,19 +29,33 @@ public class ViewStaffListDialog extends javax.swing.JFrame {
         this.bank = bank;
         showStaff();
     }
-    private void showStaff() {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        // Loop through users that are ALREADY in memory
-        for (User u : bank.getUsers()) {
-            // Only show Admin users (staff)
-            if (u instanceof Admin) {
-                Admin a = (Admin) u;
-                // Add row with Name and Email
-                model.addRow(new Object[]{a.getName(),a.getJobTitle() ,a.getEmail(),a.getPhoneNumber()});
-            }
+private void showStaff() {
+
+ 
+        try {
+            bank.loadAllData();
+        } catch (DataLoadException ex) {
+            System.getLogger(ViewStaffListDialog.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+    
+    
+    // Now display the freshly loaded data
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);
+    
+    for (User u : bank.getUsers()) {
+        if (u instanceof Admin) {
+            Admin a = (Admin) u;
+            model.addRow(new Object[]{
+                a.getName(), 
+                a.getJobTitle(), 
+                a.getEmail(), 
+                a.getPhoneNumber()
+            });
         }
     }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,7 +131,7 @@ public class ViewStaffListDialog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefreshActionPerformed
-        // TODO add your handling code here:
+//
         showStaff();
     }//GEN-LAST:event_bRefreshActionPerformed
 
