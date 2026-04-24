@@ -87,10 +87,6 @@ public class CurrentAccount extends Account implements java.io.Serializable {
             );
             return false;
         }
-        setBalance(getBalance() - amount);
-        System.out.println(
-            "Withdrew: $" + amount + " | New Balance: $" + getBalance()
-        );
 
         String transId = "WDR" + System.currentTimeMillis();
         Withdrawal withdrawal = new Withdrawal(
@@ -100,6 +96,9 @@ public class CurrentAccount extends Account implements java.io.Serializable {
             "internal"
         );
         withdrawal.execute(this);
+        System.out.println(
+            "Withdrew: $" + amount + " | New Balance: $" + getBalance()
+        );
         return true;
     }
 

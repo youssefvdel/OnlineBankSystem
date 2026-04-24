@@ -184,7 +184,7 @@ public class BankSystem {
 
     private void saveUsers() throws DataLoadException {
         List<String> lines = new ArrayList<>();
-        lines.add("type,userId,name,password,email,clientId,phone,status,cardStatus");
+        lines.add("type,userId,name,password,email,clientId,phone,status,cardStatus,jobTitle");
         for (User user : users) {
             lines.add(userToCSV(user));
         }
@@ -203,8 +203,13 @@ public class BankSystem {
     private void saveTransactions() throws DataLoadException {
         List<String> lines = new ArrayList<>();
         lines.add("type,transactionId,amount,timestamp,accountId,status,destinationAccountId");
-        for (Transaction trans : transactions) {
-            lines.add(transactionToCSV(trans));
+        java.util.Set<String> seenIds = new java.util.HashSet<>();
+        for (Account acc : accounts) {
+            for (Transaction trans : acc.getTransactionHistory().getHistory()) {
+                if (seenIds.add(trans.getTransactionId())) {
+                    lines.add(transactionToCSV(trans));
+                }
+            }
         }
         CSVHelper.writeLines(TRANSACTIONS_FILE, lines);
     }
@@ -258,7 +263,13 @@ public class BankSystem {
         accounts = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             Account acc = csvToAccount(lines.get(i));
-            if (acc != null) accounts.add(acc);
+            if (acc != null) {
+                accounts.add(acc);
+                User owner = acc.getOwner();
+                if (owner instanceof Client) {
+                    ((Client) owner).addAccount(acc);
+                }
+            }
         }
     }
 
@@ -268,7 +279,19 @@ public class BankSystem {
         transactions = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             Transaction trans = csvToTransaction(lines.get(i));
-            if (trans != null) transactions.add(trans);
+            if (trans != null) {
+                transactions.add(trans);
+                Account acc = getAccountByNumber(trans.getAccountId());
+                if (acc != null) {
+                    acc.getTransactionHistory().addTransaction(trans);
+                }
+                if (trans instanceof Transfer) {
+                    Account dest = ((Transfer) trans).getDestinationAccount();
+                    if (dest != null) {
+                        dest.getTransactionHistory().addTransaction(trans);
+                    }
+                }
+            }
         }
     }
 
@@ -394,7 +417,9 @@ public class BankSystem {
         double balance = CSVHelper.parseDouble(f.get(2), 0.0);
         String ownerId = f.get(3);
         User owner = findUserById(ownerId);
-        if (owner == null) owner = new Admin("unknown", "Unknown", "", "","","");
+        if (owner == null) {
+            return null;
+        }
 
         Account acc;
         if ("SavingsAccount".equals(type)) {

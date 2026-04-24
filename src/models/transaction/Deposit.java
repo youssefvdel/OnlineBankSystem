@@ -43,7 +43,8 @@ public class Deposit extends Transaction {
         account.setBalance(account.getBalance() + getAmount());
 
         setStatus(STATUS_COMPLETED);
-        
+
+        account.getTransactionHistory().addTransaction(this);
 
         return true;
     }

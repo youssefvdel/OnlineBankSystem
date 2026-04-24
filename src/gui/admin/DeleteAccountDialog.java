@@ -138,8 +138,8 @@ public class DeleteAccountDialog extends javax.swing.JFrame {
             }
 
             client.getAccounts().remove(target);
-
             if (bank != null) {
+                bank.getAllAccounts().remove(target);
                 bank.saveAllData();
             }
 

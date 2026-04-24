@@ -53,7 +53,7 @@ public class ViewStaffListDialog extends javax.swing.JFrame {
         bRefresh = new javax.swing.JButton();
         bClose = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 20));
         jLabel1.setText("Staff Members");

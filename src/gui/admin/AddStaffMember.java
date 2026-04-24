@@ -49,7 +49,7 @@ public class AddStaffMember extends javax.swing.JFrame {
         bCancel = new javax.swing.JButton();
         bAdd = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18));
         jLabel1.setText("Add New Staff Member");

@@ -71,23 +71,20 @@ public class Transfer extends Transaction implements java.io.Serializable {
             return false;
         }
 
-        /**
-         * Uses the Transferable interface for polymorphic transfers.
-         */
-
-
         double srcBefore = account.getBalance();
         double dstBefore = destinationAccount.getBalance();
 
-        account.withdraw(getAmount());
-        destinationAccount.deposit(getAmount());
+        account.setBalance(account.getBalance() - getAmount());
+        destinationAccount.setBalance(destinationAccount.getBalance() + getAmount());
+
         setStatus("Completed");
         System.out.println("Transfer successful!" + " From: " + account.getAccountNumber() + " To: " + destinationAccount.getAccountNumber() + " Amount: " + getAmount());
         System.out.println("Source: " + srcBefore + " ==> " + account.getBalance());
         System.out.println("Destination: " + dstBefore + " ==> " + destinationAccount.getBalance());
-        
+
         account.getTransactionHistory().addTransaction(this);
-        
+        destinationAccount.getTransactionHistory().addTransaction(this);
+
         return true;
     }
     /**
