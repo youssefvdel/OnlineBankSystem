@@ -67,7 +67,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel2.setText("Username");
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        jLabel3.setText("Passowrd");
+        jLabel3.setText("Password");
 
         jtuser.addActionListener(this::jtuserActionPerformed);
 
@@ -84,17 +84,11 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel4.setText("Attempts left: 3");
 
         ShowPassword.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        ShowPassword.setText("Show Passowrd");
+        ShowPassword.setText("Show Password");
         ShowPassword.addActionListener(this::ShowPasswordActionPerformed);
 
-        btnRegister.setBackground(new java.awt.Color(242, 242, 242));
-        btnRegister.setForeground(new java.awt.Color(51, 102, 255));
+        btnRegister.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         btnRegister.setText("Register");
-        btnRegister.setAlignmentY(0.0F);
-        btnRegister.setBorderPainted(false);
-        btnRegister.setIconTextGap(0);
-        btnRegister.setInheritsPopupMenu(true);
-        btnRegister.setMargin(new java.awt.Insets(2, 0, 2, 0));
         btnRegister.addActionListener(this::btnRegisterActionPerformed);
 
         jLabel5.setText("Don't have account?");

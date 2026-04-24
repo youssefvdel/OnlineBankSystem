@@ -2,4 +2,3 @@ type,userId,name,password,email,clientId,phone,status,cardStatus,jobTitle
 Admin,admin,Test Admin,admin123,admin@bank.com,,,,,
 StandardClient,client1,Test Client,client123,client@bank.com,client1,01012345678,Active,INACTIVE,
 Admin,A1776977285851,YousefMohiey,12313,YousefMohiey@gmail.com,,,,,
-Admin,A1776986449687,YoussefAdel,123123,Youssefadel@gmail.com,,011111111111,,,Boss
