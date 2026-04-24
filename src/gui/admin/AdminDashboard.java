@@ -2,8 +2,9 @@
  */
 package gui.admin;
 
+import javax.swing.JOptionPane;
+
 import gui.auth.RegisterFrame;
-import gui.util.Toast;
 import manager.BankSystem;
 import models.user.Admin;
 
@@ -140,7 +141,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         bank.saveAllData();
         admin.logout();
-        Toast.showSuccess(this, "Logged out successfully");
+        JOptionPane.showMessageDialog(this, "Logged out successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
         dispose();
         new gui.auth.LoginFrame(bank).setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed

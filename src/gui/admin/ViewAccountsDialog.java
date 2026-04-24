@@ -2,7 +2,8 @@
  */
 package gui.admin;
 
-import gui.util.Toast;
+import javax.swing.JOptionPane;
+
 import manager.BankSystem;
 import models.account.Account;
 
@@ -170,7 +171,7 @@ public class ViewAccountsDialog extends javax.swing.JDialog {
         tableModel.setRowCount(0);
 
         if (bank == null) {
-            Toast.showInfo(this, "No bank system connected.");
+            JOptionPane.showMessageDialog(this, "No bank system connected.", "Info", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
@@ -178,7 +179,7 @@ public class ViewAccountsDialog extends javax.swing.JDialog {
             ArrayList<Account> accounts = bank.getAllAccounts();
 
             if (accounts.isEmpty()) {
-                Toast.showInfo(this, "No accounts found.");
+                JOptionPane.showMessageDialog(this, "No accounts found.", "Info", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
 
@@ -192,10 +193,10 @@ public class ViewAccountsDialog extends javax.swing.JDialog {
                 tableModel.addRow(new Object[]{accNum, type, balance, owner, status});
             }
 
-            Toast.showSuccess(this, "Loaded " + tableModel.getRowCount() + " account(s)");
+            JOptionPane.showMessageDialog(this, "Loaded " + tableModel.getRowCount() + " account(s)", "Success", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
-            Toast.showError(this, "Failed to load accounts: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Failed to load accounts: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

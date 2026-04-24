@@ -2,7 +2,8 @@
  */
 package gui.admin;
 
-import gui.util.Toast;
+import javax.swing.JOptionPane;
+
 import utils.CSVHelper;
 
 import javax.swing.table.DefaultTableModel;
@@ -165,7 +166,7 @@ public class ViewReportsDialog extends javax.swing.JDialog {
         java.io.File reportsFile = new java.io.File("data/reports.csv");
         
         if (!reportsFile.exists()) {
-            Toast.showInfo(this, "No reports available yet.");
+            JOptionPane.showMessageDialog(this, "No reports available yet.", "Info", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         
@@ -173,7 +174,7 @@ public class ViewReportsDialog extends javax.swing.JDialog {
             java.util.List<String> lines = CSVHelper.readLines("data/reports.csv");
             
             if (lines.isEmpty()) {
-                Toast.showInfo(this, "No reports available yet.");
+                JOptionPane.showMessageDialog(this, "No reports available yet.", "Info", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
             
@@ -190,10 +191,10 @@ public class ViewReportsDialog extends javax.swing.JDialog {
                 }
             }
             
-            Toast.showSuccess(this, "Loaded " + tableModel.getRowCount() + " report(s)");
+            JOptionPane.showMessageDialog(this, "Loaded " + tableModel.getRowCount() + " report(s)", "Success", JOptionPane.INFORMATION_MESSAGE);
             
         } catch (Exception e) {
-            Toast.showError(this, "Failed to load reports: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Failed to load reports: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

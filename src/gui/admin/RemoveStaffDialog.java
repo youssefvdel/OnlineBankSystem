@@ -1,6 +1,7 @@
 package gui.admin;
 
-import gui.util.Toast;
+import javax.swing.JOptionPane;
+
 import manager.BankSystem;
 import models.user.Admin;
 import models.user.User;
@@ -55,7 +56,7 @@ public class RemoveStaffDialog extends javax.swing.JDialog {
         btnRemove.addActionListener(evt -> {
             int selectedRow = tblStaff.getSelectedRow();
             if (selectedRow == -1) {
-                Toast.showError(this, "Please select a staff member to remove");
+                JOptionPane.showMessageDialog(this, "Please select a staff member to remove", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -81,10 +82,10 @@ public class RemoveStaffDialog extends javax.swing.JDialog {
 
                 if (removed) {
                     bank.saveAllData();
-                    Toast.showSuccess(this, "Staff member removed successfully");
+                    JOptionPane.showMessageDialog(this, "Staff member removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                     loadStaff();
                 } else {
-                    Toast.showError(this, "Failed to remove staff member");
+                    JOptionPane.showMessageDialog(this, "Failed to remove staff member", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

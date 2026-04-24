@@ -2,7 +2,8 @@
  */
 package gui.auth;
 
-import gui.util.Toast;
+import javax.swing.JOptionPane;
+
 import manager.BankSystem;
 import models.user.User;
 
@@ -128,31 +129,31 @@ public class ForgotPasswordFrame extends javax.swing.JFrame {
         String confirmPassword = new String(txtConfirmPassword.getPassword());
 
         if (email.isEmpty()) {
-            Toast.showError(this, "Email is required");
+            JOptionPane.showMessageDialog(this, "Email is required", "Error", JOptionPane.ERROR_MESSAGE);
             txtEmail.requestFocus();
             return;
         }
 
         if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            Toast.showError(this, "Invalid email format");
+            JOptionPane.showMessageDialog(this, "Invalid email format", "Error", JOptionPane.ERROR_MESSAGE);
             txtEmail.requestFocus();
             return;
         }
 
         if (newPassword.isEmpty()) {
-            Toast.showError(this, "New password is required");
+            JOptionPane.showMessageDialog(this, "New password is required", "Error", JOptionPane.ERROR_MESSAGE);
             txtNewPassword.requestFocus();
             return;
         }
 
         if (newPassword.length() < 6) {
-            Toast.showError(this, "Password must be at least 6 characters");
+            JOptionPane.showMessageDialog(this, "Password must be at least 6 characters", "Error", JOptionPane.ERROR_MESSAGE);
             txtNewPassword.requestFocus();
             return;
         }
 
         if (!newPassword.equals(confirmPassword)) {
-            Toast.showError(this, "Passwords do not match");
+            JOptionPane.showMessageDialog(this, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
             txtConfirmPassword.requestFocus();
             return;
         }
@@ -170,14 +171,14 @@ public class ForgotPasswordFrame extends javax.swing.JFrame {
 
             if (found) {
                 bank.saveAllData();
-                Toast.showSuccess(this, "Password reset successful!");
+                JOptionPane.showMessageDialog(this, "Password reset successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } else {
-                Toast.showError(this, "Email not found in system");
+                JOptionPane.showMessageDialog(this, "Email not found in system", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception e) {
-            Toast.showError(this, "Failed to reset password: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Failed to reset password: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnResetActionPerformed
 

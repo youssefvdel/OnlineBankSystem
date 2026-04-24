@@ -1,6 +1,5 @@
 package gui.auth;
 
-import gui.util.Toast;
 import manager.BankSystem;
 import models.user.StandardClient;
 
@@ -194,43 +193,43 @@ public class RegisterFrame extends javax.swing.JFrame {
         String confirmPassword = new String(txtConfirmPassword.getPassword());
         
         if (name.isEmpty()) {
-            Toast.showError(this, "Name is required");
+            JOptionPane.showMessageDialog(this, "Name is required", "Error", JOptionPane.ERROR_MESSAGE);
             txtName.requestFocus();
             return;
         }
         
         if (email.isEmpty()) {
-            Toast.showError(this, "Email is required");
+            JOptionPane.showMessageDialog(this, "Email is required", "Error", JOptionPane.ERROR_MESSAGE);
             txtEmail.requestFocus();
             return;
         }
         
         if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            Toast.showError(this, "Invalid email format");
+            JOptionPane.showMessageDialog(this, "Invalid email format", "Error", JOptionPane.ERROR_MESSAGE);
             txtEmail.requestFocus();
             return;
         }
         
         if (phone.isEmpty()) {
-            Toast.showError(this, "Phone is required");
+            JOptionPane.showMessageDialog(this, "Phone is required", "Error", JOptionPane.ERROR_MESSAGE);
             txtPhone.requestFocus();
             return;
         }
         
         if (password.isEmpty()) {
-            Toast.showError(this, "Password is required");
+            JOptionPane.showMessageDialog(this, "Password is required", "Error", JOptionPane.ERROR_MESSAGE);
             txtPassword.requestFocus();
             return;
         }
         
         if (password.length() < 6) {
-            Toast.showError(this, "Password must be at least 6 characters");
+            JOptionPane.showMessageDialog(this, "Password must be at least 6 characters", "Error", JOptionPane.ERROR_MESSAGE);
             txtPassword.requestFocus();
             return;
         }
         
         if (!password.equals(confirmPassword)) {
-            Toast.showError(this, "Passwords do not match");
+            JOptionPane.showMessageDialog(this, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
             txtConfirmPassword.requestFocus();
             return;
         }
@@ -246,7 +245,7 @@ public class RegisterFrame extends javax.swing.JFrame {
             bank.addUser(newClient);
             bank.saveAllData();
             
-            Toast.showSuccess(this, "Registration successful!\nYour User ID: " + userId);
+            JOptionPane.showMessageDialog(this, "Registration successful!\nYour User ID: " + userId, "Success", JOptionPane.INFORMATION_MESSAGE);
             
             txtName.setText("");
             txtEmail.setText("");
@@ -260,7 +259,7 @@ public class RegisterFrame extends javax.swing.JFrame {
             dispose();
             
         } catch (Exception e) {
-            Toast.showError(this, "Registration failed: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Registration failed: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
