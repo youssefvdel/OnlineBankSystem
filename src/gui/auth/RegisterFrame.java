@@ -15,6 +15,7 @@ import javax.swing.*;
 public class RegisterFrame extends javax.swing.JFrame {
 
     private BankSystem bank;
+    private javax.swing.JFrame loginFrame;
     
     /**
      * Creates new form RegisterFrame
@@ -22,7 +23,18 @@ public class RegisterFrame extends javax.swing.JFrame {
      * @param bank The BankSystem instance
      */
     public RegisterFrame(BankSystem bank) {
+        this(bank, null);
+    }
+    
+    /**
+     * Creates new form RegisterFrame with reference to login frame.
+     * 
+     * @param bank The BankSystem instance
+     * @param loginFrame The login frame to show after registration/cancel
+     */
+    public RegisterFrame(BankSystem bank, javax.swing.JFrame loginFrame) {
         this.bank = bank;
+        this.loginFrame = loginFrame;
         initComponents();
     }
 
@@ -242,12 +254,20 @@ public class RegisterFrame extends javax.swing.JFrame {
             txtPassword.setText("");
             txtConfirmPassword.setText("");
             
+            if (loginFrame != null) {
+                loginFrame.setVisible(true);
+            }
+            dispose();
+            
         } catch (Exception e) {
             Toast.showError(this, "Registration failed: " + e.getMessage());
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        if (loginFrame != null) {
+            loginFrame.setVisible(true);
+        }
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 

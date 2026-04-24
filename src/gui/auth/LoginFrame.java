@@ -241,7 +241,8 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ShowPasswordActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-         new gui.auth.RegisterFrame(bank).setVisible(true);
+        this.setVisible(false);
+        new gui.auth.RegisterFrame(bank, this).setVisible(true);
     }//GEN-LAST:event_btnRegisterActionPerformed
     
     /**
