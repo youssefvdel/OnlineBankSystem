@@ -94,6 +94,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         txtConfirmPassword = new javax.swing.JPasswordField();
         txtConfirmPassword.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
 
+        chkShowPassword = new javax.swing.JCheckBox();
         chkShowPassword.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
         chkShowPassword.setText("Show Password");
         chkShowPassword.addActionListener(new java.awt.event.ActionListener() {
