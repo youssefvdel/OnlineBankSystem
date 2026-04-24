@@ -11,23 +11,24 @@ import models.user.CardStatus;
 public class CardManagementFrame extends javax.swing.JFrame {
 
     Client client;
+    manager.BankSystem bank;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CardManagementFrame.class.getName());
 
-    /**
-     * Creates new form CardManagementFrame
-     * @param client
-     */
     public CardManagementFrame(Client client) {
-    initComponents();
-    this.client = client;
-    setLocationRelativeTo(null);
+        this(client, null);
+    }
 
-    client.loadCardStatus();   
-    refreshStatus();           
-}
+    public CardManagementFrame(Client client, manager.BankSystem bank) {
+        initComponents();
+        this.client = client;
+        this.bank = bank;
+        setLocationRelativeTo(null);
+        refreshStatus();
+    }
 
     private CardManagementFrame() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        initComponents();
+        setLocationRelativeTo(null);
     }
     
 
@@ -129,113 +130,90 @@ private void refreshStatus() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveIfNeeded() {
+        if (bank != null) {
+            bank.saveAllData();
+        }
+    }
+
     /**
     * Sets card status to ACTIVE when the Active option is selected.
     * Updates the UI label to reflect the new status.
     */
     private void ActiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActiveActionPerformed
-    // Update card status to ACTIVE
     client.updateCardStatus(CardStatus.ACTIVE);
-
-    // Show confirmation message
+    saveIfNeeded();
     javax.swing.JOptionPane.showMessageDialog(this, "Card set to ACTIVE");
-
-    // Refresh status label
     refreshStatus();
     }//GEN-LAST:event_ActiveActionPerformed
-       
+
  /**
  * Updates the card status based on the selected radio button.
  * Allows the user to set the card to ACTIVE, INACTIVE, LOST, or STUCK.
  */
     private void issueCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_issueCardActionPerformed
     if (Active.isSelected()) {
-        // Set card status to ACTIVE
         client.updateCardStatus(CardStatus.ACTIVE);
-    } 
+    }
     else if (Inactive.isSelected()) {
-        // Set card status to INACTIVE
         client.updateCardStatus(CardStatus.INACTIVE);
-    } 
+    }
     else if (Lost.isSelected()) {
-        // Mark the card as LOST
         client.updateCardStatus(CardStatus.LOST);
-    } 
+    }
     else if (Stuck.isSelected()) {
-        // Mark the card as STUCK
         client.updateCardStatus(CardStatus.STUCK);
-    } 
+    }
     else {
-        // No option selected
         javax.swing.JOptionPane.showMessageDialog(this, "Select a status first");
         return;
     }
-    // Confirmation message
+    saveIfNeeded();
     javax.swing.JOptionPane.showMessageDialog(this, "Card status updated successfully");
-    // Update status label
     refreshStatus();
     }//GEN-LAST:event_issueCardActionPerformed
 
-    
     /**
     * Sets card status to LOST when the Lost option is selected.
     * Used when the card is reported lost or stolen.
     */
     private void LostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LostActionPerformed
-
-    // Update card status to LOST
     client.updateCardStatus(CardStatus.LOST);
-
-    // Show confirmation message
+    saveIfNeeded();
     javax.swing.JOptionPane.showMessageDialog(this, "Card set to LOST");
-
-    // Refresh status label
     refreshStatus();
     }//GEN-LAST:event_LostActionPerformed
-    
+
     /**
     * Sets card status to STUCK when the Stuck option is selected.
     * Used when the card is retained by an ATM.
     */
      private void StuckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StuckActionPerformed
-        // Update card status to STUCK
     client.updateCardStatus(CardStatus.STUCK);
-
-    // Show confirmation message
+    saveIfNeeded();
     javax.swing.JOptionPane.showMessageDialog(this, "Card set to STUCK");
-
-    // Refresh status label
     refreshStatus();
     }//GEN-LAST:event_StuckActionPerformed
-    
+
     /**
     * Blocks the client's card by setting its status to LOST.
     * Used when the card is reported lost or stolen.
     */
     private void blockCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockCardActionPerformed
-    // Update card status to LOST (blocked)
     client.updateCardStatus(CardStatus.LOST);
-
-    // Show confirmation message
+    saveIfNeeded();
     javax.swing.JOptionPane.showMessageDialog(this, "Card blocked (LOST)");
-
-    // Refresh status label on UI
     refreshStatus();
     }//GEN-LAST:event_blockCardActionPerformed
-
 
     /**
     * Sets card status to INACTIVE when the Inactive option is selected.
     * Updates the UI label to reflect the new status.
     */
     private void InactiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InactiveActionPerformed
-    // Update card status to INACTIVE
     client.updateCardStatus(CardStatus.INACTIVE);
-
-    // Show confirmation message
+    saveIfNeeded();
     javax.swing.JOptionPane.showMessageDialog(this, "Card set to INACTIVE");
-
-    // Refresh status label
     refreshStatus();
     }//GEN-LAST:event_InactiveActionPerformed
      

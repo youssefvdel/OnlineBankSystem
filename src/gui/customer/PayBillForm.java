@@ -12,26 +12,24 @@ import models.user.Client;
  */
 public class PayBillForm extends javax.swing.JFrame {
     Client client;
+    manager.BankSystem bank;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PayBillForm.class.getName());
 
-    /**
-     * Creates new form PayBillForm
-     */
     public PayBillForm() {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
-/**
- * Constructs a PayBillForm and links it with a Client object.
- *
- * @param c the client whose data will be used to process payments
- */
-public PayBillForm(Client c) {
-    initComponents();
-    this.client = c;
-    
-}
+
+    public PayBillForm(Client c) {
+        this(c, null);
+    }
+
+    public PayBillForm(Client c, manager.BankSystem bank) {
+        initComponents();
+        this.client = c;
+        this.bank = bank;
+        setLocationRelativeTo(null);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,6 +112,10 @@ public PayBillForm(Client c) {
 
         // Call method
         client.payBill(billType, amount);
+
+        if (bank != null) {
+            bank.saveAllData();
+        }
 
         // Success
         javax.swing.JOptionPane.showMessageDialog(this, "Payment successful");

@@ -206,7 +206,7 @@ public class LoginFrame extends javax.swing.JFrame {
             if (user instanceof Admin) {
                 new AdminDashboard((Admin) user, bank).setVisible(true);
             } else {
-                new ClientDashboard(user).setVisible(true);
+                new ClientDashboard(user, bank).setVisible(true);
             }
             dispose();
         } else {

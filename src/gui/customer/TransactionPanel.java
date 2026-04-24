@@ -13,12 +13,18 @@ import models.account.Account;
  * @author tareq
  */
 public class TransactionPanel extends javax.swing.JFrame {
-    
+
     private Account account;
+    private manager.BankSystem bank;
     private boolean isDepositMode = true;
 
     public TransactionPanel(Account account) {
-        initComponents();  
+        this(account, null);
+    }
+
+    public TransactionPanel(Account account, manager.BankSystem bank) {
+        initComponents();
+        this.bank = bank;  
         setResizable(true);
         setMinimumSize(new java.awt.Dimension(400, 300)); 
         
@@ -188,6 +194,10 @@ public class TransactionPanel extends javax.swing.JFrame {
         } else {
             account.withdraw(amount);
             statusLabel.setText("Withdrawal successful");
+        }
+
+        if (bank != null) {
+            bank.saveAllData();
         }
 
     } catch (InvalidAmountException e) {
