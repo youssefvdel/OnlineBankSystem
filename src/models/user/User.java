@@ -116,6 +116,13 @@ public void logout()
     public void setEmail(String email)
     {this.email= email;}
 
+    /**
+     * Sets the user password.
+     * @param password the new password for the user
+     */
+    public void setPassword(String password)
+    {this.password = password;}
+
 
     /**
      * Returns the type of user (Admin or Client).
